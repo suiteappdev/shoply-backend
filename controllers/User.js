@@ -4,15 +4,16 @@ module.exports = function(app, apiRoutes){
     var User = require('../models/user');
 
     function create(req, res){
-        console.log("request", req);
         userHelper.create({
             name          : req.body.name,
             last_name     : req.body.last_name,
             password      : req.body.password,
             email         : req.body.email,
         }, function(err, usuario){
+              console.log("err", err);
+              console.log("usuarion", usuario);
+
             if(usuario){
-              console.log(err)
                 res.status(200).json(usuario);
             }
         });
