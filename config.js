@@ -1,5 +1,5 @@
 module.exports = {
-	dburl : "mongodb://root:mhbsB4ylBExY@localhost:27017/shoply",
+	dburl : "mongodb://armitage:house1989*@localhost/shoply",
 	secret : "",
 	appPort : 8080,
 	smtp_email : "listerine1989@gmail.com",
