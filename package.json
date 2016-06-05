@@ -20,7 +20,7 @@
     "email-templates": "^2.1.0",
     "express": "^4.13.3",
     "fd-slicer": "^1.0.1",
-    "forever": "^0.15.1",
+    "forever": "^0.15.2",
     "fs": "0.0.2",
     "jimp": "^0.2.21",
     "jsonwebtoken": "^5.4.0",
