@@ -9,31 +9,39 @@ module.exports = function(app, apiRoutes, io){
     function getbyId(req, res){
           var REQ = req.params;
           model.findOne({_id: REQ.id}, function(err, resource){
-            jimp.read(path.normalize(resource.data.path) , function (err, image) {
-                res.writeHead(200, {'Content-Type': resource.data.mimetype });
+                jimp.read(resource.data.location, function (err, image) {
+                    image.getBuffer(resource.data.mimetype, function(_err, result){
+                      res.end(result, 'binary');           
+                    });
+                });
+          });
+    }
 
-                image.getBuffer(resource.data.mimetype, function(_err, result){
-                  res.end(result);           
+    function cropJob(req, res){
+        var REQ = req.params;
+        jimp.read(resource.location , function (err, image) {
+            res.writeHead(200, {'Content-Type': resource.data.mimetype });
+                  image.crop(parseInt(REQ.x), parseInt(REQ.y), parseInt(REQ.w), parseInt(REQ.h)).getBuffer(resource.data.mimetype, function(_err, result){
+                    res.end(result, 'binary');           
+                });
+        });
+    }
+
+    function cropJob(req, res){
+        var REQ = req.params;
+          model.findOne({_id: REQ.id}, function(err, resource){ 
+                res.writeHead(200, {'Content-Type': resource.data.mimetype });
+                jimp.read(resource.data.location, function (err, image) {
+                  image.crop(parseInt(REQ.x), parseInt(REQ.y), parseInt(REQ.w), parseInt(REQ.h)).getBuffer(resource.data.mimetype, function(_err, result){
+                  res.end(result, 'binary');   
                 });
             });
-          });
-    }
-
-    function getCrop(req, res){
-          var REQ = req.params;
-
-          model.findOne({_id: REQ.id}, function(err, resource){
-            jimp.read(path.normalize(resource.data.path) , function (err, image) {
-              res.writeHead(200, {'Content-Type': resource.data.mimetype });
-              image.crop(parseInt(REQ.x), parseInt(REQ.y), parseInt(REQ.w), parseInt(REQ.h)).getBuffer(resource.data.mimetype, function(_err, result){
-                res.end(result, 'binary');           
-              });
-            });
-          });
-    }
+         })
+      }
      
     app.get("/api/" + entity_name + "/image/:id", getbyId);      
-    app.get("/api/" + entity_name + "/image/:id/:x/:y/:w/:h", getCrop);      
+    app.get("/api/" + entity_name + "/image/:id/:x/:y/:w/:h", cropJob);      
+    app.post("/api/" + entity_name + "/image/:id/:x/:y/:w/:h", cropJob);      
 
     return this;
 }

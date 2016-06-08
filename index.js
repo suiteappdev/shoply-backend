@@ -3,7 +3,8 @@ var app = express();
 var http = require('http').Server(app);
 var config = require("./config");
 var mongoose = require("mongoose");
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: "50mb"}));
 var cors = require('cors');
 app.use(express.static('uploads'));
 var jwt = require('jsonwebtoken');
