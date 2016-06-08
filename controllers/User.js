@@ -15,8 +15,9 @@ module.exports = function(app, apiRoutes){
             password      : req.body.password,
             email         : req.body.email,
         }, function(err, usuario){
+
             if(usuario){
-                var mailOptions = {
+                /*var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
                       subject: 'Welcome to shoply',
@@ -35,7 +36,7 @@ module.exports = function(app, apiRoutes){
 
                 _shell.on('close', function(code) {
                     console.log('closing code: ' + code);
-                });
+                });*/
 
                 res.status(200).json(usuario);
             }
