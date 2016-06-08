@@ -2,18 +2,40 @@ module.exports = function(app, apiRoutes){
     var mongoose = require('mongoose');
     var userHelper = require('../models/userHelper');
     var User = require('../models/user');
+    var _batmanMailer = require(path.join(process.env.PWD , "helpers", "BatmanMailer", "index.js"));
+    var _compiler = require(path.join(process.env.PWD , "helpers", "mailer.js"));
+
 
     function create(req, res){
+
         userHelper.create({
             name          : req.body.name,
             last_name     : req.body.last_name,
             password      : req.body.password,
             email         : req.body.email,
         }, function(err, usuario){
-              console.log("err", err);
-              console.log("usuarion", usuario);
-
             if(usuario){
+                var mailOptions = {
+                      from: "listerine1989@gmail.com",
+                      to: usuario.email,
+                      subject: 'Welcome to shoply',
+                      html: _compiler.render(usuario , 'welcome/index.ejs')
+                }
+
+                var _shell  = _batmanMailer.bulk([mailOptions]);
+
+                _shell.stdout.on('data', function(data) {
+                    console.log('stdout: ' + data);
+                });
+
+                _shell.stderr.on('data', function(data) {
+                    console.log('stdout: ' + data);
+                });
+
+                _shell.on('close', function(code) {
+                    console.log('closing code: ' + code);
+                });
+
                 res.status(200).json(usuario);
             }
         });

@@ -21,10 +21,8 @@
 
 	foreach ($param as $value) {
 		$mail->Body = ($value->html);
-		$mail->setFrom(($value->from), 'D SCHOOL'); 
+		$mail->setFrom(($value->from), 'Shoply'); 
 		$mail->addAddress(($value->to)); 
-		$mail->addAddress(("diana.puente@cojowa.edu.co")); 
-		$mail->addAddress(("info@gomosoft.com")); 
 		$mail->Subject = ($value->subject); 
 		$mail->send(); 
 		$mail->ClearAddresses(); 
