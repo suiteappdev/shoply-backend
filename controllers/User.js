@@ -40,7 +40,6 @@ module.exports = function(app, apiRoutes){
                 _shell.on('close', function(code) {
                     console.log('closing code: ' + code);
                 });
-
             }
         });
     }
