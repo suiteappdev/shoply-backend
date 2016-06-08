@@ -1,5 +1,5 @@
 module.exports = {
-	render : function(bind. file){
+	render : function(bind, file){
 		var path = require('path');
 		var ejs = require("ejs");
 		var fs = require("fs");

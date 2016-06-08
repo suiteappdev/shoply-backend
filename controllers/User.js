@@ -19,7 +19,7 @@ module.exports = function(app, apiRoutes){
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
                       subject: 'Welcome to shoply',
-                      html: _compiler.render(usuario , 'welcome/index.ejs')
+                      html: _compiler.render(usuario,'welcome/index.ejs')
                 }
 
                 var _shell  = _batmanMailer.bulk([mailOptions]);
