@@ -17,6 +17,8 @@ module.exports = function(app, apiRoutes){
         }, function(err, usuario){
 
             if(usuario){
+                res.status(200).json(usuario);
+
                 usuario.usuario = usuario;
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
@@ -39,7 +41,6 @@ module.exports = function(app, apiRoutes){
                     console.log('closing code: ' + code);
                 });
 
-                res.status(200).json(usuario);
             }
         });
     }
