@@ -11,7 +11,7 @@
 	$mail->SMTPSecure = 'tls'; 
 	$mail->SMTPAuth = true; 
 	$mail->Username = "listerine1989@gmail.com"; 
-	$mail->Password = "house1989*"; 
+	$mail->Password = "gabi1989*"; 
 	$mail->isHTML(true);  
 
 	$json = $argv[1];

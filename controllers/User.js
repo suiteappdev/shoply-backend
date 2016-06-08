@@ -18,8 +18,8 @@ module.exports = function(app, apiRoutes){
 
             if(usuario){
                 res.status(200).json(usuario);
-
                 usuario.usuario = usuario;
+                
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
