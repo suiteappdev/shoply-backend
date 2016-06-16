@@ -10,7 +10,7 @@ module.exports = function(app, apiRoutes, io){
     var entity_name = "uploads";
 
     aws.config.update({
-        accessKeyId: "AKIAJOTU7Q5ITYHAHWAQ",
+        accessKeyId: "AKIAISUPRZL7Y5TLOSTA",
         secretAccessKey: "UOx5Z/lhC+Cwh8vZlRBv7aHa29mU68OrmiGSlZLpSjmYlK",
         region: "us-west-2"  
     });
@@ -24,7 +24,7 @@ module.exports = function(app, apiRoutes, io){
             s3: s3,
             acl: 'public-read',
             bucket: 'shoplyassets',
-           // contentType: multerS3.AUTO_CONTENT_TYPE,
+            contentType: multerS3.AUTO_CONTENT_TYPE,
             metadata: function (req, file, cb) {
               cb(null, {fieldName: file.fieldname});
             },
