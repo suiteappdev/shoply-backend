@@ -9,7 +9,7 @@ module.exports = function(app, apiRoutes, io){
     var aws = require("aws-sdk");
     var entity_name = "uploads";
 
-    var s3 = new aws.S3(aws.config.loadFromPath('./credentials.json'));
+    var s3 = new aws.S3({ "accessKeyId": "AKIAIP4NSK2WXK3GQ6WQ", "secretAccessKey": "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", "region": "us-west-2" });
 
     var upload = multer({
         storage: multerS3({
