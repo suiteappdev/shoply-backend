@@ -10,8 +10,8 @@ module.exports = function(app, apiRoutes, io){
     var entity_name = "uploads";
 
     aws.config.update({
-        accessKeyId: "AKIAIP4NSK2WXK3GQ6WQ",
-        secretAccessKey: "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",
+        accessKeyId: "AKIAJOTU7Q5ITYHAHWAQ",
+        secretAccessKey: "UOx5Z/lhC+Cwh8vZlRBv7aHa29mU68OrmiGSlZLpSjmYlK",
         "region": "us-west-2"  
     });
     
