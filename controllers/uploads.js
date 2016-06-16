@@ -10,7 +10,12 @@ module.exports = function(app, apiRoutes, io){
     var entity_name = "uploads";
 
     var s3 = new aws.S3();
-    aws.config.loadFromPath('./credentials.json');
+    
+    AWS.config.update({
+        accessKeyId: "AKIAIP4NSK2WXK3GQ6WQ",
+        secretAccessKey: "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",
+        "region": "us-west-2"  
+    });
 
     var upload = multer({
         storage: multerS3({
