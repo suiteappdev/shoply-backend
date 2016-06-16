@@ -9,11 +9,11 @@ module.exports = function(app, apiRoutes, io){
     var aws = require("aws-sdk");
     var entity_name = "uploads";
 
-    var s3 = aws.config.loadFromPath('./credentials.json');
-    
+    var s3 = new aws.S3(AWS.config.loadFromPath('./config.json'));
+
     var upload = multer({
         storage: multerS3({
-            s3 : s3,
+            s3: s3,
             acl: 'public-read',
             bucket: 'shoplyassets',
             contentType: multerS3.AUTO_CONTENT_TYPE,
