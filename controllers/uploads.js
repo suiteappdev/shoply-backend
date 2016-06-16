@@ -12,9 +12,11 @@ module.exports = function(app, apiRoutes, io){
     aws.config.update({
         accessKeyId: "AKIAJOTU7Q5ITYHAHWAQ",
         secretAccessKey: "UOx5Z/lhC+Cwh8vZlRBv7aHa29mU68OrmiGSlZLpSjmYlK",
-        "region": "us-west-2"  
+        region: "us-west-2"  
     });
-    
+
+    aws.config.update({region: 'us-west-2'});
+
     var s3 = new aws.S3();
 
     var upload = multer({
@@ -22,7 +24,7 @@ module.exports = function(app, apiRoutes, io){
             s3: s3,
             acl: 'public-read',
             bucket: 'shoplyassets',
-            contentType: multerS3.AUTO_CONTENT_TYPE,
+           // contentType: multerS3.AUTO_CONTENT_TYPE,
             metadata: function (req, file, cb) {
               cb(null, {fieldName: file.fieldname});
             },
