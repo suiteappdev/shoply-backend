@@ -8,6 +8,8 @@ module.exports = function(app, apiRoutes, io){
     var multerS3 = require('multer-s3');
     var aws = require("aws-sdk");
     var entity_name = "uploads";
+    var cropper = require(path.join("../", "helpers", "cropper", "cropper.js"));
+
 
     aws.config.update({
         accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -46,7 +48,16 @@ module.exports = function(app, apiRoutes, io){
         });
     }
 
+    function upload_amazon(req, res, next){
+        cropper.uploadToS3(req.data, function(err, data){
+            if (err)       
+                console.log(err)     
+            else console.log("Successfully uploaded");
+        });
+    }
+
     app.post("/api/" + entity_name , upload, post);
+    app.post("/api/upload-amazon/", upload_amazon);
 
     return this;
 }
