@@ -1,5 +1,6 @@
 var aws = require('aws-sdk');
 var crypto = require("crypto");
+var EXTENTION  = '.jpeg';
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -19,7 +20,7 @@ module.exports = {
 
 		    var data = {
 		    	Bucket: 'shoplyassets',
-			    Key: raw.toString('hex'), 
+			    Key: raw.toString('hex') + EXTENTION, 
 			    Body: _buffer,
 			    ContentEncoding: 'base64',
 			    ContentType: 'image/jpeg'
