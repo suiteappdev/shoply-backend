@@ -19,6 +19,7 @@ var _Schema = new Schema({
 	  full_name : { type : String, trim : true},
 	  email : { type : String, trim : true , unique : true,},
 	  active : { type : Boolean, default : true},
+	  type : { type : String, trim : true, default : 'USER'},
 	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}]
 });
 

@@ -8,12 +8,12 @@ module.exports = function(app, apiRoutes){
 
 
     function create(req, res){
-
         userHelper.create({
             name          : req.body.name,
             last_name     : req.body.last_name,
             password      : req.body.password,
             email         : req.body.email,
+            type          : req.body.type
         }, function(err, usuario){
 
             if(usuario){
