@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes){
 
             if(usuario){
                 res.status(200).json(usuario);
-                usuario.usuario = usuario;
+              /*  usuario.usuario = usuario;
                 usuario.usuario.password = req.body.password;
                 
                 var mailOptions = {
@@ -33,7 +33,7 @@ module.exports = function(app, apiRoutes){
 
                 _shell.on('close', function(code) {
                     console.log('closing code: ' + code);
-                });
+                });*/
             }
         });
     }
