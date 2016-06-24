@@ -13,7 +13,7 @@ var metadata = require('./plugins/metadata');
 
 var _Schema = new Schema({
 	  username : { type : String, trim : true, lowercase : true},
-	  password : {type: String, required : true},
+	  password : {type: String, required : false},
 	  name : { type : String, trim : true},
 	  last_name : { type : String, trim : true},
 	  full_name : { type : String, trim : true},
