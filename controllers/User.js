@@ -42,6 +42,7 @@ module.exports = function(app, apiRoutes){
          var data = {};
          var REQ = req.body || req.params;
          !REQ.metadata || (data.metadata = REQ.metadata);
+         !REQ.data || (data.data = REQ.data);
          !REQ.username || (data.username = REQ.username);
          !REQ.password || (data.password = REQ.password);
          !REQ.email || (data.email = REQ.email);
