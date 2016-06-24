@@ -25,6 +25,11 @@ var _Schema = new Schema({
 });
 
 _Schema.pre('save', function (next) {
+	if(this.data.representane_legal){
+		this.full_name = this.data.representane_legal;
+		next();
+	}
+
     this.full_name = (this.name || '') + ' ' + (this.last_name  || '');
     next();
 });
