@@ -7,7 +7,10 @@ module.exports = function(app, apiRoutes){
     var _compiler = require(path.join(process.env.PWD , "helpers", "mailer.js"));
 
     function create(req, res){
-        userHelper.create(req.body, function(err, usuario){
+       var data = req.body;
+       data._company = req.headers["x-soply-company"];
+
+        userHelper.create(data, function(err, usuario){
 
             if(usuario){
                 res.status(200).json(usuario);

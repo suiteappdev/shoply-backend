@@ -11,7 +11,8 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find()
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .populate("_company")
        .populate("_user")
        .exec(function(err, rs){
            if(!err)
@@ -52,6 +53,7 @@ module.exports = function(app, apiRoutes, io){
       data.metadata = REQ.metadata;
       data.shoppingCart = REQ.shoppingCart;      
       data._user = REQ._user;
+      data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
             
   	 var model = new Model(data);
 
