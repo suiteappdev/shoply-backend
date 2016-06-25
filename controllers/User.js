@@ -80,7 +80,7 @@ module.exports = function(app, apiRoutes){
     function users(req, res){
         var Role = require("../models/roles");
 
-        User.find().populate("_company")
+        User.find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}).populate("_company")
         .exec(function(err, users){
             if(!err){
                 res.send(users);
