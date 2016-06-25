@@ -121,7 +121,7 @@ module.exports = function(app, apiRoutes){
 
          UserSchema.findOne({email : req.body.email}).populate("_company").exec(function(err, user){
             if(!user){
-                    res.json({err : 'Usuario o clave incorrectos'}, 401);
+                    res.status(401).json({err : 'Usuario o clave incorrectos'});
                     return;
              }
 
