@@ -8,7 +8,10 @@ module.exports = function(app, apiRoutes){
 
     function create(req, res){
        var data = req.body;
-       data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+       
+       if(req.headers["x-soply-company"]){
+         data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+       }
 
         userHelper.create(data, function(err, usuario){
 
