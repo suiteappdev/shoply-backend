@@ -80,7 +80,7 @@ module.exports = function(app, apiRoutes){
     function users(req, res){
         var Role = require("../models/roles");
 
-        User.find()
+        User.find().populate("_company")
         .exec(function(err, users){
             if(!err){
                 res.send(users);
@@ -92,7 +92,8 @@ module.exports = function(app, apiRoutes){
         var Role = require("../models/roles");
 
         User
-        .findOne( mongoose.Types.ObjectId(req.params.id) )
+        .findOne( mongoose.Types.ObjectId(req.params.id))
+        .populate("_company")
         .exec(function(err, rs){
             if(rs)
                 res.json(rs);
