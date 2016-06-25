@@ -11,7 +11,8 @@ var _Schema = new Schema({
 	  _category : { type : Schema.Types.ObjectId , ref : 'category'},
 	  data : { type : Object},
 	  _like : [{type : Schema.Types.ObjectId , ref : 'User'}],
-	  comments : { type : Array}
+	  comments : { type : Array},
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
 _Schema.pre('save', function (next) {

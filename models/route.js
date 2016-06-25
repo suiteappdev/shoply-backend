@@ -8,7 +8,8 @@ var metadata = require('./plugins/metadata');
 var entity = "route";
 
 var _Schema = new Schema({
-	  data : { type : Object}
+	  data : { type : Object},
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
  });
 
 _Schema.pre('save', function (next) {

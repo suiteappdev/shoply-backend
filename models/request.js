@@ -11,6 +11,7 @@ var _Schema = new Schema({
  	   data : { type : Object},
  	   shoppingCart : Array,
 	  _user : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
 _Schema.pre('save', function (next) {

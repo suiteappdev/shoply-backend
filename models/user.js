@@ -21,7 +21,8 @@ var _Schema = new Schema({
 	  data:{ type : Object},
 	  active : { type : Boolean, default : true},
 	  type : { type : String, trim : true, default : 'USER'},
-	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}]
+	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
 });
 
 _Schema.pre('save', function (next) {

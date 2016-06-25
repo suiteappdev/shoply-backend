@@ -48,7 +48,6 @@ module.exports = function(app, apiRoutes){
          !REQ.email || (data.email = REQ.email);
          !REQ.name || (data.name = REQ.name);
          !REQ.last_name || (data.last_name = REQ.last_name);
-
          data = { $set : data }; 
 
          userHelper.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){

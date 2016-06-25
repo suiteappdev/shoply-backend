@@ -11,7 +11,8 @@ var _Schema = new Schema({
 	  id : {type : String, trim : true, unique : true, lowercase : true},
       parent : { type : String, trim : true, lowercase : true},
 	  text : { type : String, trim : true, lowercase : true},
-	  data : { type : Object}
+	  data : { type : Object},
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
 _Schema.pre('save', function (next) {

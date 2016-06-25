@@ -7,8 +7,6 @@ var config = require('./config');
 var user = {
 	sessionSchema : sessionSchema,
 	create  : function(data, callback){
-		console.log(data);
-		
 		if(data.password){
 	    	data.password = require("../helpers/crypto-util")(data.password);
 		}
