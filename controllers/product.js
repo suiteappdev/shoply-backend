@@ -65,7 +65,8 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
       !REQ._category || (data._category = mongoose.Types.ObjectId(REQ._category)); 
-      !REQ._company || (data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]));  
+     
+      data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);  
       
   		var model = new Model(data);
 
