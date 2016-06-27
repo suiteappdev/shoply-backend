@@ -17,24 +17,24 @@ module.exports = function(app, apiRoutes){
 
             if(usuario){
                 res.status(200).json(usuario);
-                usuario.usuario = usuario;
-                usuario.usuario.password = data.password;
+                _data.usuario = usuario;
+                _data.usuario.password = data.password;
                 
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
                       subject: 'Welcome to shoply',
-                      html: _compiler.render(usuario,'welcome/index.ejs')
+                      html: _compiler.render(_data,'welcome/index.ejs')
                 }
 
                 var _shell  = _batmanMailer.bulk([mailOptions]);
 
-                _shell.stdout.on('data', function(data) {
-                    console.log('stdout: ' + data);
+                _shell.stdout.on('data', function(output) {
+                    console.log('stdout: ' + output);
                 });
 
-                _shell.stderr.on('data', function(data) {
-                    console.log('stdout: ' + data);
+                _shell.stderr.on('data', function(output) {
+                    console.log('stdout: ' + output);
                 });
 
                 _shell.on('close', function(code) {
