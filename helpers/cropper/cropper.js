@@ -17,16 +17,24 @@ module.exports = {
 		
 		crypto.pseudoRandomBytes(16, function (err, raw) {
             if (err) return cb(err);
+            var _key = raw.toString('hex') + EXTENTION;
 
 		    var data = {
 		    	Bucket: 'shoplyassets',
-			    Key: raw.toString('hex') + EXTENTION, 
+			    Key: _key, 
 			    Body: _buffer,
 			    ContentEncoding: 'base64',
 			    ContentType: 'image/jpeg'
 	  		};
 
-			s3.putObject(data, callback);
+			s3.putObject(data, function(err, data){
+				if(err){
+					callback(err, null);
+				}else{
+					data.url =  s3.getUrl('shoplyassets', _key);
+					callback(null, data);
+				}
+			});
         });
 	}
 }
