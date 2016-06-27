@@ -25,7 +25,6 @@ module.exports = {
 		    	Bucket: BUCKET,
 			    Key: _key, 
 			    Body: _buffer,
-			    acl: 'public-read',
 			    ContentEncoding: 'base64',
 			    ContentType: 'image/jpeg'
 	  		};
