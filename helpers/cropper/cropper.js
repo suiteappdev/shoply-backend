@@ -1,6 +1,8 @@
 var aws = require('aws-sdk');
 var crypto = require("crypto");
 var EXTENTION  = '.jpeg';
+var BUCKET = 'shoplyassets';
+var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -20,7 +22,7 @@ module.exports = {
             var _key = raw.toString('hex') + EXTENTION;
 
 		    var data = {
-		    	Bucket: 'shoplyassets',
+		    	Bucket: BUCKET,
 			    Key: _key, 
 			    Body: _buffer,
 			    ContentEncoding: 'base64',
@@ -31,7 +33,8 @@ module.exports = {
 				if(err){
 					callback(err, null);
 				}else{
-					s3.getResourceUrl('shoplyassets', _key, callback);
+					var URL = BASE_AMAZON  + _key;
+					callback({url : URL});
 				}
 			});
         });
