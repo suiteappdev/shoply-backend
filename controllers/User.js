@@ -8,8 +8,7 @@ module.exports = function(app, apiRoutes){
 
     function create(req, res){
        var data = req.body;
-       console.log(data);
-       
+
        if(req.headers["x-soply-company"]){
          data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
        }
@@ -21,6 +20,7 @@ module.exports = function(app, apiRoutes){
                  var _data = {};
 
                 _data.usuario = req.body;
+                _data.usuario.password = null;
                 
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
