@@ -8,6 +8,7 @@ module.exports = function(app, apiRoutes){
 
     function create(req, res){
        var data = req.body;
+       console.log(data);
        
        if(req.headers["x-soply-company"]){
          data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
