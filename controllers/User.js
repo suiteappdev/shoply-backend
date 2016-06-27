@@ -20,7 +20,6 @@ module.exports = function(app, apiRoutes){
                  var _data = {};
 
                 _data.usuario = req.body;
-                _data.usuario.password = null;
                 
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
