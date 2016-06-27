@@ -19,8 +19,7 @@ module.exports = function(app, apiRoutes){
                 res.status(200).json(usuario);
                  var _data = {};
 
-                _data.usuario = usuario;
-                _data.usuario.password = req.body.password;
+                _data.usuario = req.body;
                 
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
