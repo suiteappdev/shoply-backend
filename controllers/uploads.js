@@ -50,9 +50,8 @@ module.exports = function(app, apiRoutes, io){
 
     function upload_amazon(req, res, next){
         cropper.uploadToS3(req.body.data, function(err, data){
-            if (err)       
-                console.log(err)     
-            else console.log("Successfully uploaded");
+            if (!err)       
+                res.status(200).json(data);
         });
     }
 
