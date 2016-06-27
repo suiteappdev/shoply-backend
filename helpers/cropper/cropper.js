@@ -31,7 +31,7 @@ module.exports = {
 				if(err){
 					callback(err, null);
 				}else{
-					data.url =  s3.getUrl('shoplyassets', _key);
+					data.url =  s3.getObject({Bucket: 'myBucket', Key: _key});
 					callback(null, data);
 				}
 			});
