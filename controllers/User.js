@@ -15,10 +15,9 @@ module.exports = function(app, apiRoutes){
        }
 
         userHelper.create(data, function(err, usuario){
-
+            console.log(err);
             if(usuario){
                 res.status(200).json(usuario);
-                  console.log(_plainPwd);
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
