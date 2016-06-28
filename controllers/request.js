@@ -33,7 +33,7 @@ module.exports = function(app, apiRoutes, io){
        .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"]), createdAt :{
           $gte:new Date(REQ.ini).toISOString(),
           $lt: new Date(REQ.end).toISOString()
-       }})
+       }, _seller : REQ.seller})
        .populate("_company")
        .populate("_client")
        .populate("_seller")
@@ -123,7 +123,7 @@ module.exports = function(app, apiRoutes, io){
         });
 	}
     apiRoutes.get("/" + _url_alias, get);
-    apiRoutes.get("/" + _url_alias + "/:ini/:end", getRange);
+    apiRoutes.get("/" + _url_alias + "/:seller/:ini/:end", getRange);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);
