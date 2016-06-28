@@ -15,7 +15,11 @@ module.exports = function(app, apiRoutes){
        }
 
         userHelper.create(data, function(err, usuario){
-            console.log(err);
+          if(err){
+              res.status(500).json(err);
+              return;
+          }
+
             if(usuario){
                 res.status(200).json(usuario);
                 var mailOptions = {
