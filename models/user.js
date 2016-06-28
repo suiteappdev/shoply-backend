@@ -22,7 +22,8 @@ var _Schema = new Schema({
 	  active : { type : Boolean, default : true},
 	  type : { type : String, trim : true, default : 'USER'},
 	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
-	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
+	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}]
 });
 
 _Schema.pre('save', function (next) {
