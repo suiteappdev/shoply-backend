@@ -8,6 +8,7 @@ module.exports = function(app, apiRoutes){
 
     function create(req, res){
        var data = req.body;
+       var _plainPwd = req.body.password;
 
        if(req.headers["x-soply-company"]){
          data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
@@ -17,14 +18,14 @@ module.exports = function(app, apiRoutes){
 
             if(usuario){
                 res.status(200).json(usuario);
-
+                  console.log(_plainPwd);
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
                       subject: 'Welcome to shoply',
                       html: _compiler.render({_data : {
                         email : usuario.email,
-                        password : "hola"
+                        password : _plainPwd
                       }},'welcome/index.ejs')
                 }
 
