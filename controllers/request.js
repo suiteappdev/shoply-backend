@@ -24,6 +24,27 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
+    function getRange(req, res){
+
+      var REQ = req.params; 
+
+       Model
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"]), createdAt :{
+          $gte:new Date(REQ.ini),
+          $lt: new Date(REQ.end)
+       }})
+       .populate("_company")
+       .populate("_user")
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       });
+    }
+
 
 
     function getById(req, res){
@@ -96,6 +117,7 @@ module.exports = function(app, apiRoutes, io){
         });
 	}
     apiRoutes.get("/" + _url_alias, get);
+    apiRoutes.get("/" + _url_alias + "/:ini/:end", getRange);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);

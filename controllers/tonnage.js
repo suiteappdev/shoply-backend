@@ -24,8 +24,6 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
-
-
     function getById(req, res){
 
       var REQ = req.params; 
