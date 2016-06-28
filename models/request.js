@@ -10,7 +10,8 @@ var entity = "request";
 var _Schema = new Schema({
  	   data : { type : Object},
  	   shoppingCart : Array,
-	  _user : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _client : {type : Schema.Types.ObjectId , ref : 'User'},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 

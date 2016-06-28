@@ -13,7 +13,8 @@ module.exports = function(app, apiRoutes, io){
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
        .populate("_company")
-       .populate("_user")
+       .populate("_seller")
+       .populate("_client")
        .exec(function(err, rs){
            if(!err)
            {
@@ -34,7 +35,8 @@ module.exports = function(app, apiRoutes, io){
           $lt: new Date(REQ.end).toISOString()
        }})
        .populate("_company")
-       .populate("_user")
+       .populate("_client")
+       .populate("_seller")
        .exec(function(err, rs){
            if(!err)
            {
@@ -54,6 +56,8 @@ module.exports = function(app, apiRoutes, io){
        Model
        .findOne({_id : REQ.id})
        .populate("_user")
+       .populate("_seller")
+       .populate("_client")
        .exec(function(err, rs){
            if(!err)
            {
@@ -73,7 +77,8 @@ module.exports = function(app, apiRoutes, io){
 
       data.metadata = REQ.metadata;
       data.shoppingCart = REQ.shoppingCart;      
-      data._user = REQ._user;
+      data._seller = REQ._seller;
+      data._client = REQ._client;
       data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
             
   	 var model = new Model(data);
@@ -96,7 +101,8 @@ module.exports = function(app, apiRoutes, io){
   		!REQ.data || (data.data = REQ.data);             
     
       data.shoppingCart = REQ.shoppingCart;      
-      data._user = REQ._user;
+      data._seller =  mongoose.Types.ObjectId(REQ._seller);
+      data._client =  mongoose.Types.ObjectId(REQ._client);
   		
       data = { $set : data };          
 
@@ -109,7 +115,7 @@ module.exports = function(app, apiRoutes, io){
 
 
     function remove(req, res){
-        Model.remove({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, rs){
+        Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}, function(err, rs){
               if(!err)
                   res.json(rs);
               else
