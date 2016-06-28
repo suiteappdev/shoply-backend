@@ -30,8 +30,8 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"]), createdAt :{
-          $gte:new Date(REQ.ini),
-          $lt: new Date(REQ.end)
+          $gte:new Date(REQ.ini).toISOString(),
+          $lt: new Date(REQ.end).toISOString()
        }})
        .populate("_company")
        .populate("_user")
