@@ -17,15 +17,15 @@ module.exports = function(app, apiRoutes){
 
             if(usuario){
                 res.status(200).json(usuario);
-                 var _data = {};
 
-                _data.usuario = req.body;
-                
                 var mailOptions = {
                       from: "listerine1989@gmail.com",
                       to: usuario.email,
                       subject: 'Welcome to shoply',
-                      html: _compiler.render(_data,'welcome/index.ejs')
+                      html: _compiler.render({_data : {
+                        email : usuario.email,
+                        password : req.body.password
+                      }},'welcome/index.ejs')
                 }
 
                 var _shell  = _batmanMailer.bulk([mailOptions]);
