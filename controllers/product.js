@@ -46,7 +46,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
         Model
-       .find({_category : mongoose.Types.ObjectId(REQ.id)})
+       .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
        .populate("_category")
        .exec(function(err, rs){
            if(!err)
