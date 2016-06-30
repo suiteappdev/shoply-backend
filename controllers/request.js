@@ -99,7 +99,8 @@ module.exports = function(app, apiRoutes, io){
     function update(req, res){
   		var data = {};
   		var REQ = req.body || req.params;
-  		!REQ.data || (data.data = REQ.data);             
+  		!REQ.data || (data.data = REQ.data);
+      !REQ.metadata || (data.metadata = REQ.metadata);           
     
       data.shoppingCart = REQ.shoppingCart;      
       data._seller =  mongoose.Types.ObjectId(REQ._seller);
