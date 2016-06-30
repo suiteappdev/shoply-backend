@@ -15,7 +15,10 @@ module.exports = function(app, apiRoutes){
        }
 
        if(req._route){
-          data._route = mongoose.Types.ObjectId(req._route);
+           data._route = [];
+          for(r in req._route){
+             data._route.push(mongoose.Types.ObjectId(req._route[r]));
+          }
        }
 
         userHelper.create(data, function(err, usuario){
@@ -68,9 +71,12 @@ module.exports = function(app, apiRoutes){
             data._company = mongoose.Types.ObjectId(REQ._company);
           }
 
-          if(REQ._route){
-            data._route = mongoose.Types.ObjectId(REQ._route);
-          }
+         if(REQ._route){
+             data._route = [];
+            for(r in req._route){
+               data._route.push(mongoose.Types.ObjectId(req._route[r]));
+            }
+         }
 
          data = { $set : data }; 
 
