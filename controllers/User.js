@@ -67,9 +67,9 @@ module.exports = function(app, apiRoutes){
          !REQ.name || (data.name = REQ.name);
          !REQ.last_name || (data.last_name = REQ.last_name);
 
-          if(REQ._company){
-            data._company = mongoose.Types.ObjectId(REQ._company);
-          }
+         if(req.headers["x-soply-company"]){
+           data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+         }
 
          if(REQ._route){
              data._route = [];
