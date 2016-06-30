@@ -57,6 +57,7 @@ module.exports = function(app, apiRoutes, io){
        .findOne({_id : REQ.id})
        .populate("_user")
        .populate("_seller")
+       .populate("_company")
        .populate("_client")
        .exec(function(err, rs){
            if(!err)
