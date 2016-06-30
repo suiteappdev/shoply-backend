@@ -73,8 +73,8 @@ module.exports = function(app, apiRoutes){
 
          if(REQ._route){
              data._route = [];
-            for(r in req._route){
-               data._route.push(mongoose.Types.ObjectId(req._route[r]));
+            for(r in REQ._route){
+               data._route.push(mongoose.Types.ObjectId(REQ._route[r]));
             }
          }
 
