@@ -14,6 +14,10 @@ module.exports = function(app, apiRoutes){
          data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
        }
 
+       if(req._route){
+          data._route = mongoose.Types.ObjectId(req._route);
+       }
+
         userHelper.create(data, function(err, usuario){
           if(err){
               res.status(409).json({code : 11000});
@@ -61,7 +65,11 @@ module.exports = function(app, apiRoutes){
          !REQ.last_name || (data.last_name = REQ.last_name);
 
           if(REQ._company){
-            data._company = REQ._company;
+            data._company = mongoose.Types.ObjectId(REQ._company);
+          }
+
+          if(REQ._route){
+            data._route = mongoose.Types.ObjectId(REQ._route);
           }
 
          data = { $set : data }; 
@@ -88,7 +96,9 @@ module.exports = function(app, apiRoutes){
     function users(req, res){
         var Role = require("../models/roles");
 
-        User.find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}).populate("_company")
+        User.find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+        .populate("_company")
+        .populate("_route")
         .exec(function(err, users){
             if(!err){
                 res.send(users);
@@ -102,6 +112,7 @@ module.exports = function(app, apiRoutes){
         User
         .findOne( mongoose.Types.ObjectId(req.params.id))
         .populate("_company")
+        .populate("_route")
         .exec(function(err, rs){
             if(rs)
                 res.json(rs);

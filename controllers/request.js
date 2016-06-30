@@ -77,8 +77,8 @@ module.exports = function(app, apiRoutes, io){
 
       data.metadata = REQ.metadata;
       data.shoppingCart = REQ.shoppingCart;      
-      data._seller = REQ._seller;
-      data._client = REQ._client;
+      data._seller = mongoose.Types.ObjectId(REQ._seller);
+      data._client = mongoose.Types.ObjectId(REQ._client);
       data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
             
   	 var model = new Model(data);
