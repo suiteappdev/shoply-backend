@@ -31,6 +31,7 @@ module.exports = function(app, apiRoutes, io){
        Model
        .findOne({_id : REQ.id})
         .populate("_category")
+        .populate("_company")
        .exec(function(err, rs){
            if(!err)
            {
@@ -48,6 +49,7 @@ module.exports = function(app, apiRoutes, io){
         Model
        .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
        .populate("_category")
+       .populate("_company")
        .exec(function(err, rs){
            if(!err)
            {
