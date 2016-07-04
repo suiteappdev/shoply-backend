@@ -32,7 +32,7 @@ module.exports = function(app, apiRoutes, io){
        Model
        .find({
           _company : mongoose.Types.ObjectId(req.headers["x-soply-company"]), 
-          _seller : REQ.seller
+          _seller : REQ.seller,
           createdAt : {
             $gte: new Date(REQ.ini).toISOString(),
             $lt: new Date(REQ.end).toISOString()
