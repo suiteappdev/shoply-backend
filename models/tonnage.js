@@ -8,6 +8,7 @@ var metadata = require('./plugins/metadata');
 var entity = "tonnage";
 
 var _Schema = new Schema({
+	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
 	  _request : [{type : Schema.Types.ObjectId , ref : 'request'}],
 	  data : { type : Object}
  });

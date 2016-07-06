@@ -29,7 +29,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .findOne({_id : REQ.id})
+       .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}})
        .populate("_company")
        .populate("_request")
        .exec(function(err, rs){
@@ -48,7 +48,7 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
       !REQ.metadata || (data.metadata = REQ.metadata);
-       data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+      data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
        
        if(REQ._request){
           data._request = [];
