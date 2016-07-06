@@ -47,9 +47,17 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
+      !REQ.metadata || (data.metadata = REQ.metadata);
        data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
-       data._request = REQ._request;
        
+       if(REQ._request){
+          data._request = [];
+
+          for(x in REQ._request){
+              data._request.push(mongoose.Types.ObjectId(x));
+          }
+       }
+
   	   var model = new Model(data);
 
   		model.save(function(err, rs){
