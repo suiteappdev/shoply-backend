@@ -19,8 +19,8 @@ _Schema.pre('save', function (next) {
 });
 
 //add plugins
-_Schema.plugin(autoIncrement.plugin, _Schema);
 _Schema.plugin(metadata);
 _Schema.plugin(timestamps);
 
 module.exports = mongoose.model(entity, _Schema); 
+_Schema.plugin(autoIncrement.plugin, _Schema);
