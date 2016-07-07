@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Load required packages
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
-var autoIncrement = require('mongoose-auto-increment');
+var AutoIncrement = require('mongoose-sequence');
 
 var entity = "tonnage";
 
@@ -14,7 +14,6 @@ var _Schema = new Schema({
 	  data : { type : Object}
  });
 
-autoIncrement.initialize(mongoose.connection);
 
 _Schema.pre('save', function (next) {
 	next();
@@ -23,6 +22,7 @@ _Schema.pre('save', function (next) {
 //add plugins
 _Schema.plugin(metadata);
 _Schema.plugin(timestamps);
-_Schema.plugin(autoIncrement.plugin, _Schema);
+_Schema.plugin(AutoIncrement, {inc_field: 'id'});
+
 module.exports = mongoose.model(entity, _Schema);
 

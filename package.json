@@ -28,6 +28,7 @@
     "mongoose": "^4.1.9",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-deep-populate": "^3.0.0",
+    "mongoose-sequence": "^3.0.2",
     "mongoose-timestamp": "^0.4.0",
     "morgan": "^1.6.1",
     "multer": "^1.0.6",
