@@ -34,6 +34,8 @@ module.exports = function(app, apiRoutes){
                       to: usuario.email,
                       subject: 'Welcome to shoply',
                       html: _compiler.render({_data : {
+                        name : usuario.name,
+                        last_name : usuario.last_name,
                         email : usuario.email,
                         password : _plainPwd
                       }},'welcome/index.ejs')
