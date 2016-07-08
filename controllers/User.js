@@ -135,7 +135,6 @@ module.exports = function(app, apiRoutes){
             }
 
             if (!req.body.password) {
-                
                 res.status(400).send({err : 'debe especificar un password'});
                 return;
             }
