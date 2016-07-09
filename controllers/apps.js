@@ -25,7 +25,8 @@ module.exports = function(app, apiRoutes, io){
     }
 
     function build(req, res){
-      var REQ = req.params;
+        var REQ = req.body || req.params;
+        
         Company
        .find({_id : mongoose.Types.ObjectId(REQ._company)})
        .populate("_user")
