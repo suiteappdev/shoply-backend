@@ -30,17 +30,15 @@ module.exports = function(app, apiRoutes, io){
        .find({_company : mongoose.Types.ObjectId(REQ._company)})
        .populate("_user")
        .exec(function(err, rs){
-           if(!err){
-              fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs)), function(err) {
-                if(err) {
-                    return console.log(err);
-                }
-                  console.log("The file was saved!");
-              })
-           }
+          if(!err){
+            fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
+              if(err){
+                  return console.log(err);
+              }
+              console.log("creado");
+            });
+          }
        });
-
-;  
     }
 
     function get(req, res){
