@@ -31,7 +31,7 @@ module.exports = function(app, apiRoutes, io){
        .populate("_user")
        .exec(function(err, rs){
            if(!err){
-              fs.writeFile(path.join(__dirname, "apps", "www", "js", "company.json"), JSON.stringify(rs), function(err) {
+              fs.writeFile(path.join(process.env.PWD, "apps", "www", "js", "company.json"), JSON.stringify(rs), function(err) {
                 if(err) {
                     return console.log(err);
                 }
