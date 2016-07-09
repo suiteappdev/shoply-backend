@@ -28,7 +28,7 @@ module.exports = function(app, apiRoutes, io){
         var REQ = req.body || req.params;
         
         Company
-       .find({_id : mongoose.Types.ObjectId(REQ._company)})
+       .findOne({_id : mongoose.Types.ObjectId(REQ._company)})
        .populate("_user")
        .exec(function(err, rs){
         console.log(rs);
