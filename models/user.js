@@ -20,7 +20,7 @@ var _Schema = new Schema({
 	  email : { type : String, trim : true , unique : true},
 	  data:{ type : Object},
 	  active : { type : Boolean, default : true},
-	  type : { type : String, trim : true, default : 'USER'},
+	  type : { type : String, trim : true, default : 'ADMINISTRATOR'},
 	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
 	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}]
