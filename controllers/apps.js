@@ -1,7 +1,7 @@
 module.exports = function(app, apiRoutes, io){
   	var _entity ="apps";
   	var _url_alias = "apps";
-
+    var fs = require('fs');
   	var path = require("path");
     var mongoose = require('mongoose');
     var Model = require(path.join("../", "models", _entity + ".js"));
@@ -22,6 +22,25 @@ module.exports = function(app, apiRoutes, io){
            else
             res.json(err);
        });
+    }
+
+    function build(req, res){
+      var REQ = req.params;
+        Company
+       .find({_company : mongoose.Types.ObjectId(REQ._company)})
+       .populate("_user")
+       .exec(function(err, rs){
+           if(!err){
+              fs.writeFile(path.join(__dirname, "apps", "www", "js", "company.json"), JSON.stringify(rs), function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                  console.log("The file was saved!");
+              })
+           }
+       });
+
+;  
     }
 
     function get(req, res){
@@ -110,6 +129,7 @@ module.exports = function(app, apiRoutes, io){
     
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.post("/" + _url_alias, post);
+    apiRoutes.post("/" + _url_alias + "/build/", build);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
 
