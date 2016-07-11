@@ -31,7 +31,6 @@ module.exports = {
 							callback(err, null);
 						}else{
 							var URL = BASE_AMAZON  + _key;
-							console.log(data);
 							callback(null, {url : URL});
 						}
 					});
