@@ -37,7 +37,7 @@ module.exports = function(app, apiRoutes, io){
                   return console.log(err);
               }
 
-              Builder.build(function(output){
+              Builder.Build(function(output){
                   Build.Upload(process.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk", function(_err, _data){
                     res.status(200).json(_data)
                   });
