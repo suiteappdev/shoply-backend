@@ -8,7 +8,6 @@ module.exports = function(app, apiRoutes, io){
     var Company = require(path.join("../", "models", "company.js"));
     var Builder = require(path.join("../", "helpers", "apkbuilder", "apkbuilder.js"));
 
-
     function getCompany(req, res){
 
       var REQ = req.params; 
@@ -39,11 +38,14 @@ module.exports = function(app, apiRoutes, io){
               
               Builder.Build(function(output){
                   Builder.Upload(function(_err, _data){
-                        var app = {};
-                        app.data = _data; 
-                        app._company  = REQ._company;
+                        var data = {};
+                        !REQ.data || (data.data = REQ.data);
 
-                        var model = new Model(app);
+                        data.data.url = _data.url; 
+                        data._company  = REQ._company;
+                        data.metadata = REQ.metadata;
+
+                        var model = new Model(data);
 
                         model.save(function(err, rs){
                             res.status(200).json(rs);
