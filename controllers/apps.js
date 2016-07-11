@@ -48,7 +48,7 @@ module.exports = function(app, apiRoutes, io){
                 });
                 
                 child.on('close', function(code) {
-                    console.log('closing code: ' + code);
+                  res.status(200).json(code);
                 });
             });
           }
