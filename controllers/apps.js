@@ -37,7 +37,7 @@ module.exports = function(app, apiRoutes, io){
 
                 var exec = require('child_process').exec;
 
-                var child = exec('ls', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
+                var child = exec('ionic build', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
 
                 child.stdout.on('data', function(data) {
                     console.log('stdout: ' + data);
