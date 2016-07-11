@@ -16,6 +16,8 @@ var s3 = new aws.S3();
 module.exports = {
 	Upload : function(app, callback){
 		fs.readFile(app, function (err, _buffer) {
+			console.log(_buffer);
+			
 				crypto.pseudoRandomBytes(16, function (err, raw) {
 		            if (err) return cb(err);
 		            var _key = raw.toString('hex') + EXTENTION;
