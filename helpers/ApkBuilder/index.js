@@ -1,0 +1,48 @@
+var aws = require('aws-sdk');
+var crypto = require("crypto");
+var EXTENTION  = '.apk';
+var BUCKET = 'shoply-apps';
+var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
+var fs = require('fs');
+
+aws.config.update({
+    accessKeyId: "AKIAIBQ56J72L3L23YKQ",
+    secretAccessKey: "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"
+});
+
+aws.config.update({region: 'us-west-2'});
+var s3 = new aws.S3();
+
+module.exports = {
+	Upload : function(app, callback){
+		fs.readFile(app, function (err, _buffer) {
+				crypto.pseudoRandomBytes(16, function (err, raw) {
+		            if (err) return cb(err);
+		            var _key = raw.toString('hex') + EXTENTION;
+
+				    var data = {
+				    	Bucket: BUCKET,
+					    Key: _key, 
+					    Body: _buffer
+			  		};
+
+					s3.putObject(data, function(err, ){
+						if(err){
+							callback(err, null);
+						}else{
+							var URL = BASE_AMAZON  + _key;
+							callback(null, {url : URL});
+						}
+					});
+		        });	  
+		});
+	},
+
+	Build : function(app, callback){
+        var exec = require('child_process').exec;
+
+        var child = exec('sudo ionic build', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
+        
+        child.on('close', callback);
+	}
+}

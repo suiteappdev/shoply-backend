@@ -6,6 +6,8 @@ module.exports = function(app, apiRoutes, io){
     var mongoose = require('mongoose');
     var Model = require(path.join("../", "models", _entity + ".js"));
     var Company = require(path.join("../", "models", "company.js"));
+    var Builder = require(path.join("../", "helpers", "apkBuilder", "index"));
+
 
     function getCompany(req, res){
 
@@ -35,21 +37,11 @@ module.exports = function(app, apiRoutes, io){
                   return console.log(err);
               }
 
-                var exec = require('child_process').exec;
-
-                var child = exec('sudo ionic build', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
-
-                child.stdout.on('data', function(data) {
-                    console.log('stdout: ' + data);
-                });
-                
-                child.stderr.on('data', function(data) {
-                    console.log('stdout: ' + data);
-                });
-                
-                child.on('close', function(code) {
-                  res.status(200).json({status_code : code});
-                });
+              Builder.build(, function(output){
+                  Build.Upload(process.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk", function(_err, _data){
+                    res.status(200).json(_data)
+                  });
+              });
             });
           }
        });
