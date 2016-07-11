@@ -42,7 +42,7 @@ module.exports = function(app, apiRoutes, io){
                         !REQ.data || (data.data = REQ.data);
 
                         data.data.url = _data.url; 
-                        data._company  = REQ._company;
+                        data._company  = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
                         data.metadata = REQ.metadata;
 
                         var model = new Model(data);
