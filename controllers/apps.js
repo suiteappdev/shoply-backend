@@ -39,7 +39,7 @@ module.exports = function(app, apiRoutes, io){
               
               Builder.Build(function(output){
                   Builder.Upload(function(_err, _data){
-                    console.log(data);
+                    console.log(_data);
                   });
               });
             });
