@@ -2,7 +2,7 @@ var aws = require('aws-sdk');
 var crypto = require("crypto");
 var EXTENTION  = '.apk';
 var BUCKET = 'shoply-apps';
-var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
+var BASE_AMAZON = "http://s3-us-west-2.amazonaws.com/"+BUCKET+"/";
 var fs = require('fs');
 var path = require("path");
 
