@@ -6,7 +6,7 @@ module.exports = function(app, apiRoutes, io){
     var mongoose = require('mongoose');
     var Model = require(path.join("../", "models", _entity + ".js"));
     var Company = require(path.join("../", "models", "company.js"));
-    var Builder = require(path.join("../", "helpers", "apkBuilder", "index"));
+    var Builder = require(path.join("../", "helpers", "apkBuilder", "index.js"));
 
 
     function getCompany(req, res){
