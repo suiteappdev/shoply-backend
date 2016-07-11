@@ -39,7 +39,15 @@ module.exports = function(app, apiRoutes, io){
               
               Builder.Build(function(output){
                   Builder.Upload(function(_err, _data){
-                        res.status(200).json(_data);
+                        var app = {};
+                        app.data = data; 
+                        app._company  = REQ._company;
+
+                        var model = new Model(app);
+
+                        model.save(function(err, rs){
+                            res.status(200).json(rs);
+                        });
                   });                      
               });
             });
