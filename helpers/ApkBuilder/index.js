@@ -38,7 +38,7 @@ module.exports = {
 		});
 	},
 
-	Build : function(app, callback){
+	Build : function(callback){
         var exec = require('child_process').exec;
 
         var child = exec('sudo ionic build', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
