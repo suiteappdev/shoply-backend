@@ -26,7 +26,7 @@ module.exports = {
 					    Body: _buffer
 			  		};
 
-					s3.putObject(data, function(err, ){
+					s3.putObject(data, function(err, data){
 						if(err){
 							callback(err, null);
 						}else{
