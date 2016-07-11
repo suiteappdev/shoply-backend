@@ -27,16 +27,29 @@ module.exports = function(app, apiRoutes, io){
     function build(req, res){
         var REQ = req.body || req.params;
         
-        Company
-       .findOne({_id : mongoose.Types.ObjectId(REQ._company)})
-       .populate("_user")
+        Company.findOne({_id : mongoose.Types.ObjectId(REQ._company)}).populate("_user")
        .exec(function(err, rs){
-        console.log(rs);
           if(!err){
             fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
               if(err){
                   return console.log(err);
               }
+
+                var exec = require('child_process').exec;
+
+                var child = exec('ls', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
+
+                child.stdout.on('data', function(data) {
+                    console.log('stdout: ' + data);
+                });
+                
+                child.stderr.on('data', function(data) {
+                    console.log('stdout: ' + data);
+                });
+                
+                child.on('close', function(code) {
+                    console.log('closing code: ' + code);
+                });
             });
           }
        });
