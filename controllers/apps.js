@@ -44,11 +44,11 @@ module.exports = function(app, apiRoutes, io){
                 });
                 
                 child.stderr.on('data', function(data) {
-                    console.log('stdout: ' + data);
+                    res.status(500).json({data : data});
                 });
                 
                 child.on('close', function(code) {
-                  res.status(200).json(code);
+                  res.status(200).json({status_code : code});
                 });
             });
           }
