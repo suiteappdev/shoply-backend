@@ -38,11 +38,9 @@ module.exports = function(app, apiRoutes, io){
               }
               
               Builder.Build(function(output){
-                    if(output == 1){
-                      Builder.Upload(function(_data){
-                            res.status(200).json(_data);
-                      });                      
-                    }
+                  Builder.Upload(function(_data){
+                        res.status(200).json(_data);
+                  });                      
               });
             });
           }
