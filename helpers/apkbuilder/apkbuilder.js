@@ -4,7 +4,7 @@ var EXTENTION  = '.apk';
 var BUCKET = 'shoply-apps';
 var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
 var fs = require('fs');
-var PATH = require("path");
+var path = require("path");
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -15,11 +15,12 @@ aws.config.update({region: 'us-west-2'});
 var s3 = new aws.S3();
 module.exports = {
 	Upload : function(app, callback){
-		fs.readFile(PATH.join(pathprocess.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk"), function (err, _buffer) {
-			console.log(_buffer);
+		fs.readFile(path.join(pathprocess.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk", function (err, _buffer) {
+			console.log(err);
 
 				crypto.pseudoRandomBytes(16, function (err, raw) {
 		            if (err) return cb(err);
+		            
 		            var _key = raw.toString('hex') + EXTENTION;
 
 				    var data = {
