@@ -44,7 +44,7 @@ module.exports = function(app, apiRoutes, io){
                 });
                 
                 child.stderr.on('data', function(data) {
-                    res.status(500).json({data : data});
+                    console.log('stdout: ' + data);
                 });
                 
                 child.on('close', function(code) {
