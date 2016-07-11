@@ -56,11 +56,10 @@ module.exports = function(app, apiRoutes, io){
     }
 
     function get(req, res){
-
       var REQ = req.params; 
-
+      
        Model
-       .find()
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
        .populate("_company")
        .exec(function(err, rs){
            if(!err)
