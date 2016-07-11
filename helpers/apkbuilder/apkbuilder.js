@@ -15,12 +15,11 @@ aws.config.update({region: 'us-west-2'});
 var s3 = new aws.S3();
 module.exports = {
 	Upload : function(app, callback){
-		fs.readFile(path.join(pathprocess.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk", function (err, _buffer) {
-			console.log(err);
-
-				crypto.pseudoRandomBytes(16, function (err, raw) {
+		fs.readFile(path.join(pathprocess.env.PWD, "apps", "shoply-app", "platforms", "android,", "build", "outputs", "apk", "android-debug.apk"), function (err, _buffer) {
+						console.log("error", err);
+						console.log("buffer", _buffer);
+				/*crypto.pseudoRandomBytes(16, function (err, raw) {
 		            if (err) return cb(err);
-		            
 		            var _key = raw.toString('hex') + EXTENTION;
 
 				    var data = {
@@ -38,7 +37,7 @@ module.exports = {
 							//callback(null, {url : URL});
 						}
 					});
-		        });	  
+		        });	 */ 
 		});
 	},
 
