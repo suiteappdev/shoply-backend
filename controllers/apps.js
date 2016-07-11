@@ -40,7 +40,7 @@ module.exports = function(app, apiRoutes, io){
               Builder.Build(function(output){
                   Builder.Upload(function(_err, _data){
                         var app = {};
-                        app.data = data; 
+                        app.data = _data; 
                         app._company  = REQ._company;
 
                         var model = new Model(app);
