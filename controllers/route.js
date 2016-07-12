@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .exec(function(err, rs){
            if(!err)
@@ -46,7 +46,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
-       data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+       data._company =  mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
        
   	   var model = new Model(data);
 

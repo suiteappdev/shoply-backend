@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
            if(!err)
            {
@@ -43,7 +43,7 @@ module.exports = function(app, apiRoutes, io){
     function getRoot(req, res){
       var REQ = req.params; 
        Model
-       .find({parent : "#", _company :mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .find({parent : "#", _company :mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
            if(!err)
            {
@@ -56,7 +56,7 @@ module.exports = function(app, apiRoutes, io){
 
     function getChilds(req, res){
         var REQ = req.params;
-        Model.find({parent : REQ.parent, _company: mongoose.Types.ObjectId(req.headers["x-soply-company"])}).exec(function(err, rs){
+        Model.find({parent : REQ.parent, _company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).exec(function(err, rs){
             if(!err){
               res.json(rs)
              }else{
@@ -75,7 +75,7 @@ module.exports = function(app, apiRoutes, io){
       data.id = REQ.id;      
       data.text = REQ.text;
       data.parent = REQ.parent;
-      data._company = req.headers["x-soply-company"];
+      data._company = req.headers["x-shoply-company"];
             
   	 var model = new Model(data);
 

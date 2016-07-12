@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_seller")
        .populate("_client")
@@ -31,7 +31,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({
-          _company : mongoose.Types.ObjectId(req.headers["x-soply-company"]), 
+          _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
           _seller : REQ.seller,
           createdAt : {
             $gte: new Date(REQ.ini).toISOString(),
@@ -84,7 +84,7 @@ module.exports = function(app, apiRoutes, io){
       data.shoppingCart = REQ.shoppingCart;      
       data._seller = mongoose.Types.ObjectId(REQ._seller);
       data._client = mongoose.Types.ObjectId(REQ._client);
-      data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
             
   	 var model = new Model(data);
 
@@ -121,7 +121,7 @@ module.exports = function(app, apiRoutes, io){
 
 
     function remove(req, res){
-        Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}, function(err, rs){
+        Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, function(err, rs){
               if(!err)
                   res.json(rs);
               else

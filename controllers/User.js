@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes){
        var _plainPwd = req.body.password;
 
        if(req.headers["x-soply-company"]){
-         data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+         data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
        }
 
        if(req._route){
@@ -70,7 +70,7 @@ module.exports = function(app, apiRoutes){
          !REQ.last_name || (data.last_name = REQ.last_name);
 
          if(req.headers["x-soply-company"]){
-           data._company = mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+           data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
          }
 
          if(REQ._route){
@@ -104,7 +104,7 @@ module.exports = function(app, apiRoutes){
     function users(req, res){
         var Role = require("../models/roles");
 
-        User.find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+        User.find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
         .populate("_company")
         .populate("_route")
         .exec(function(err, users){

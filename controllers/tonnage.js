@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_request")
        .exec(function(err, rs){
@@ -29,7 +29,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_request")
        .exec(function(err, rs){
@@ -48,7 +48,7 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
       !REQ.metadata || (data.metadata = REQ.metadata);
-      data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+      data._company =  mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
        
        if(REQ._request){
           data._request = [];
@@ -77,10 +77,10 @@ module.exports = function(app, apiRoutes, io){
 
   		!REQ.data || (data.data = REQ.data);             
       
-      data._company =  mongoose.Types.ObjectId(req.headers["x-soply-company"]);
+      data._company =  mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
   		data = { $set : data };          
 
-  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}, data,function(err, rs){
+  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, data,function(err, rs){
   			if(rs){
   				res.json(err || rs);
   			}
@@ -89,7 +89,7 @@ module.exports = function(app, apiRoutes, io){
 
 
     function remove(req, res){
-        Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])}, function(err, rs){
+        Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, function(err, rs){
               if(!err)
                   res.json(rs);
               else
