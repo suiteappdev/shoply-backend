@@ -10,7 +10,7 @@ module.exports = function(app, apiRoutes){
        var data = req.body;
        var _plainPwd = req.body.password;
 
-       if(req.headers["x-soply-company"]){
+       if(req.headers["x-shoply-company"]){
          data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
        }
 
