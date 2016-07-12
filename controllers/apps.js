@@ -74,7 +74,7 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
-    function getPublic(){
+    function getPublic(req, res){
       var REQ = req.params; 
 
        Model.findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
