@@ -22,7 +22,7 @@ process.env.PWD = process.cwd() || process.env.PWD;
 apiRoutes = express.Router();
 
 apiRoutes.use(function(req, res, next) {
-        var token = req.body.token || req.query.token || req.headers['x-shoply-auth'];
+        var token = req.body.token || req.query.token || req.headers['x-shoply-user'];
         if (token) {
             jwt.verify(token, app.get("secret"), function(err, decoded) {      
                 var Session = require("./models/session");

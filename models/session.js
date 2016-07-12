@@ -23,12 +23,6 @@ _Schema.statics.removeToken = function(token, callback){
 	return this.model('session').findOne({ token : token}, callback);
 }
 
-//asociate a socket
-
-
-
-//cierra una sesión
-
 _Schema.methods.close = function(){
     this.closed_date = Date.now();
     this.save();
