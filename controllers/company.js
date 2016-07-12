@@ -40,6 +40,24 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
+    function getByUser(req, res){
+
+      var REQ = req.params; 
+
+       Model
+       .find({_id : mongoose.Types.ObjectId(REQ._user)})
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       });
+    }
+
+
+
     function post(req, res){
   		var data = {};
   		var REQ = req.body || req.params;
