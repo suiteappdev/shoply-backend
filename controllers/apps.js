@@ -74,7 +74,20 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
+    function getPublic(){
+      var REQ = req.params; 
 
+       Model.findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-soply-company"])})
+       populate("_company")
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       });
+    }
 
     function getById(req, res){
 
@@ -142,6 +155,7 @@ module.exports = function(app, apiRoutes, io){
     apiRoutes.get("/" + _url_alias +"/company/", getCompany);
     
     apiRoutes.get("/" + _url_alias + "/:id", getById);
+    apiRoutes.get("/" + _url_alias + "/public/:id", getPublic);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.post("/" + _url_alias + "/build/", build);
     apiRoutes.put("/" + _url_alias + "/:id", update);
