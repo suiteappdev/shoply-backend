@@ -45,7 +45,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_id : mongoose.Types.ObjectId(REQ.user)})
+       .find({_user : mongoose.Types.ObjectId(REQ.user)})
        .exec(function(err, rs){
            if(!err)
            {
