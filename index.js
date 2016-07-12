@@ -24,7 +24,9 @@ apiRoutes = express.Router();
 apiRoutes.use(function(req, res, next) {
         var token = req.body.token || req.query.token || req.headers['x-shoply-auth'];
         if (token) {
-            jwt.verify(token, app.get("secret"), function(err, decoded) {      
+            console.log("token", token);
+            jwt.verify(token, app.get("secret"), function(err, decoded) {
+            console.log("err", err);      
                 var Session = require("./models/session");
                  if (err){
                         return res.status(401).json({ success: false, message: 'Failed to authenticate token.' }); 
