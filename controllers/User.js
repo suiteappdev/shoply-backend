@@ -201,7 +201,7 @@ module.exports = function(app, apiRoutes){
     apiRoutes.get('/user/:id', user);
     apiRoutes.get('/user/exists/:email', exists);
     app.post('/api/password-reset/', passwordReset);
-    apiRoutes.post("/user", create);
+    app.post("/user", create);
     app.post("/api/login", login);
     apiRoutes.put("/user/:id", update);
     apiRoutes.delete("/user/:id", remove);
