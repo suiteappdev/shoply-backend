@@ -41,33 +41,33 @@ module.exports = function(app, apiRoutes, io){
                       var builder = new xml2js.Builder();
                       var xml = builder.buildObject(result);
 
-                      console.log(xml);
+                      fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
+                        if(err){
+                            return console.log(err);
+                        }
+                        
+                        Builder.Build(function(output){
+                            Builder.Upload(function(_err, _data){
+                                  var data = {};
+                                  !REQ.data || (data.data = REQ.data);
+
+                                  data.data.url = _data.url; 
+                                  data.data.isPublic = true; 
+                                  data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+                                  data.metadata = REQ.metadata;
+
+                                  var model = new Model(data);
+
+                                  model.save(function(err, rs){
+                                      res.status(200).json(rs);
+                                  });
+                            });                      
+                        });
+                      });                      
                   });
               });
 
-            /*fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
-              if(err){
-                  return console.log(err);
-              }
-              
-              Builder.Build(function(output){
-                  Builder.Upload(function(_err, _data){
-                        var data = {};
-                        !REQ.data || (data.data = REQ.data);
 
-                        data.data.url = _data.url; 
-                        data.data.isPublic = true; 
-                        data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-                        data.metadata = REQ.metadata;
-
-                        var model = new Model(data);
-
-                        model.save(function(err, rs){
-                            res.status(200).json(rs);
-                        });
-                  });                      
-              });
-            });*/
           }
        });
     }
