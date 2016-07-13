@@ -7,7 +7,7 @@ module.exports = function(app, apiRoutes, io){
     var gcm = require('node-gcm');
 
     function register(req, res){
-        var REQ = req.params;
+        var REQ = req.body || req.params;
 
 	    console.log('device token received');
 	      
