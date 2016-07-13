@@ -28,7 +28,7 @@ module.exports = function(app, apiRoutes, io){
     function build(req, res){
         var REQ = req.body || req.params;
         
-        Company.findOne({_id : mongoose.Types.ObjectId(REQ._company)}).populate("_user")
+        Company.findOne({_id : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_user")
        .exec(function(err, rs){
           if(!err){
             console.log(rs);
