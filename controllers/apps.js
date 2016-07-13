@@ -34,7 +34,7 @@ module.exports = function(app, apiRoutes, io){
               var xml2js = require('xml2js');
               var parser = new xml2js.Parser();
 
-              fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml", function(err, data) {
+              fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
                       console.log(result);
                   });
