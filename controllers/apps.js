@@ -31,7 +31,16 @@ module.exports = function(app, apiRoutes, io){
         Company.findOne({_id : mongoose.Types.ObjectId(REQ._company)}).populate("_user")
        .exec(function(err, rs){
           if(!err){
-            fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
+              var xml2js = require('xml2js');
+              var parser = new xml2js.Parser();
+
+              fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml", function(err, data) {
+                  parser.parseString(data, function (err, result) {
+                      console.log(result);
+                  });
+              });
+
+            /*fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
               if(err){
                   return console.log(err);
               }
@@ -53,7 +62,7 @@ module.exports = function(app, apiRoutes, io){
                         });
                   });                      
               });
-            });
+            });*/
           }
        });
     }
