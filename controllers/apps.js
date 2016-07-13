@@ -31,8 +31,7 @@ module.exports = function(app, apiRoutes, io){
         Company.findOne({_id : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_user")
        .exec(function(err, rs){
           if(!err){
-            console.log(rs);
-              /*var xml2js = require('xml2js');
+              var xml2js = require('xml2js');
               var parser = new xml2js.Parser();
 
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
@@ -44,7 +43,7 @@ module.exports = function(app, apiRoutes, io){
 
                       console.log(xml);
                   });
-              });*/
+              });
 
             /*fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js", "company.json"), JSON.stringify(rs), function(err){
               if(err){
