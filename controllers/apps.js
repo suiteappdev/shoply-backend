@@ -37,8 +37,8 @@ module.exports = function(app, apiRoutes, io){
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
                       var config = result.widget.$.id = "com.shoply." + rs._id;
-                      
-                      var builder = xml2js.Builder();
+                      var xml2js = require('xml2js');
+                      var builder = new xml2js.Builder();
                       var xml = builder.buildObject(obj);
 
                       console.log(xml);
