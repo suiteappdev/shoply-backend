@@ -199,7 +199,7 @@ module.exports = function(app, apiRoutes){
 
     apiRoutes.get('/user', users);
     apiRoutes.get('/user/:id', user);
-    app.get('/user/exists/:email', exists);
+    app.get('/api/user/exists/:email', exists);
     app.post('/api/password-reset/', passwordReset);
     app.post("/api/user", create);
     app.post("/api/login", login);
