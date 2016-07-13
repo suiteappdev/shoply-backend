@@ -47,8 +47,8 @@ module.exports = function(app, apiRoutes, io){
 	    res.send('ok');
     }
 
-    post.post("/" + _url_alias + "/register/:user/", register);
-    post.post("/" + _url_alias + "/push/:user/", push);
+    app.post("/" + _url_alias + "/register/:user/", register);
+    app.post("/" + _url_alias + "/push/:user/", push);
 
     return this;
 }
