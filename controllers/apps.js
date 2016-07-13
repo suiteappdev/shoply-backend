@@ -39,7 +39,7 @@ module.exports = function(app, apiRoutes, io){
                       var config = result.widget.$.id = "com.shoply." + rs._id;
                       var xml2js = require('xml2js');
                       var builder = new xml2js.Builder();
-                      var xml = builder.buildObject(obj);
+                      var xml = builder.buildObject(config);
 
                       console.log(xml);
                   });
