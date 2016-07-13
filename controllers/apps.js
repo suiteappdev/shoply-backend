@@ -36,8 +36,8 @@ module.exports = function(app, apiRoutes, io){
 
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
-                      result.widget.$.id = "com.ionicframework.shoplyapp722350";
-                      
+                      result.widget.$.id = "com.shoply." + res._id;
+
                       var xml2js = require('xml2js');
                       var builder = new xml2js.Builder();
                       var xml = builder.buildObject(result);
