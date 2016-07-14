@@ -33,44 +33,51 @@ module.exports = function(app, apiRoutes, io){
           if(!err){
               var xml2js = require('xml2js');
               var parser = new xml2js.Parser();
-
+              
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
-                      var _package = "com.shoply.ID" + rs._id.toString(); 
+                    crypto.pseudoRandomBytes(10, function (err, raw) {
+                            if (err) return cb(err);
 
-                      result.widget.$.id = _package;
+                                var _key = raw.toString('hex');
+                                var _package = "com."+ _key + "." + "ID" + rs._id.toString(); 
 
-                      var xml2js = require('xml2js');
-                      var builder = new xml2js.Builder();
-                      var xml = builder.buildObject(result);
+                                result.widget.$.id = _package;
 
-                      fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
-                        if(err){
-                            return console.log(err);
-                        }
-                        
-                        Builder.Build(function(output){
-                            Builder.Upload(function(_err, _data){
-                                  var data = {};
-                                  !REQ.data || (data.data = REQ.data);
+                                var xml2js = require('xml2js');
+                                var builder = new xml2js.Builder();
+                                var xml = builder.buildObject(result);
 
-                                  data.data.url = _data.url; 
-                                  data.data.isPublic = true; 
-                                  data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-                                  data.metadata = REQ.metadata;
+                                fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
+                                  if(err){
+                                      return console.log(err);
+                                  }
+                                  
+                                  Builder.Build(function(output){
+                                      Builder.Upload(function(_err, _data){
+                                            var data = {};
+                                            !REQ.data || (data.data = REQ.data);
 
-                                  var model = new Model(data);
+                                            data.data.url = _data.url; 
+                                            data.data.isPublic = true; 
+                                            data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+                                            data.metadata = REQ.metadata;
 
-                                  model.save(function(err, rs){
-                                      res.status(200).json(rs);
+                                            var model = new Model(data);
+
+                                            model.save(function(err, rs){
+                                                res.status(200).json(rs);
+                                            });
+                                      });                      
                                   });
-                            });                      
-                        });
-                      });                      
+                                }); 
+                        });  
+
+
+
+                     
                   });
               });
-
-
           }
        });
     }
