@@ -41,7 +41,7 @@ module.exports = function(app, apiRoutes, io){
                             if (err) return cb(err);
 
                                 var _key = raw.toString('hex');
-                                var _package = "com."+ _key + "." + "ID" + rs._id.toString(); 
+                                var _package = "com.CP"+ _key + "." + "ID" + rs._id.toString(); 
 
                                 result.widget.$.id = _package;
 
