@@ -7,6 +7,7 @@ module.exports = function(app, apiRoutes, io){
     var Model = require(path.join("../", "models", _entity + ".js"));
     var Company = require(path.join("../", "models", "company.js"));
     var Builder = require(path.join("../", "helpers", "apkbuilder", "apkbuilder.js"));
+    var crypto = require("crypto");
 
     function getCompany(req, res){
 
