@@ -42,8 +42,10 @@ module.exports = function(app, apiRoutes, io){
 
                                 var _key = raw.toString('hex');
                                 var _package = "com.CP"+ _key + "." + "ID" + rs._id.toString(); 
+                                var _name = REQ.name;
 
                                 result.widget.$.id = _package;
+                                result.name = _name;
 
                                 var xml2js = require('xml2js');
                                 var builder = new xml2js.Builder();

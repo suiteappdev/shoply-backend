@@ -91,17 +91,19 @@ module.exports = function(app, apiRoutes, io){
 
 
     function update(req, res){
-		var data = {};
-		var REQ = req.body || req.params;
-		!REQ.data || (data.data = REQ.data);             
+  		var data = {};
+  		var REQ = req.body || req.params;
 
-		data = { $set : data };          
+  		!REQ.data || (data.data = REQ.data);             
+      data.text = REQ.text;
+      
+  		data = { $set : data };          
 
-		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
-			if(rs){
-				res.json(err || rs);
-			}
-		});
+  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+  			if(rs){
+  				res.json(err || rs);
+  			}
+  		});
     }
 
 
