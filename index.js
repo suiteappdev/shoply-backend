@@ -76,6 +76,8 @@ var turns = io;
 io.on('connection', function(socket){
     socket.on("_company", function(_company){
       socket.join(_company);
+      console.log("connected to::", socket);
+      console.log("connected to ROOM::", _company);
     });
 });
 
