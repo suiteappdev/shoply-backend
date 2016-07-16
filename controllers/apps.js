@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
     var multer = require("multer");
 
     var upload = multer({ dest: 'uploads/' });
-    var cpUpload = upload.fields([{ name: 'icono', maxCount: 1 }, { name: 'splash', maxCount: 8 }])
+    var cpUpload = upload.fields([{ name: 'icon', maxCount: 1 }, { name: 'splash', maxCount: 8 }])
     
     function getCompany(req, res){
 
