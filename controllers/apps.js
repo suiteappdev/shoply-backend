@@ -15,9 +15,11 @@ module.exports = function(app, apiRoutes, io){
         cb(null, 'apps/shoply-app/resources')
       },
       filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
+        cb(null, file.fieldname +  path.extname(file.originalname))
       }
     })
+
+     path.extname(file.originalname)
     
     var upload = multer({ storage: storage});
 
