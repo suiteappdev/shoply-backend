@@ -9,8 +9,17 @@ module.exports = function(app, apiRoutes, io){
     var Builder = require(path.join("../", "helpers", "apkbuilder", "apkbuilder.js"));
     var crypto = require("crypto");
     var multer = require("multer");
-
-    var upload = multer({ dest: 'uploads/' });
+    
+    var storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, 'apps/shoply-app/resources')
+      },
+      filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+      }
+    })
+    
+    var upload = multer({ storage: storage});
 
     var cpUpload = upload.fields([{ name: 'icon'}, { name: 'splash'}])
     
@@ -40,6 +49,11 @@ module.exports = function(app, apiRoutes, io){
           if(!err){
               var xml2js = require('xml2js');
               var parser = new xml2js.Parser();
+
+              //copy resource images
+
+
+              //rename
               
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
