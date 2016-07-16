@@ -41,19 +41,12 @@ module.exports = function(app, apiRoutes, io){
 
     function build(req, res){
         var REQ = req.body || req.params;
-        console.log(req.files);
         
         Company.findOne({_id : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_user")
        .exec(function(err, rs){
           if(!err){
               var xml2js = require('xml2js');
               var parser = new xml2js.Parser();
-
-              //copy resource images
-
-
-              //rename
-              
               fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "config.xml"), function(err, data) {
                   parser.parseString(data, function (err, result) {
                     crypto.pseudoRandomBytes(10, function (err, raw) {
@@ -79,7 +72,7 @@ module.exports = function(app, apiRoutes, io){
                                   Builder.Build(function(output){
                                       Builder.Upload(function(_err, _data){
                                             var data = {};
-                                            !REQ.data || (data.data = REQ.data);
+                                            !REQ.data || (data.data = JSON.parse(REQ.data));
 
                                             data.data.url = _data.url; 
                                             data.data.isPublic = true; 
