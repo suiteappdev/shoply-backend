@@ -23,6 +23,7 @@ _Schema.pre('save', function (next) {
 //add plugins
 _Schema.plugin(metadata);
 _Schema.plugin(timestamps);
-_Schema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model(entity, _Schema); 
+
+_Schema.plugin(AutoIncrement, {inc_field: 'id'});
