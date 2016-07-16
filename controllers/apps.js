@@ -11,7 +11,8 @@ module.exports = function(app, apiRoutes, io){
     var multer = require("multer");
 
     var upload = multer({ dest: 'uploads/' });
-    var cpUpload = upload.fields([{ name: 'icon', maxCount: 1 }, { name: 'splash', maxCount: 8 }])
+
+    var cpUpload = upload.fields([{ name: 'icon'}, { name: 'splash'}])
     
     function getCompany(req, res){
 
@@ -32,7 +33,7 @@ module.exports = function(app, apiRoutes, io){
 
     function build(req, res){
         var REQ = req.body || req.params;
-        console.log(REQ.files);
+        console.log(req.files);
         
         Company.findOne({_id : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_user")
        .exec(function(err, rs){
