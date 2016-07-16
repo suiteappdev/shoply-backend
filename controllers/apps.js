@@ -19,10 +19,7 @@ module.exports = function(app, apiRoutes, io){
       }
     })
 
-     path.extname(file.originalname)
-    
     var upload = multer({ storage: storage});
-
     var cpUpload = upload.fields([{ name: 'icon'}, { name: 'splash'}])
     
     function getCompany(req, res){
