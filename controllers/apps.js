@@ -8,7 +8,11 @@ module.exports = function(app, apiRoutes, io){
     var Company = require(path.join("../", "models", "company.js"));
     var Builder = require(path.join("../", "helpers", "apkbuilder", "apkbuilder.js"));
     var crypto = require("crypto");
+    var multer = require("multer");
 
+    var upload = multer({ dest: 'uploads/' });
+    var cpUpload = upload.fields([{ name: 'icono', maxCount: 1 }, { name: 'splash', maxCount: 8 }])
+    
     function getCompany(req, res){
 
       var REQ = req.params; 
@@ -28,6 +32,7 @@ module.exports = function(app, apiRoutes, io){
 
     function build(req, res){
         var REQ = req.body || req.params;
+        console.log(REQ.files);
         
         Company.findOne({_id : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_user")
        .exec(function(err, rs){
@@ -185,7 +190,7 @@ module.exports = function(app, apiRoutes, io){
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.get("/" + _url_alias + "/public/:id", getPublic);
     apiRoutes.post("/" + _url_alias, post);
-    apiRoutes.post("/" + _url_alias + "/build/", build);
+    apiRoutes.post("/" + _url_alias + "/build/", cpUpload, build);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
 
