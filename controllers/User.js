@@ -34,7 +34,7 @@ module.exports = function(app, apiRoutes){
               var mailOptions = {
                     from: "listerine1989@gmail.com",
                     to: usuario.email,
-                    subject: 'Welcome to shoply'
+                    subject: 'Bienvenido a Shoply'
               }     
 
               if(usuario.type == "USER"){
@@ -44,6 +44,9 @@ module.exports = function(app, apiRoutes){
                       email : usuario.email,
                       password : _plainPwd
                     }},'welcome/index.ejs');
+
+                    mailOptions.html = _html;
+
               }else if(usuario.type == "SELLER"){
 
                     User.findOne({email : usuario.email}).populate("_company").exec(function(err, rs){
@@ -55,25 +58,41 @@ module.exports = function(app, apiRoutes){
                               password : _plainPwd,
                               company : rs._company.data.empresa
                             }},'seller/index.ejs');
+
+                            mailOptions.html = _html;
+
+                            var _shell  = _batmanMailer.bulk([mailOptions]);
+
+                            _shell.stdout.on('data', function(output) {
+                                console.log('stdout: ' + output);
+                            });
+
+                            _shell.stderr.on('data', function(output) {
+                                console.log('stdout: ' + output);
+                            });
+
+                            _shell.on('close', function(code) {
+                                console.log('closing code: ' + code);
+                            });                            
                           }
                     });
+
+                    return;
               }
 
-                mailOptions.html = _html;
+              var _shell  = _batmanMailer.bulk([mailOptions]);
 
-                var _shell  = _batmanMailer.bulk([mailOptions]);
+              _shell.stdout.on('data', function(output) {
+                  console.log('stdout: ' + output);
+              });
 
-                _shell.stdout.on('data', function(output) {
-                    console.log('stdout: ' + output);
-                });
+              _shell.stderr.on('data', function(output) {
+                  console.log('stdout: ' + output);
+              });
 
-                _shell.stderr.on('data', function(output) {
-                    console.log('stdout: ' + output);
-                });
-
-                _shell.on('close', function(code) {
-                    console.log('closing code: ' + code);
-                });
+              _shell.on('close', function(code) {
+                  console.log('closing code: ' + code);
+              });  
             }
         });
     }
