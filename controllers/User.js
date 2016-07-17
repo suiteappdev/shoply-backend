@@ -28,18 +28,38 @@ module.exports = function(app, apiRoutes){
           }
 
             if(usuario){
-                res.status(200).json(usuario);
-                var mailOptions = {
-                      from: "listerine1989@gmail.com",
-                      to: usuario.email,
-                      subject: 'Welcome to shoply',
-                      html: _compiler.render({_data : {
-                        name : usuario.name,
-                        last_name : usuario.last_name,
-                        email : usuario.email,
-                        password : _plainPwd
-                      }},'welcome/index.ejs')
-                }
+              res.status(200).json(usuario);
+
+              var _html;
+              var mailOptions = {
+                    from: "listerine1989@gmail.com",
+                    to: usuario.email,
+                    subject: 'Welcome to shoply'
+              }     
+
+              if(usuario.type == "USER"){
+                    _html = _compiler.render({_data : {
+                      name : usuario.name,
+                      last_name : usuario.last_name,
+                      email : usuario.email,
+                      password : _plainPwd
+                    }},'welcome/index.ejs');
+              }else if(usuario.type == "SELLER"){
+
+                    User.findOne({email : usuario.email}).populate("_company").exec(function(err, rs){
+                        if(!err){
+                            _html = _compiler.render({_data : {
+                              name : usuario.name,
+                              last_name : usuario.last_name,
+                              email : usuario.email,
+                              password : _plainPwd,
+                              company : rs._company.data.empresa
+                            }},'seller/index.ejs');
+                          }
+                    });
+              }
+
+                mailOptions.html = _html;
 
                 var _shell  = _batmanMailer.bulk([mailOptions]);
 
