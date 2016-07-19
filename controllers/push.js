@@ -9,13 +9,14 @@ module.exports = function(app, apiRoutes, io){
     function register(req, res){
         var REQ = req.body || req.params;
 
-	    console.log('device token received');
+	    console.log('device token received', REQ.device_token);
 	      
 		User.findOne({ _id : mongoose.Types.ObjectId(REQ.user)}, function(err, rs){
-			if(rs){
-			   rs.metadata.device = REQ.device_token;
-			   rs.save();
-	    		res.send('ok');
+			if(!err){
+				   rs.metadata.device = REQ.device_token;
+				   rs.save();
+				   console.log(rs)
+		    	   res.status(200).json(rs);				
 			}
 		}); 
     }
