@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
 
 	    console.log('device token received');
 	      
-		User.findOne({ _id : mongoose.Types.ObjectId(REQ.user) }, function(err, rs){
+		User.findOne({ _id : mongoose.Types.ObjectId(REQ.user)}, function(err, rs){
 			if(rs){
 			   rs.metadata.device = REQ.device_token;
 			   rs.save();
@@ -47,8 +47,8 @@ module.exports = function(app, apiRoutes, io){
 	    res.send('ok');
     }
 
-    app.post("/api/" + _url_alias + "/register/:user/", register);
-    app.post("/api/" + _url_alias + "/push/:user/", push);
+    app.post("/" +_url_alias + "/register/:user/", register);
+    app.post("/" +_url_alias + "/push/:user/", push);
 
     return this;
 }
