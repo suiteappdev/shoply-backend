@@ -37,7 +37,8 @@ module.exports = function(app, apiRoutes, io){
 	    message.timeToLive = 3; //the number of seconds to keep the message on the server if the device is offline
 
 	   	User.findOne({ _id : mongoose.Types.ObjectId(REQ.user)}).exec(function(err, rs){
-	   		device_tokens.push(rs.metadata.device);
+	   		 console.log(rs);
+	   		 device_tokens.push(rs.metadata.device);
 	   	});
 
 	    sender.send(message, device_tokens, retry_times, function(result){
