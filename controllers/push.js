@@ -42,7 +42,7 @@ module.exports = function(app, apiRoutes, io){
 
 	    sender.send(message, device_tokens, retry_times, function(result){
 	        console.log(result);
-	        console.log('push sent to: ' + device_token);
+	        console.log('push sent to: ' + device_tokens);
 	    });
 
 	    res.send('ok');
