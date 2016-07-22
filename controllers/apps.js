@@ -54,6 +54,9 @@ module.exports = function(app, apiRoutes, io){
 
                                 var _key = raw.toString('hex');
                                 var _package = "com.CP"+ _key + "." + "ID" + rs._id.toString(); 
+                                
+                                console.log(_package);
+
                                 var _name = REQ.name;
 
                                 result.widget.$.id = _package;
