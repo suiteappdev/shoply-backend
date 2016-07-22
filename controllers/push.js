@@ -13,8 +13,7 @@ module.exports = function(app, apiRoutes, io){
 
 		User.findOne({ _id : mongoose.Types.ObjectId(req.params.user)}, function(err, user){
 			if(!err){
-				user.metadata.device = req.params.device_token;
-
+				user.data.device = req.params.device_token;
 				user.save(function(err){
 					res.status(200).json(user);
 				});
