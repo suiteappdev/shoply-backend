@@ -16,7 +16,7 @@ module.exports = function(app, apiRoutes, io){
 				user.metadata.device = REQ.device_token;
 
 				user.save(function(err){
-					res.status(200).json(rs);
+					res.status(200).json(user);
 				});
 			}
 		}); 
