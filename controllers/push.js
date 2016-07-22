@@ -7,13 +7,13 @@ module.exports = function(app, apiRoutes, io){
     var gcm = require('node-gcm');
 
     function register(req, res){
-        var REQ = req.body || req.params;
+  		var REQ = req.body || req.params;
 
 	    console.log('device token received', REQ.device_token);
 	    console.log("REQ", REQ);
 	    console.log("REQ", REQ.user);
 
-		User.findOne({ _id : mongoose.Types.ObjectId(REQ.user)}).exec(function(err, rs){
+		User.findOne({ _id : mongoose.Types.ObjectId(req.params.user)}).exec(function(err, rs){
 			if(!err){
 				   console.log("rs", rs);
 		    	   res.status(200).json(rs);				
