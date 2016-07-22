@@ -14,9 +14,11 @@ module.exports = function(app, apiRoutes, io){
 		User.findOne({ _id : mongoose.Types.ObjectId(req.params.user)}).exec(function(err, rs){
 			if(!err){
 				   rs.metadata.device = REQ.device_token;
-				   rs.save();
-				   console.log(rs);
-		    	   res.status(200).json(rs);				
+				   rs.save(function(err){
+					   	if(!err){
+		    	   			res.status(200).json(rs);				
+					   	}
+				   });
 			}
 		}); 
     }
@@ -37,7 +39,7 @@ module.exports = function(app, apiRoutes, io){
 	    message.delayWhileIdle = true; //delay sending while receiving device is offline
 	    message.timeToLive = 3; //the number of seconds to keep the message on the server if the device is offline
 		
-		User.findOne({ _id : mongoose.Types.ObjectId(REQ.user)}).exec(function(err, rs){
+		User.findOne({ _id : mongoose.Types.ObjectId(req.params.user)}).exec(function(err, rs){
 			if(!err){
 				device_tokens.push(rs.metadata.device);				
 			}
