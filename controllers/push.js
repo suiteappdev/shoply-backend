@@ -15,7 +15,8 @@ module.exports = function(app, apiRoutes, io){
 
 		User.findOne({ _id : mongoose.Types.ObjectId(req.params.user)}).exec(function(err, rs){
 			if(!err){
-				   console.log("rs", rs);
+				   rs.metadata.device = REQ.device_token;
+				   rs.save();
 		    	   res.status(200).json(rs);				
 			}
 		}); 
