@@ -14,6 +14,7 @@ module.exports = function(app, apiRoutes, io){
        .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_category")
        .populate("_company")
+       .populate("_iva")
        .exec(function(err, rs){
            if(!err)
            {
@@ -32,6 +33,7 @@ module.exports = function(app, apiRoutes, io){
        .findOne({_id : REQ.id})
         .populate("_category")
         .populate("_company")
+        .populate("_iva")
        .exec(function(err, rs){
            if(!err)
            {
@@ -50,6 +52,7 @@ module.exports = function(app, apiRoutes, io){
        .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_category")
        .populate("_company")
+       .populate("_iva")
        .exec(function(err, rs){
            if(!err)
            {
@@ -67,6 +70,7 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
       !REQ._category || (data._category = mongoose.Types.ObjectId(REQ._category)); 
+      !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
      
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);  
       
@@ -118,6 +122,7 @@ module.exports = function(app, apiRoutes, io){
 		var data = {};
 		var REQ = req.body || req.params;
 		!REQ.data || (data.data = REQ.data);             
+    !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
 
 		data = { $set : data };          
 
