@@ -27,7 +27,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .findOne({_id : REQ.id, { _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}})
+       .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
            if(!err)
            {
