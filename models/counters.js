@@ -8,7 +8,7 @@ var metadata = require('./plugins/metadata');
 var entity = "counters";
 
 var _Schema = new Schema({
-	  _id : { type : String, trim : true, unique : true, lowercase : true},
+	  _id : { type : String, unique : true, lowercase : true},
       seq : { type: Number},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
