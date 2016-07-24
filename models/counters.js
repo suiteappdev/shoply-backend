@@ -13,7 +13,7 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	var self = this;
     mongoose.models[entity].findOne({entity: self.entity}, function(err, counter) {
         if(err) {
