@@ -50,7 +50,7 @@ module.exports = function(app, apiRoutes, io){
 
   		model.save(function(err, rs){
         if(err && err.code == 11000){
-          res.status(409);
+            res.status(409).json({err : "duplicate item", code : 11000});
         }else{
           res.status(200).json(rs);
         }
