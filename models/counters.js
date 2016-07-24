@@ -14,7 +14,19 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	next();
+	var self = this;
+    mongoose.models[entity].findOne({entity: self.entity}, function(err, counter) {
+        if(err) {
+            done(err);
+        } else if(counter) {
+            self.invalidate("Duplicate", "Duplicate Counter");
+            done(new Error("entity name must be unique string"));
+        } else {
+            done();
+        }
+    });
+
+    next();
 });
 
 //add plugins
