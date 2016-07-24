@@ -49,10 +49,11 @@ module.exports = function(app, apiRoutes, io){
   	  var model = new Model(data);
 
   		model.save(function(err, rs){
-        console.log(err);
-          //if(err && err.code == 11000){
-           //res.status(409).json({err : "duplicate item", code : 11000});
-          res.status(200).json(rs);
+          if(!err){
+              res.status(200).json(rs);
+          }else{
+            res.status(409).json({err : "duplicate item", code : 11000});
+          }
   		});
 
     }
