@@ -5,14 +5,11 @@ var Schema = mongoose.Schema;
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
-var entity = "request";
+var entity = "counters";
 
 var _Schema = new Schema({
- 	   data : { type : Object},
- 	   shoppingCart : Array,
-	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
-	  _client : {type : Schema.Types.ObjectId , ref : 'User'},
-	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
+	  _id : { type : String, trim : true, unique : true, lowercase : true},
+      seq : { type: Number}
  });
 
 _Schema.pre('save', function (next) {
