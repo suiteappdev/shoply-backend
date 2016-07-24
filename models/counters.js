@@ -24,8 +24,9 @@ _Schema.pre('save', function (next, done) {
         } else {
             done();
         }
-        next();
     });
+    
+    next(self);
 });
 
 //add plugins
