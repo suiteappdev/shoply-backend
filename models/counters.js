@@ -24,6 +24,7 @@ _Schema.pre('save', function (next, done) {
         } else {
             done();
         }
+        next();
     });
 });
 
