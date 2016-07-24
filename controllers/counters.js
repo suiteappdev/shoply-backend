@@ -51,6 +51,7 @@ module.exports = function(app, apiRoutes, io){
   		model.save(function(err, rs){
         if(rs){
           res.json(rs);
+          return;
         }else{
           res.json(err);
         }
