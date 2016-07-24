@@ -17,6 +17,8 @@ module.exports = function(app, apiRoutes, io){
            {
             res.json(rs);
            }
+           else
+            res.json(err);
        });
     }
 
@@ -46,10 +48,16 @@ module.exports = function(app, apiRoutes, io){
       
   	  var model = new Model(data);
 
-    		model.save(function(err, rs){
-          res.json(rs || err);
-    		});
+  		model.save(function(err, rs){
+        if(!err){
+          res.status(200).json(rs);
+          return;
+        }else{
+          res.status(409).json(err);
+        }
+  		});
     }
+
 
     function update(req, res){
   		var data = {};
@@ -62,7 +70,7 @@ module.exports = function(app, apiRoutes, io){
 
   		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
   			if(rs){
-  				res.status(200).json(rs || err);
+  				res.json(err || rs);
   			}
   		});
     }
