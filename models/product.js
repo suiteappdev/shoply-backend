@@ -26,7 +26,6 @@ _Schema.pre('save', function (next) {
 		_self = this;
 	
 	sq("_product", _self._company, function(err, s){
-		console.log("counter", s);
 		_self.id = s.seq;
 		next();
 	});

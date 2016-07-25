@@ -47,6 +47,7 @@ module.exports = function(app, apiRoutes, io){
       data.entity = REQ._entity;
       data.entityName = REQ.entityName;
       data.initial = REQ.min;
+      data.field = REQ.field;
       
   	  var model = new Model(data);
 
@@ -71,6 +72,7 @@ module.exports = function(app, apiRoutes, io){
       data.entity = REQ._entity;
       data.seq = REQ.min;
       data.entityName = REQ.entityName;
+      data.field = REQ.field;
 
   		data = { $set : data };          
 

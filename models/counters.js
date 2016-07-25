@@ -8,6 +8,7 @@ var metadata = require('./plugins/metadata');
 var entity = "counters";
 
 var _Schema = new Schema({
+	  field : { type : String },
 	  entity :  { type : String , unique : true, required : true, dropDups: true },
       entityName: { type : String},
       initial : { type: Number},
