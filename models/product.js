@@ -23,10 +23,9 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	_self = this;
 	
 	sq("_product", function(err, s){
-		_self.id = s.sq;
+		this.id = s.sq;
 		next();
 	});
 });
