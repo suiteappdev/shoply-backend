@@ -25,11 +25,10 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	
-	sq("_product", function(err, sq){
-		console.log(sq);
+	sq("_product", function(err, s){
+		_self.id = s.sq;
+		next();
 	});
-
-	next();
 });
 
 //add plugins
