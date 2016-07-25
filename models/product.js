@@ -29,6 +29,7 @@ _Schema.pre('save', function (next) {
 		this.id = s.seq;
 		next();
 	});
+	
 });
 
 //add plugins
