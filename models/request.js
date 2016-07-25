@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+function sq(collection, company, callback) {
+   mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+}
+
+
 // Load required packages
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
@@ -8,6 +13,7 @@ var metadata = require('./plugins/metadata');
 var entity = "request";
 
 var _Schema = new Schema({
+	   id : {type : Number, unique : true},
  	   data : { type : Object},
  	   shoppingCart : Array,
 	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
@@ -16,7 +22,11 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	next();
+	_self = this;
+	sq("_request", _self._company, function(err, s){
+		_self.id = s.seq;
+		next();
+	});
 });
 
 //add plugins

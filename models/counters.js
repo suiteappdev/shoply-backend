@@ -9,7 +9,7 @@ var entity = "counters";
 
 var _Schema = new Schema({
 	  field : { type : String },
-	  entity :  { type : String , unique : true, required : true, dropDups: true },
+	  entity :  { type : String , required : true, dropDups: true },
       entityName: { type : String},
       initial : { type: Number},
       seq : { type: Number},
@@ -17,7 +17,20 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-    next();
+	var self = this;
+    
+    mongoose.models[entity].findOne({ entity: self.entity, _company : mongoose.Types.ObjectId(self._company)}, function(err, counter) {
+        if(err) {
+            done(err);
+        } else if(counter) {
+            self.invalidate("duplicate", "counter must be unique");
+            done(new Error("counter must be unique"));
+        } else {
+            done();
+        }
+    });
+
+	next();
 });
 
 //add plugins
