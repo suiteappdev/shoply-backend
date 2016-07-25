@@ -16,7 +16,7 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	var self = this;
     
     mongoose.models[entity].findOne({ entity: self.entity, _company : mongoose.Types.ObjectId(self._company)}, function(err, counter) {
