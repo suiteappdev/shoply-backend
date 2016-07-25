@@ -55,8 +55,7 @@ module.exports = function(app, apiRoutes, io){
         if(!err){
           res.status(200).json(rs);
         }else{
-          console.log(err);
-          if(err.code == 11000){
+          if(err && err.code == 11000){
             res.status(409).json(err);
           }else{
             res.status(500).json(err);
