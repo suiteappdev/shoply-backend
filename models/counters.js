@@ -24,7 +24,7 @@ _Schema.pre('save', function (next, done) {
             done(err);
         } else if(counter) {
             self.invalidate("duplicate", "counter must be unique");
-            done(new Error({ code : 11000}));
+            done({ code : 11000});
         } else {
 			next();
         }
