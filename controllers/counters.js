@@ -46,6 +46,7 @@ module.exports = function(app, apiRoutes, io){
       data.seq = REQ.min;
       data.entity = REQ._entity;
       data.entityName = REQ.entityName;
+      data.initial = REQ.min;
       
   	  var model = new Model(data);
 

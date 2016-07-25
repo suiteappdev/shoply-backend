@@ -10,6 +10,7 @@ var entity = "counters";
 var _Schema = new Schema({
 	  entity :  { type : String , unique : true, required : true, dropDups: true },
       entityName: { type : String},
+      initial : { type: Number},
       seq : { type: Number},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
