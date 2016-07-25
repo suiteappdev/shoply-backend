@@ -3,11 +3,8 @@ var Schema = mongoose.Schema;
 
 // Load required packages
 
-function sq(collection) {
-   var ret =  mongoose.model('counters').findOneAndUpdate({ entity: collection }, { $inc: { seq: 1 } });
-   
-   console.log("counter", ret);
-   return ret.seq;
+function sq(collection, callback) {
+   mongoose.model('counters').findOneAndUpdate({ entity: collection }, { $inc: { seq: 1 } }, callback);
 }
 
 var timestamps = require('mongoose-timestamp');
@@ -27,7 +24,11 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	_self.id = sq("_product");
+	
+	sq("_product", function(err, sq){
+		console.log(sq);
+	});
+
 	next();
 });
 
