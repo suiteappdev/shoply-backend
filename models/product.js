@@ -23,10 +23,11 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
+		_self = this;
 	
 	sq("_product", function(err, s){
 		console.log("counter", s);
-		this.data.id = s.seq;
+		_self.id = s.seq;
 		next();
 	});
 
