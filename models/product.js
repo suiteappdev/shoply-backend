@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Load required packages
 
 function sq(collection) {
-   var ret =  mongoose.models["counters"].findAndModify(
+   var ret =  mongoose.collection('counters').findAndModify(
           {
             query: { entity: collection },
             update: { $inc: { seq: 1 } },
