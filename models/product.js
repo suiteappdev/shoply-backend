@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Load required packages
 
 function sq(collection) {
-   var ret = db.counters.findAndModify(
+   var ret =  mongoose.models["counters"].findAndModify(
           {
             query: { entity: collection },
             update: { $inc: { seq: 1 } },
@@ -32,9 +32,7 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-
 	_self.id = sq("_product");
-
 	next();
 });
 
