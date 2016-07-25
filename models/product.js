@@ -26,11 +26,9 @@ _Schema.pre('save', function (next) {
 	
 	sq("_product", function(err, s){
 		console.log("counter", s);
-		this.id = s.sq;
+		this.id = s.seq;
 		next();
 	});
-
-	next();
 });
 
 //add plugins
