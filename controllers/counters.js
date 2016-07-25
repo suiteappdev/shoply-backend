@@ -52,7 +52,11 @@ module.exports = function(app, apiRoutes, io){
         if(!err){
           res.status(200).json(rs);
         }else{
-          res.status(409).json(err);
+          if(err.code == 11000){
+            res.status(409).json(err);
+          }else{
+            res.status(500).json(err);
+          }
         }
   		});
     }
