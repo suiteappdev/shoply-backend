@@ -45,6 +45,7 @@ module.exports = function(app, apiRoutes, io){
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
       data.seq = REQ.min;
       data.entity = REQ._entity;
+      data.entityName = REQ.entityName;
       
   	  var model = new Model(data);
 
@@ -68,6 +69,7 @@ module.exports = function(app, apiRoutes, io){
       
       data.entity = REQ._entity;
       data.seq = REQ.min;
+      data.entityName = REQ.entityName;
 
   		data = { $set : data };          
 
