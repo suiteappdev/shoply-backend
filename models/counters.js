@@ -13,20 +13,8 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
-_Schema.pre('save', function (next, done) {
-	var self = this;
-    mongoose.models[entity].findOne({entity: self.entity}, function(err, counter) {
-        if(err) {
-            done(err);
-        } else if(counter) {
-            self.invalidate("Duplicate", "Duplicate Counter");
-            done(new Error("entity name must be unique string"));
-        } else {
-            done();
-        }
-    });
-    
-    next(self);
+_Schema.pre('save', function (next,) {
+    next();
 });
 
 //add plugins
