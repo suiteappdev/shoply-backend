@@ -2,6 +2,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // Load required packages
+
+function sq(collection) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { entity: collection },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
+
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
