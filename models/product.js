@@ -5,6 +5,8 @@ var Schema = mongoose.Schema;
 
 function sq(collection) {
    var ret =  mongoose.model('counters').findOneAndUpdate({ entity: collection }, { $inc: { seq: 1 } });
+   
+   console.log("counter", ret);
    return ret.seq;
 }
 
