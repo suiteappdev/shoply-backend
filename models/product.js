@@ -22,12 +22,15 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	
 	sq("_product", function(err, s){
+		console.log("counter", s);
 		this.id = s.sq;
-		next();
+		done();
 	});
+
+	next();
 });
 
 //add plugins
