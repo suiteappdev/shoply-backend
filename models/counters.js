@@ -26,11 +26,9 @@ _Schema.pre('save', function (next, done) {
             self.invalidate("duplicate", "counter must be unique");
             done(new Error("counter must be unique"));
         } else {
-            done();
+			next();
         }
     });
-
-	next();
 });
 
 //add plugins
