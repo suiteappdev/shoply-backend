@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var entity = "product";
 
-var _reference = require(path.join("../", "models", entity + ".js"));
+//var _reference = require(path.join("../", "models", entity + ".js"));
 
 // Load required packages
 
