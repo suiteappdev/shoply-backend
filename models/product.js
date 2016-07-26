@@ -35,12 +35,19 @@ _Schema.pre('save', function (next) {
 			if(ref){
 				_found = true;
   				self.invalidate("duplicate", "duplicate reference");
-  				console.log("invalid");
            		done({ code : 11000});
-				return;
-			}
+			}else{
+				var _ref = new _reference({
+					reference : r,
+					productId : _self.id,
+					_product : mongoose.Types.ObjectId(_self._id),
+					_company  :mongoose.Types.ObjectId(_self._company)
+				});
 
-			console.log("no found")
+				_ref.save(function(err, rs){
+					r = mongoose.Types.ObjectId(rs._id);
+				});
+			}
 		});
 	}
 
