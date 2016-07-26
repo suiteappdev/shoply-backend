@@ -24,6 +24,8 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
+
+	//enviar por cada referencia un insert a refencia
 	
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;

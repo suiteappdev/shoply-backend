@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 // Load required packages
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
-var entity = "company";
+var entity = "reference";
 
 var _Schema = new Schema({
-	  _user : {type : Schema.Types.ObjectId , ref : 'User'},
-	  data : { type : Object}
+	reference : { type: String, trim:true },
+	_product : { type : Schema.Types.ObjectId , ref : 'product'},
+	_company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
 _Schema.pre('save', function (next) {
