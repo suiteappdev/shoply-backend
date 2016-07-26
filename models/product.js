@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var entity = "product";
+var path = require("path");
 
 var _reference = require(path.join("../", "models", entity + ".js"));
 
