@@ -35,15 +35,19 @@ _Schema.pre('save', function (next) {
 			if(ref){
 				_found = true;
   				self.invalidate("duplicate", "duplicate reference");
+  				console.log("invalid");
            		done({ code : 11000});
 				return;
 			}
+
+			console.log("no found")
 		});
 	}
 
 	if(!_found){
 		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
+			console.log("saved")
 			next();
 		});		
 	}
