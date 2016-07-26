@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var entity = "product";
+
+var _reference = require(path.join("../", "models", entity + ".js"));
 
 // Load required packages
 
@@ -23,12 +26,8 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	console.log("ID:", _self._id);
-	/*for(x in _self._references){
-		mongoose.model('reference').findOne({reference}, function(err, ref){
 
-		});		
-	}*/
+	console.log("ID", _self._id);
 
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;
