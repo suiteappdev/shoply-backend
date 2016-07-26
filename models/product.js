@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var entity = "product";
 
-//var _reference = require(path.join("../", "models", entity + ".js"));
+var _reference = require(path.join("../", "models", entity + ".js"));
 
 // Load required packages
 
@@ -21,19 +21,31 @@ var _Schema = new Schema({
 	  _like : [{type : Schema.Types.ObjectId , ref : 'User'}],
 	  _iva : { type : Schema.Types.ObjectId , ref : 'ivas'},
 	  comments : { type : Array},
-	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
+	  _reference :[{ type : Schema.Types.ObjectId , ref : 'reference'}]
  });
 
 _Schema.pre('save', function (next) {
 	_self = this;
+	 var _found = false;
 
-	console.log("ID", _self._id);
+	for(r in _self._reference){
+		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
+			if(ref){
+				_found = true;
+  				self.invalidate("duplicate", "duplicate reference");
+           		done({ code : 11000});
+				return;
+			}
+		});
+	}
 
-	sq("_product", _self._company, function(err, s){
-		_self.id = s.seq;
-		next();
-	});
-
+	if(!_found){
+		sq("_product", _self._company, function(err, s){
+			_self.id = s.seq;
+			next();
+		});		
+	}
 });
 
 //add plugins

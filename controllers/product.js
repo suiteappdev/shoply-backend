@@ -71,6 +71,15 @@ module.exports = function(app, apiRoutes, io){
       !REQ.data || (data.data = REQ.data);
       !REQ._category || (data._category = mongoose.Types.ObjectId(REQ._category)); 
       !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
+
+      if(REQ._reference){
+          data._reference = [];
+
+        for(r in REQ._reference){
+          data._reference.push(mongoose.Types.ObjectId(REQ._reference[r]));
+        }
+      }
+
      
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);  
       
