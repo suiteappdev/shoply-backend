@@ -64,7 +64,7 @@ module.exports = function(app, apiRoutes, io){
   		var data = {};
   		var REQ = req.body || req.params;
 
-      data.reference REQ.reference;
+      data.reference = REQ.reference;
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);               
 
   		data = { $set : data };          
