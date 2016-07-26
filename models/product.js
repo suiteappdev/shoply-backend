@@ -10,7 +10,6 @@ function sq(collection, company, callback) {
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
-var entity = "product";
 
 var _Schema = new Schema({
 	  id : {type : Number, unique : true},
@@ -24,9 +23,13 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
+	console.log("ID:", _self._id);
+	/*for(x in _self._references){
+		mongoose.model('reference').findOne({reference}, function(err, ref){
 
-	//enviar por cada referencia un insert a refencia
-	
+		});		
+	}*/
+
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;
 		next();
