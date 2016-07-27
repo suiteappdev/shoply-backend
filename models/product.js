@@ -23,7 +23,7 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	_self = this;
 	 var _found = false;
 	 
