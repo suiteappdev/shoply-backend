@@ -57,7 +57,7 @@ _Schema.pre('save', function (next, done) {
 		    if (err) console.error(err);
 		    console.log('Inserted ' + result.nInserted + ' row(s).');
 			next();			
-		}
+		});
 	});	
 });
 
