@@ -89,11 +89,7 @@ module.exports = function(app, apiRoutes, io){
   		var model = new Model(data, { strict : false });
 
   		model.save(function(err, rs){
-        if(!err){
-          return res.json(rs);
-        }
-
-        res.send(err);
+        
   		});
 
     }
