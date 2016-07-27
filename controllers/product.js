@@ -93,6 +93,8 @@ module.exports = function(app, apiRoutes, io){
           res.status(200).json(rs);
           return;
         }
+
+        res.send(err);
   		});
 
     }
