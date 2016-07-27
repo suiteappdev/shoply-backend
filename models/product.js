@@ -37,6 +37,7 @@ _Schema.pre('save', function (next) {
   				self.invalidate("duplicate", "duplicate reference");
            		done({ code : 11000});
 			}else{
+				console.log("creating new ref");
 				var _ref = new _reference({
 					reference : r,
 					productId : _self.id,
@@ -45,6 +46,7 @@ _Schema.pre('save', function (next) {
 				});
 
 				_ref.save(function(err, rs){
+					console.log("reference", rs);
 					 _self._reference[r] = mongoose.Types.ObjectId(rs._id);
 				});
 			}
@@ -52,6 +54,7 @@ _Schema.pre('save', function (next) {
 	}
 
 	if(!_found){
+		console.log("no found");
 		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			console.log("saved")
