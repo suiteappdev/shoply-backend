@@ -33,34 +33,31 @@ _Schema.pre('save', function (next, done) {
 		_reference.findOne({reference : _self.data._reference[r]}, function(err, ref){
 			if(ref){
 			  	_self.invalidate("duplicate", "duplicate reference");
-    			return done({ code : 11000, reference:  _self.data._reference[r]});
+    			done({ code : 11000, reference:  _self.data._reference[r]});
+			}else{
+				sq("_product", _self._company, function(err, s){
+					_self.id = s.seq;
+
+					var _reference = mongoose.model('reference');
+
+					var _ref = new _reference({
+						reference : _self.data._reference,
+						productId : _self.id,
+						_product : mongoose.Types.ObjectId(_self._id),
+						_company  :mongoose.Types.ObjectId(_self._company)
+					});
+
+					_ref.save(function(err, rs){
+						if(rs){
+							_self._reference = mongoose.Types.ObjectId(rs._id);
+							delete _self.data._reference;
+							next();
+						}
+					})
+				});				
 			}
 		});
 	}
-
-	console.log("passing");
-
-	sq("_product", _self._company, function(err, s){
-		_self.id = s.seq;
-
-		var _reference = mongoose.model('reference');
-
-		var _ref = new _reference({
-			reference : _self.data._reference,
-			productId : _self.id,
-			_product : mongoose.Types.ObjectId(_self._id),
-			_company  :mongoose.Types.ObjectId(_self._company)
-		});
-
-		_ref.save(function(err, rs){
-			if(rs){
-				_self._reference = mongoose.Types.ObjectId(rs._id);
-				delete _self.data._reference;
-				next();
-			}
-		})
-	});	
-
 });
 
 //add plugins
