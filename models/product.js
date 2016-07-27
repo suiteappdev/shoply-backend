@@ -5,12 +5,7 @@ var path = require("path");
 
 // Load required packages
 
-function sq(collection, company, rollback, callback) {
-   if(rollback){
-   		mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
-   		return;
-   }	
-   
+function sq(collection, company, callback) {
    mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
 }
 
@@ -30,21 +25,22 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next, done) {
 	_self = this;
-	 var _found = [];
+	 var _found = false;
 
 	for(r in _self.data._reference){
 		var _reference = mongoose.model('reference');
 
 		_reference.findOne({reference : _self.data._reference[r]}, function(err, ref){
 			if(ref){
-				_found.push(_self.data._reference[r]);
+				_found = true;
+			  	_self.invalidate("duplicate", "duplicate reference");
+    			done({ code : 11000, reference:  _self.data._reference[r]});
 			}
 		});
 	}
 
-
-	if(_found.length == 0){
-		console.log("dupes", _found)
+	if(_found){
+		console.log("IsDupe?", _found)
 		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			_self._reference = [];
@@ -65,11 +61,11 @@ _Schema.pre('save', function (next, done) {
 				})							
 			}
 
+			console.log("saved refs", _self._reference);
 			next();			
 		});	
 	}else{
-  		_self.invalidate("duplicate", "duplicate reference");
-        done({ code : 11000, reference: _found});
+
 	}
 });
 
