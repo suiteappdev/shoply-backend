@@ -3,8 +3,6 @@ var Schema = mongoose.Schema;
 var entity = "product";
 var path = require("path");
 
-var _reference = require(path.join("../", "models", entity + ".js"));
-
 // Load required packages
 
 function sq(collection, company, callback) {
@@ -30,7 +28,7 @@ _Schema.pre('save', function (next) {
 	 var _found = false;
 
 	for(r in _self.data._reference){
-		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
+		mongoose.model('reference').findOne({reference : r, productId : _self.id}, function(err, ref){
 			console.log(ref);
 			/*if(ref){
 				_found = true;
