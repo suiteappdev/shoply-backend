@@ -35,8 +35,8 @@ _Schema.pre('save', function (next) {
 		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
 			if(ref){
 				_found = true;
-  				self.invalidate("duplicate", "duplicate reference");
-           		done({ code : 11000});
+  				_self.invalidate("duplicate", "duplicate reference");
+           		done({ code : 11000, reference:r});
 			}
 		});
 	}
