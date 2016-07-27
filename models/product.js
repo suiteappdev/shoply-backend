@@ -38,6 +38,8 @@ _Schema.pre('save', function (next, done) {
 		});
 	}
 
+	console.log("passing");
+
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;
 
@@ -54,12 +56,11 @@ _Schema.pre('save', function (next, done) {
 			if(rs){
 				_self._reference = mongoose.Types.ObjectId(rs._id);
 				delete _self.data._reference;
-				done();
+				next();
 			}
 		})
 	});	
 
-	next();
 });
 
 //add plugins
