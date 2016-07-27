@@ -89,11 +89,15 @@ module.exports = function(app, apiRoutes, io){
   		var model = new Model(data, { strict : false });
 
   		model.save(function(err, rs){
-  			if(rs){
-  				res.json(rs);
-  			}else{
-  				res.json(err);
-  			}
+        if(!err){
+          res.status(200).json(rs);
+        }else{
+          if(err && err.code == 11000){
+            res.status(409).json(err);
+          }else{
+            res.status(500).json(err);
+          }
+        }
   		});
 
     }
