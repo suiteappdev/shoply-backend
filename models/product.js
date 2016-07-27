@@ -51,6 +51,7 @@ _Schema.pre('save', function (next, done) {
 
 		_ref.save(function(err, rs){
 			if(rs){
+				console.log(rs);
 				next();
 			}
 		})
