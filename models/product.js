@@ -28,8 +28,9 @@ _Schema.pre('save', function (next) {
 	 var _found = false;
 
 	for(r in _self.data._reference){
-		mongoose.model('reference').findOne({reference : r, productId : _self.id}, function(err, ref){
-			console.log(ref);
+		var _reference = mongoose.model('reference');
+
+		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
 			if(ref){
 				_found = true;
   				self.invalidate("duplicate", "duplicate reference");
