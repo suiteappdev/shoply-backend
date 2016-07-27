@@ -92,7 +92,7 @@ module.exports = function(app, apiRoutes, io){
         if(rs){
           return res.status(200).json(rs);
         }else{
-          res.status(500).json(err);
+          return res.status(500).json(err);
         }
   		});
 
