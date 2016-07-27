@@ -29,7 +29,7 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	 var _found = false;
-	 console.log("REQ refs", _self._reference);
+	 console.log("REQ", _self);
 
 	for(r in _self._reference){
 		console.log("r", r);
