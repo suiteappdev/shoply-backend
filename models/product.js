@@ -26,6 +26,8 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	 var _found = false;
+	 
+	 console.log(_self._id);
 
 	for(r in _self.data._reference){
 		var _reference = mongoose.model('reference');
@@ -35,31 +37,33 @@ _Schema.pre('save', function (next) {
 				_found = true;
   				self.invalidate("duplicate", "duplicate reference");
            		done({ code : 11000});
-			}else{
-				console.log("creating new ref");
-				var _ref = new _reference({
-					reference : r,
-					productId : _self.id,
-					_product : mongoose.Types.ObjectId(_self._id),
-					_company  :mongoose.Types.ObjectId(_self._company)
-				});
-
-				_ref.save(function(err, rs){
-					console.log("reference", rs);
-					 _self._reference[r] = mongoose.Types.ObjectId(rs._id);
-				});
 			}
 		});
 	}
 
-	//if(!_found){
-	//	console.log("no found");
-		/*sq("_product", _self._company, function(err, s){
+	if(!_found){
+		for(r in _self.data._reference){
+			var _ref = new _reference({
+				reference : r,
+				productId : _self.id,
+				_product : mongoose.Types.ObjectId(_self._id),
+				_company  :mongoose.Types.ObjectId(_self._company)
+			});			
+		}
+
+
+		_ref.save(function(err, rs){
+			console.log("reference", rs);
+			 //_self._reference[r] = mongoose.Types.ObjectId(rs._id);
+		});
+
+		/*console.log("no found");
+		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			console.log("saved")
 			next();
-		});		*/
-	//}
+		});	*/	
+	}
 });
 
 //add plugins
