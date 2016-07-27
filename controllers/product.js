@@ -90,11 +90,10 @@ module.exports = function(app, apiRoutes, io){
 
   		model.save(function(err, rs){
         if(!err){
-          res.status(200).json(rs);
-          return;
+          return res.json(rs);
         }
 
-        res.send(err);
+        res.json(err);
   		});
 
     }
