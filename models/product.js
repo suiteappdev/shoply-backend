@@ -35,7 +35,6 @@ _Schema.pre('save', function (next, done) {
 			  	_self.invalidate("duplicate", "duplicate reference");
     			done({ code : 11000, reference:  _self.data._reference[r]});
 			}else{
-				consol.log("passing");
 				sq("_product", _self._company, function(err, s){
 					_self.id = s.seq;
 
