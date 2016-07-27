@@ -92,6 +92,8 @@ module.exports = function(app, apiRoutes, io){
         if(!err){
           res.status(200).json(rs);
         }
+
+        res.send(err);
   		});
 
     }
