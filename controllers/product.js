@@ -73,7 +73,7 @@ module.exports = function(app, apiRoutes, io){
       !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
 
       if(REQ._reference){
-          data._reference = [];
+          data.data._reference = [];
 
         for(r in REQ._reference){
           data.data._reference.push(REQ._reference[r]);
