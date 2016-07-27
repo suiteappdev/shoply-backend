@@ -44,6 +44,7 @@ _Schema.pre('save', function (next, done) {
 
 
 	if(_found.length == 0){
+		console.log("dupes", _found)
 		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			_self._reference = [];
@@ -58,6 +59,7 @@ _Schema.pre('save', function (next, done) {
 
 				_ref.save(function(err, rs){
 					if(rs){
+						console.log("new ref");
 						_self._reference.push(mongoose.Types.ObjectId(rs._id)); 
 					}
 				})							
