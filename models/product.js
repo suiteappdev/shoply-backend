@@ -25,48 +25,42 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next, done) {
 	_self = this;
-	 var _found = false;
 
 	for(r in _self.data._reference){
 		var _reference = mongoose.model('reference');
 
 		_reference.findOne({reference : _self.data._reference[r]}, function(err, ref){
 			if(ref){
-				_found = true;
 			  	_self.invalidate("duplicate", "duplicate reference");
     			done({ code : 11000, reference:  _self.data._reference[r]});
 			}
 		});
 	}
 
-	if(_found){
-		console.log("IsDupe?", _found)
-		sq("_product", _self._company, function(err, s){
-			_self.id = s.seq;
-			_self._reference = [];
+	sq("_product", _self._company, function(err, s){
+		_self.id = s.seq;
+		_self._reference = [];
 
-			for(r in _self.data._reference){
-				var _ref = new _reference({
-					reference : _self.data._reference[r],
-					productId : _self.id,
-					_product : mongoose.Types.ObjectId(_self._id),
-					_company  :mongoose.Types.ObjectId(_self._company)
-				});
+		for(r in _self.data._reference){
+			var _ref = new _reference({
+				reference : _self.data._reference[r],
+				productId : _self.id,
+				_product : mongoose.Types.ObjectId(_self._id),
+				_company  :mongoose.Types.ObjectId(_self._company)
+			});
 
-				_ref.save(function(err, rs){
-					if(rs){
-						console.log("new ref");
-						_self._reference.push(mongoose.Types.ObjectId(rs._id)); 
-					}
-				})							
-			}
+			_ref.save(function(err, rs){
+				if(rs){
+					console.log("new ref");
+					_self._reference.push(mongoose.Types.ObjectId(rs._id)); 
+				}
+			})							
+		}
 
-			console.log("saved refs", _self._reference);
-			next();			
-		});	
-	}else{
-
-	}
+		console.log("saved refs", _self._reference);
+		
+		next();			
+	});	
 });
 
 //add plugins
