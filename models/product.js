@@ -26,6 +26,11 @@ var _Schema = new Schema({
 	  //_reference :[{ type : Schema.Types.ObjectId , ref : 'reference'}]
  });
 
+_Schema.pre('validate', function() {
+  	console.log("pre validate", this);
+  console.log('this gets printed first');
+});
+
 _Schema.pre('save', function (next) {
 	_self = this;
 	 var _found = false;
