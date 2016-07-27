@@ -39,7 +39,7 @@ _Schema.pre('save', function (next, done) {
 
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;
-		_self._reference = [];
+		var refs = [];
 
 		for(r in _self.data._reference){
 			var _ref = new _reference({
@@ -49,16 +49,14 @@ _Schema.pre('save', function (next, done) {
 				_company  :mongoose.Types.ObjectId(_self._company)
 			});
 
-			_ref.save(function(err, rs){
-				if(rs){
-					console.log("new ref");
-					_self._reference.push(mongoose.Types.ObjectId(rs._id)); 
-				}
-			})							
+			refs.push(_ref);
 		}
 
-		console.log("saved refs", _self._reference);
-		
+		mongoose.model('counters').insert(refs, function(err, rs){
+			console.log(rs);			
+		});
+
+
 		next();			
 	});	
 });
