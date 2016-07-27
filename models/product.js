@@ -45,7 +45,7 @@ _Schema.pre('save', function (next) {
 				});
 
 				_ref.save(function(err, rs){
-					r = mongoose.Types.ObjectId(rs._id);
+					 _self._reference[r] = mongoose.Types.ObjectId(rs._id);
 				});
 			}
 		});
