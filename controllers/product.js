@@ -93,7 +93,7 @@ module.exports = function(app, apiRoutes, io){
           return res.json(rs);
         }
 
-        res.json(err);
+        res.send(err);
   		});
 
     }
