@@ -32,7 +32,8 @@ _Schema.pre('save', function (next) {
 
 	for(r in _self._reference){
 		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
-			if(ref){
+			console.log(ref);
+			/*if(ref){
 				_found = true;
   				self.invalidate("duplicate", "duplicate reference");
            		done({ code : 11000});
@@ -49,18 +50,18 @@ _Schema.pre('save', function (next) {
 					console.log("reference", rs);
 					 _self._reference[r] = mongoose.Types.ObjectId(rs._id);
 				});
-			}
+			}*/
 		});
 	}
 
-	if(!_found){
-		console.log("no found");
+	//if(!_found){
+	//	console.log("no found");
 		sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			console.log("saved")
 			next();
 		});		
-	}
+	//}
 });
 
 //add plugins
