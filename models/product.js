@@ -34,7 +34,6 @@ _Schema.pre('save', function (next, done) {
 			if(ref){
 			  	_self.invalidate("duplicate", "duplicate reference");
     			done({ code : 11000, reference:  _self.data._reference[r]});
-    			return;
 			}
 		});
 	}
@@ -54,7 +53,6 @@ _Schema.pre('save', function (next, done) {
 		_ref.save(function(err, rs){
 			if(rs){
 				_self._reference = mongoose.Types.ObjectId(rs._id);
-				console.log("doc", _self);
 				delete _self.data._reference;
 				next();
 			}
