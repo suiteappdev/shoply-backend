@@ -22,8 +22,8 @@ var _Schema = new Schema({
 	  _like : [{type : Schema.Types.ObjectId , ref : 'User'}],
 	  _iva : { type : Schema.Types.ObjectId , ref : 'ivas'},
 	  comments : { type : Array},
-	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
-	  _reference :[{ type : Schema.Types.ObjectId , ref : 'reference'}]
+	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
+	  //_reference :[{ type : Schema.Types.ObjectId , ref : 'reference'}]
  });
 
 _Schema.pre('save', function (next) {
