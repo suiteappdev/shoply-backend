@@ -29,8 +29,10 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	 var _found = false;
+	 console.log("REQ refs", _self._reference);
 
 	for(r in _self._reference){
+		console.log("r", r);
 		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
 			console.log(ref);
 			/*if(ref){
@@ -56,11 +58,11 @@ _Schema.pre('save', function (next) {
 
 	//if(!_found){
 	//	console.log("no found");
-		sq("_product", _self._company, function(err, s){
+		/*sq("_product", _self._company, function(err, s){
 			_self.id = s.seq;
 			console.log("saved")
 			next();
-		});		
+		});		*/
 	//}
 });
 
