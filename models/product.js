@@ -54,10 +54,12 @@ _Schema.pre('save', function (next, done) {
 			if(rs){
 				_self._reference = mongoose.Types.ObjectId(rs._id);
 				delete _self.data._reference;
-				next();
+				done();
 			}
 		})
 	});	
+
+	next();
 });
 
 //add plugins
