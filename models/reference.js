@@ -8,7 +8,7 @@ var metadata = require('./plugins/metadata');
 var entity = "reference";
 
 var _Schema = new Schema({
-	reference : { type: String, trim:true, unique:true },
+	reference : { type: Array},
 	productId : { type:Number , unique:true },
 	_product : { type : Schema.Types.ObjectId , ref : 'product'},
 	_company : { type : Schema.Types.ObjectId , ref : 'company'}

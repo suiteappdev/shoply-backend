@@ -39,25 +39,21 @@ _Schema.pre('save', function (next, done) {
 
 	sq("_product", _self._company, function(err, s){
 		_self.id = s.seq;
-		var refs = [];
-		var job = mongoose.model('reference').initializeUnorderedBulkOp();
-		
-		for(r in _self.data._reference){
-			var _ref = new _reference({
-				reference : _self.data._reference[r],
-				productId : _self.id,
-				_product : mongoose.Types.ObjectId(_self._id),
-				_company  :mongoose.Types.ObjectId(_self._company)
-			});
 
-			job.insert(_ref);
-		}
+		var _reference = mongoose.model('reference');
 
-		job.execute(function(err, result) {
-		    if (err) console.error(err);
-		    console.log('Inserted ' + result.nInserted + ' row(s).');
-			next();			
+		var _ref = new _reference({
+			reference : _self.data._reference,
+			productId : _self.id,
+			_product : mongoose.Types.ObjectId(_self._id),
+			_company  :mongoose.Types.ObjectId(_self._company)
 		});
+
+		_ref.save(function(err, rs){
+			if(rs){
+				next();
+			}
+		})
 	});	
 });
 
