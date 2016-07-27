@@ -32,11 +32,11 @@ _Schema.pre('save', function (next, done) {
 	for(r in _self.data._reference){
 		var _reference = mongoose.model('reference');
 
-		_reference.findOne({reference : r, productId : _self.id}, function(err, ref){
+		_reference.findOne({reference : _self.data._reference[r], productId : _self.id}, function(err, ref){
 			if(ref){
 				_found = true;
   				_self.invalidate("duplicate", "duplicate reference");
-           		done({ code : 11000, reference:r});
+           		done({ code : 11000, reference: _self.data._reference[r]});
 			}
 		});
 	}
@@ -44,7 +44,7 @@ _Schema.pre('save', function (next, done) {
 	if(!_found){
 		for(r in _self.data._reference){
 			var _ref = new _reference({
-				reference : r,
+				reference : _self.data._reference[r],
 				productId : _self.id,
 				_product : mongoose.Types.ObjectId(_self._id),
 				_company  :mongoose.Types.ObjectId(_self._company)
