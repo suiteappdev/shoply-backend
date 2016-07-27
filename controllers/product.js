@@ -76,7 +76,7 @@ module.exports = function(app, apiRoutes, io){
           data._reference = [];
 
         for(r in REQ._reference){
-          data._reference.push(REQ._reference[r]);
+          data.data._reference.push(REQ._reference[r]);
         }
       }
 
