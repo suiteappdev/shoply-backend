@@ -44,7 +44,7 @@ _Schema.pre('save', function (next, done) {
 					console.log("prefix", s.prefix);
 
 					if(s.prefix){
-						console.log("composed" (s.prefix + s.seq));
+						console.log("composed", (s.prefix + s.seq));
 						_self.idcomposed = (s.prefix + s.seq);						
 					}
 
