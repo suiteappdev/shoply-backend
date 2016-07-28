@@ -137,8 +137,8 @@ module.exports = function(app, apiRoutes, io){
 
 		  data = { $set : data }; 
 
-      mongoose.model("reference").findOne({_id : mongoose.Types.ObjectId(REQ._reference._id)}, function(err, refs){
-        console.log(refs);
+      mongoose.model("reference").update({_id : mongoose.Types.ObjectId(REQ._reference._id), REQ._reference, function(err, refs){
+          console.log(refs);
       });         
 
   		/*Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
