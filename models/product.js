@@ -38,9 +38,14 @@ _Schema.pre('save', function (next, done) {
 			}else{
 				sq("_product", _self._company, function(err, s){
 					_self.id = s.seq;
+					
+					console.log("counter", s);
+
+					console.log("prefix", s.prefix);
 
 					if(s.prefix){
-						_self.idComposed = (s.prefix + s.seq);						
+						console.log("composed" (s.prefix + s.seq));
+						_self.idcomposed = (s.prefix + s.seq);						
 					}
 
 					var _reference = mongoose.model('reference');
