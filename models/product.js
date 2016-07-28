@@ -15,6 +15,7 @@ var metadata = require('./plugins/metadata');
 
 var _Schema = new Schema({
 	  id : {type : Number, unique : true},
+	  idcomposed : { type : String},
 	  _category : { type : Schema.Types.ObjectId , ref : 'category'},
 	  data : { type : Object},
 	  _like : [{type : Schema.Types.ObjectId , ref : 'User'}],
@@ -38,10 +39,14 @@ _Schema.pre('save', function (next, done) {
 				sq("_product", _self._company, function(err, s){
 					_self.id = s.seq;
 
+					if(s.prefix){
+						_self.idComposed = (s.prefix + s.seq);						
+					}
+
 					var _reference = mongoose.model('reference');
 
 					var _ref = new _reference({
-						reference : _self.data._reference,
+						reference : _self.data._reference || [_self.id.toString()],
 						productId : _self.id,
 						_product : mongoose.Types.ObjectId(_self._id),
 						_company  :mongoose.Types.ObjectId(_self._company)
