@@ -138,16 +138,14 @@ module.exports = function(app, apiRoutes, io){
 		  data = { $set : data }; 
 
       mongoose.model("reference").update({_id : mongoose.Types.ObjectId(REQ._reference._id) }, REQ._reference, function(err, refs){
-          console.log(refs);
+         if(!err){
+            Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+              if(rs){
+                res.json(err || rs);
+              }
+            });          
+         }
       });         
-
-  		/*Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
-  			if(rs){
-  				res.json(err || rs);
-  			}
-  		});*/
-    }
-
 
     function remove(req, res){
         Model.remove({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, rs){
