@@ -130,18 +130,22 @@ module.exports = function(app, apiRoutes, io){
     }
 
     function update(req, res){
-		var data = {};
-		var REQ = req.body || req.params;
-		!REQ.data || (data.data = REQ.data);             
-    !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
+  		var data = {};
+  		var REQ = req.body || req.params;
+  		!REQ.data || (data.data = REQ.data);             
+      !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
 
-		data = { $set : data };          
+		  data = { $set : data }; 
 
-		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
-			if(rs){
-				res.json(err || rs);
-			}
-		});
+      mongoose.model("reference").findOne({_id : mongoose.Types.ObjectId(REQ._reference._id)}, function(err, refs){
+        console.log(refs);
+      });         
+
+  		/*Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+  			if(rs){
+  				res.json(err || rs);
+  			}
+  		});*/
     }
 
 

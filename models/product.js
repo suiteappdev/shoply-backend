@@ -38,13 +38,8 @@ _Schema.pre('save', function (next, done) {
 			}else{
 				sq("_product", _self._company, function(err, s){
 					_self.id = s.seq;
-					
-					console.log("counter", s);
-
-					console.log("prefix", s.prefix);
 
 					if(s.prefix){
-						console.log("composed", (s.prefix + s.seq));
 						_self.idcomposed = (s.prefix + s.seq);						
 					}
 
