@@ -145,7 +145,8 @@ module.exports = function(app, apiRoutes, io){
               }
             });          
          }
-      });         
+      });     
+    }    
 
     function remove(req, res){
         Model.remove({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, rs){
