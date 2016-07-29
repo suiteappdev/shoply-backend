@@ -23,7 +23,7 @@ var _Schema = new Schema({
 	  comments : { type : Array},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
 	  _reference : { type : Schema.Types.ObjectId , ref : 'reference'},
-	  trashed : { type : Boolean}
+	  trashed : { type : Boolean, default : false}
  });
 
 _Schema.pre('save', function (next, done) {
