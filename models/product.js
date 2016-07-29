@@ -22,7 +22,8 @@ var _Schema = new Schema({
 	  _iva : { type : Schema.Types.ObjectId , ref : 'ivas'},
 	  comments : { type : Array},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
-	  _reference : { type : Schema.Types.ObjectId , ref : 'reference'}
+	  _reference : { type : Schema.Types.ObjectId , ref : 'reference'},
+	  trashed : { type : Boolean}
  });
 
 _Schema.pre('save', function (next, done) {

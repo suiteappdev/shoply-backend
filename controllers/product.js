@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false})
        .populate("_category")
        .populate("_company")
        .populate("_reference")
@@ -31,7 +31,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .findOne({_id : REQ.id})
+       .findOne({_id : REQ.id, trashed : false})
         .populate("_category")
         .populate("_company")
         .populate("_reference")
@@ -51,7 +51,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
         Model
-       .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false})
        .populate("_category")
        .populate("_company")
        .populate("_reference")
@@ -148,13 +148,12 @@ module.exports = function(app, apiRoutes, io){
       });     
     }    
 
-    function remove(req, res){
-        Model.remove({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, rs){
-              if(!err)
-                  res.json(rs);
-              else
-                 res.status(500).json(err);
-        });
+  function remove(req, res){
+      Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, { trashed : true} , function(err, rs){
+        if(rs){
+          res.json(err || rs);
+        }
+      }); 
 	}
 
     apiRoutes.get("/" + _url_alias, get);
