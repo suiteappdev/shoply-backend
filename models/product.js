@@ -53,7 +53,6 @@ _Schema.pre('save', function (next, done) {
 			}
 		})
 	});	
-	}
 });
 
 //add plugins
