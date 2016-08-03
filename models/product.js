@@ -13,7 +13,7 @@ var metadata = require('./plugins/metadata');
 
 
 var _Schema = new Schema({
-	  id : {type : Number, unique : true},
+	  id : {type : Number},
 	  idcomposed : { type : String},
 	  _category : { type : Schema.Types.ObjectId , ref : 'category'},
 	  data : { type : Object},

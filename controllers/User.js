@@ -79,7 +79,7 @@ module.exports = function(app, apiRoutes){
 
                     return;
               }
-
+              
               var _shell  = _batmanMailer.bulk([mailOptions]);
 
               _shell.stdout.on('data', function(output) {
