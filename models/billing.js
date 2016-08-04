@@ -8,9 +8,9 @@ var metadata = require('./plugins/metadata');
 var entity = "billing";
 
 var _Schema = new Schema({
-	_client :  { type : Object},
-	_product :  { type : Array},
-	_payments : { type : Array},
+	_client : { type : Schema.Types.ObjectId , ref : 'User'},
+	_product :  Array,
+	_payments : Array,
 	data : 		{ type : Object}
  });
 
