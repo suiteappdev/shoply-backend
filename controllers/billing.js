@@ -47,7 +47,7 @@ module.exports = function(app, apiRoutes, io){
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
       data._payments = REQ._payments;
       data._product = REQ._product;
-      data._client = REQ._client;
+      data._client = mongoose.Types.ObjectId(REQ._client);
       
   	   var model = new Model(data);
 
