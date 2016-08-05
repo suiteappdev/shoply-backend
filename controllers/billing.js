@@ -48,6 +48,7 @@ module.exports = function(app, apiRoutes, io){
       data._payments = REQ._payments;
       data._product = REQ._product;
       data._client = mongoose.Types.ObjectId(REQ._client);
+      data._seller = mongoose.Types.ObjectId(REQ._seller);
       
   	   var model = new Model(data);
 
