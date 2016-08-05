@@ -53,7 +53,7 @@ module.exports = function(app, apiRoutes, io){
 
   		model.save(function(err, rs){
     			if(rs){
-            model.populate("_company _client", function(err, doc){
+            model.populate("_company _client _seller", function(err, doc){
               res.json(doc);
             })
     			}else{

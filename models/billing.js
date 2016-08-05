@@ -14,6 +14,7 @@ var entity = "billing";
 var _Schema = new Schema({
 	 id : {type : Number},
 	 idcomposed : { type : String},
+	_seller :{ type : Schema.Types.ObjectId , ref : 'User'},
 	_company : { type : Schema.Types.ObjectId , ref : 'company'},
 	_client : { type : Schema.Types.ObjectId , ref : 'User'},
 	_product :  Array,
