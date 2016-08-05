@@ -5,6 +5,10 @@ var Schema = mongoose.Schema;
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
+function sq(collection, company, callback) {
+   mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+}
+
 var entity = "billing";
 
 var _Schema = new Schema({
@@ -26,7 +30,7 @@ _Schema.pre('save', function (next) {
 		if(s.prefix){
 			_self.idcomposed = (s.prefix + s.seq);						
 		}
-		
+
 		next();
 	});	
 });
