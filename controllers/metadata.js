@@ -119,12 +119,12 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
-    apiRoutes.get("/" + _url_alias,"/apps", getApps);
-    apiRoutes.get("/" + _url_alias,"/pedidos", getRequest);
-    apiRoutes.get("/" + _url_alias,"/productos", getProducts);
-    apiRoutes.get("/" + _url_alias,"/empleados", getEmployes);
-    apiRoutes.get("/" + _url_alias,"/clientes", getClients);
-    apiRoutes.get("/" + _url_alias,"/vendedores", getSellers);
+    apiRoutes.get("/" + _url_alias + "/apps", getApps);
+    apiRoutes.get("/" + _url_alias + "/pedidos", getRequest);
+    apiRoutes.get("/" + _url_alias + "/productos", getProducts);
+    apiRoutes.get("/" + _url_alias + "/empleados", getEmployes);
+    apiRoutes.get("/" + _url_alias + "/clientes", getClients);
+    apiRoutes.get("/" + _url_alias + "/vendedores", getSellers);
 
     return this;
 }
