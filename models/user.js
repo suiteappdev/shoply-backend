@@ -22,6 +22,7 @@ var _Schema = new Schema({
 	  active : { type : Boolean, default : true},
 	  type : { type : String, trim : true, default : 'ADMINISTRATOR'},
 	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
+	  _permission :{ type : Schema.Types.ObjectId , ref : 'permission'},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
 	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}]
 });

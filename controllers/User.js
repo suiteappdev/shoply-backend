@@ -21,6 +21,10 @@ module.exports = function(app, apiRoutes){
           }
        }
 
+       if(req._permission){
+           data._permission = mongoose.Types.ObjectId(req._permission);
+       }
+
         userHelper.create(data, function(err, usuario){
           if(err){
               res.status(409).json({code : 11000});
@@ -118,6 +122,10 @@ module.exports = function(app, apiRoutes){
                data._route.push(mongoose.Types.ObjectId(REQ._route[r]));
             }
          }
+
+       if(REQ._permission){
+           data._permission = mongoose.Types.ObjectId(REQ._permission);
+       }
 
          data = { $set : data }; 
 
