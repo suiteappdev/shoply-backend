@@ -154,6 +154,7 @@ module.exports = function(app, apiRoutes){
         User.find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
         .populate("_company")
         .populate("_route")
+        .populate("_permission")
         .exec(function(err, users){
             if(!err){
                 res.send(users);
@@ -168,6 +169,7 @@ module.exports = function(app, apiRoutes){
         .findOne( mongoose.Types.ObjectId(req.params.id))
         .populate("_company")
         .populate("_route")
+        .populate("_permission")
         .exec(function(err, rs){
             if(rs)
                 res.json(rs);
