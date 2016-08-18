@@ -208,10 +208,10 @@ module.exports = function(app, apiRoutes){
                     });
 
                   userHelper.createSession({token : token, user : user }, function(err, userToken){
-                        res.json({token:token, user : user});
+                        res.status(200).json({token:token, user : user});
                   });  
             }else{
-                  res.json({err: 'Usuario o clave incorrectos'}, 401);
+                  res.status(401).json({err: 'Usuario o clave incorrectos'});
             }
         });
     }
