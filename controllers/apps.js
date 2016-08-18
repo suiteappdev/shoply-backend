@@ -57,14 +57,12 @@ module.exports = function(app, apiRoutes, io){
                                 
                                 console.log(_package);
                                 
-                                var bodyData = {};
 
-                                !REQ.data || (bodyData.data = JSON.parse(REQ.data));
+                                var _bodyData =  JSON.parse(REQ.data));
                                 
-                                var _name = REQ.data.name;
-                                console.log("appname", _name);
+                                console.log("appname", _bodyData.name);
                                 result.widget.$.id = _package;
-                                result.widget.name = _name;
+                                result.widget.name = _bodyData.name;
 
                                 var xml2js = require('xml2js');
                                 var builder = new xml2js.Builder();
