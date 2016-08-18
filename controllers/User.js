@@ -124,7 +124,7 @@ module.exports = function(app, apiRoutes){
          }
 
        if(REQ._permission){
-           data._permission = mongoose.Types.ObjectId(REQ._permission);
+           data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
        }
 
          data = { $set : data }; 
