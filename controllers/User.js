@@ -194,7 +194,7 @@ module.exports = function(app, apiRoutes){
           var UserSchema = require('../models/user');
           var Role = require('../models/roles');
 
-         UserSchema.findOne({email : req.body.email}).populate("_company").exec(function(err, user){
+         UserSchema.findOne({email : req.body.email}).populate("_company _permission").exec(function(err, user){
             if(!user){
                     res.status(401).json({err : 'Usuario o clave incorrectos'});
                     return;
