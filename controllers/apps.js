@@ -61,7 +61,7 @@ module.exports = function(app, apiRoutes, io){
 
                                 result.widget.$.id = _package;
                                 
-                                console.log(result.widget.name);
+                                result.widget.name = [_name];
 
                                 var xml2js = require('xml2js');
                                 var builder = new xml2js.Builder();
