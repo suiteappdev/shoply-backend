@@ -57,9 +57,9 @@ module.exports = function(app, apiRoutes, io){
                                 
                                 console.log(_package);
 
-                                var _name = REQ.name;
+                                var _name = REQ.data.name;
 
-                                console.log("new name", REQ.name);
+                                console.log("new name", REQ.data.name);
                                 
                                 result.widget.$.id = _package;
                                 result.widget.name = _name;
