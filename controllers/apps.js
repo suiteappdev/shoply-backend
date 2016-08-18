@@ -56,11 +56,13 @@ module.exports = function(app, apiRoutes, io){
                                 var _package = "com.CP"+ _key + "." + "ID" + rs._id.toString(); 
                                 
                                 console.log(_package);
-
-                                var _name = REQ.data.name;
-
-                                console.log("new name", REQ.data.name);
                                 
+                                var bodyData = {};
+
+                                !REQ.data || (bodyData.data = JSON.parse(REQ.data));
+                                
+                                var _name = REQ.data.name;
+                                console.log("appname", _name);
                                 result.widget.$.id = _package;
                                 result.widget.name = _name;
 
