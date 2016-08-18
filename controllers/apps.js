@@ -57,9 +57,8 @@ module.exports = function(app, apiRoutes, io){
                                 
                                 console.log(_package);
                                 
+                                var _bodyData =  JSON.parse(REQ.data);
 
-                                var _bodyData =  JSON.parse(REQ.data));
-                                
                                 console.log("appname", _bodyData.name);
                                 result.widget.$.id = _package;
                                 result.widget.name = _bodyData.name;
