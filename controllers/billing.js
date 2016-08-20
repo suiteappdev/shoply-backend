@@ -82,16 +82,15 @@ module.exports = function(app, apiRoutes, io){
 
     function find(req, res){
       var REQ = req.body || req.params;
-      console.log("request", REQ);
        Model
        .find({
           _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
           _client : REQ._client,
           id : REQ.factura
-          /*createdAt : {
+          createdAt : {
             $gte: new Date(REQ.ini).toISOString(),
             $lt: new Date(REQ.end).toISOString()
-          }*/
+          }
         })
        .exec(function(err, rs){
            if(!err)
