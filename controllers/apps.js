@@ -184,7 +184,6 @@ module.exports = function(app, apiRoutes, io){
     apiRoutes.get("/" + _url_alias + "/public/:id", getPublic);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.post("/" + _url_alias + "/build/", cpUpload, build);
-    apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
 
     return this;
