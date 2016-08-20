@@ -82,16 +82,27 @@ module.exports = function(app, apiRoutes, io){
 
     function find(req, res){
       var REQ = req.body || req.params;
+      var _data = {};
+          _data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+
+      if(REQ.ini){
+        _data.createdAt.$gte = new Date(REQ.ini).toISOString(); 
+      }
+
+      if(REQ.end){
+        _data.createdAt.$lt = new Date(REQ.end).toISOString(); 
+      }
+
+      if(REQ._client){
+        _data._client = mongoose.Types.ObjectId(REQ._client);
+      }
+
+      if(REQ.factura){
+        _data.id = mongoose.Types.ObjectId(REQ.factura);
+      }
+
        Model
-       .find({
-          _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
-          _client : REQ._client,
-          id : REQ.factura,
-          createdAt : {
-            $gte: new Date(REQ.ini).toISOString(),
-            $lt: new Date(REQ.end).toISOString()
-          }
-        })
+       .find(_data)
        .exec(function(err, rs){
            if(!err)
            {
