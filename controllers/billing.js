@@ -82,7 +82,7 @@ module.exports = function(app, apiRoutes, io){
 
     function find(req, res){
       var REQ = req.body || req.params;
-      console.llog("request", REQ);
+      console.log("request", REQ);
        Model
        .find({
           _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
