@@ -98,7 +98,7 @@ module.exports = function(app, apiRoutes, io){
       }
 
       if(REQ.factura){
-        _data.id = mongoose.Types.ObjectId(REQ.factura);
+        _data.id = REQ.factura;
       }
 
        Model
