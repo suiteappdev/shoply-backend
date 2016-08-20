@@ -80,6 +80,28 @@ module.exports = function(app, apiRoutes, io){
   		});
     }
 
+    function find(req, res){
+      var REQ = req.body || req.params;
+      
+       Model
+       .find({
+          _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
+          _client : REQ._client,
+          id : REQ.code,
+          createdAt : {
+            $gte: new Date(REQ.ini).toISOString(),
+            $lt: new Date(REQ.end).toISOString()
+          }
+        })
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.status(200).json(rs);
+           }
+           else
+            res.status(200).json(err);
+       });
+    }
 
     function remove(req, res){
         Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, function(err, rs){
@@ -92,6 +114,7 @@ module.exports = function(app, apiRoutes, io){
 
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
+    apiRoutes.get("/" + _url_alias + "/find", find);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
