@@ -70,13 +70,15 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
       
       !REQ.data || (data.data = REQ.data);
-      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);               
+      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]); 
+      data._product = REQ._product;              
+      data._payments = REQ._payments;              
 
   		data = { $set : data };          
 
-  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
   			if(rs){
-  				res.json(err || rs);
+  				 res.json(err || rs);
   			}
   		});
     }

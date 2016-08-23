@@ -65,11 +65,12 @@ module.exports = function(app, apiRoutes, io){
   		var data = {};
   		var REQ = req.body || req.params;
 
-  		!REQ.data || (data.data = REQ.data);             
+      !REQ.data || (data.data = REQ.data);
+       data._company =  mongoose.Types.ObjectId(req.headers["x-shoply-company"]);            
 
   		data = { $set : data };          
 
-  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, data,function(err, rs){
+  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, data, function(err, rs){
   			if(rs){
   				res.json(err || rs);
   			}
