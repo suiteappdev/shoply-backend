@@ -14,6 +14,8 @@ var entity = "tonnage";
 var _Schema = new Schema({
 	  id : {type : Number, unique : true},
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
+	  _client : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
 	  _request : [{type : Schema.Types.ObjectId , ref : 'request'}],
 	  data : { type : Object}
  });
