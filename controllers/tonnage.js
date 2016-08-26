@@ -23,7 +23,7 @@ module.exports = function(app, apiRoutes, io){
           if (err) return res.status(500).json(err);
 
           Model.populate(rs, options, function (err, data) {
-            res.status(200)-json(data);
+            res.status(200).json(data);
           });        
        });
     }
