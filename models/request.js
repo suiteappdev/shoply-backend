@@ -24,8 +24,12 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	sq("_request", _self._company, function(err, s){
-		_self.id = s.seq;
-		next();
+		if(){
+			_self.id = s.seq;
+			next();			
+		}else{
+			next();
+		}
 	});
 });
 
