@@ -24,7 +24,7 @@ var _Schema = new Schema({
 _Schema.pre('save', function (next) {
 	_self = this;
 	sq("_request", _self._company, function(err, s){
-		if(){
+		if(s){
 			_self.id = s.seq;
 			next();			
 		}else{
