@@ -13,8 +13,6 @@ module.exports = function(app, apiRoutes, io){
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
-       .populate("_seller")
-       .populate("_client")
        .populate("_request")
        .exec(function(err, rs){
            if(!err)
@@ -34,8 +32,6 @@ module.exports = function(app, apiRoutes, io){
        .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_request")
-       .populate("_seller")
-       .populate("_client")
        .exec(function(err, rs){
            if(!err)
            {
