@@ -25,6 +25,8 @@ var _Schema = new Schema({
 	  _permission :{ type : Schema.Types.ObjectId , ref : 'permission'},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
 	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}]
+	  resetPasswordToken: String,
+  	  resetPasswordExpires: Date
 });
 
 _Schema.pre('save', function (next) {

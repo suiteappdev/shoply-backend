@@ -5,7 +5,8 @@ module.exports = function(app, apiRoutes){
     var User = require('../models/user');
     var _batmanMailer = require(path.join(process.env.PWD , "helpers", "BatmanMailer", "index.js"));
     var _compiler = require(path.join(process.env.PWD , "helpers", "mailer.js"));
-
+    var crypto = require("crypto");
+    
     function create(req, res){
        var data = req.body;
        var _plainPwd = req.body.password;
@@ -244,6 +245,28 @@ module.exports = function(app, apiRoutes){
         }else{
             res.status(400).json({message : "password not match"})
         }
+    }
+
+    function recover(req, res){
+        var REQ = req.body || req.params;
+        
+        User.findOne({ email : REQ.email}, function(err, rs){
+            if(rs){
+                  crypto.pseudoRandomBytes(30, function (err, raw) {
+                      rs.resetPasswordToken = raw;
+                      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                      rs.save(function(err, rs){
+                          if(rs){
+                              res.status(200).json({message : "ok"});
+                          }
+                      })                   
+                  }); 
+
+            }else{
+                res.status(404).json({message : "user not found"})
+            }
+        });            
     }
 
     apiRoutes.get('/user', users);
