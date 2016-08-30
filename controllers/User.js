@@ -6,7 +6,7 @@ module.exports = function(app, apiRoutes){
     var _batmanMailer = require(path.join(process.env.PWD , "helpers", "BatmanMailer", "index.js"));
     var _compiler = require(path.join(process.env.PWD , "helpers", "mailer.js"));
     var crypto = require("crypto");
-    
+
     function create(req, res){
        var data = req.body;
        var _plainPwd = req.body.password;
@@ -273,6 +273,7 @@ module.exports = function(app, apiRoutes){
     apiRoutes.get('/user/:id', user);
     app.get('/api/user/exists/:email', exists);
     app.post('/api/password-reset/', passwordReset);
+    app.post('/api/recover/', recover);
     app.post("/api/user", create);
     app.post("/api/login", login);
     apiRoutes.put("/user/:id", update);
