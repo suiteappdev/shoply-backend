@@ -254,7 +254,7 @@ module.exports = function(app, apiRoutes){
             if(rs){
                   crypto.pseudoRandomBytes(30, function (err, raw) {
                       rs.resetPasswordToken = raw;
-                      user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                      rs.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
                       rs.save(function(err, rs){
                           if(rs){
