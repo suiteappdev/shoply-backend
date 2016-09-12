@@ -266,8 +266,6 @@ module.exports = function(app, apiRoutes){
                                     subject: 'Recuperacion de Contraseña'
                               }
 
-                              onsole.log("token", rs.resetPasswordToken.toString())
-
                               _html = _compiler.render({ _data : {
                                 url : rs.resetPasswordToken
                                 } }, 'recover/index.ejs');
