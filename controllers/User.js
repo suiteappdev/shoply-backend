@@ -252,7 +252,7 @@ module.exports = function(app, apiRoutes){
         User.findOne({ email : REQ.email}, function(err, rs){
             if(rs){
                   crypto.pseudoRandomBytes(30, function (err, raw) {
-                      rs.resetPasswordToken = raw;
+                      rs.resetPasswordToken = raw.toString('hex');
                       rs.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
                       rs.save(function(err, rs){
