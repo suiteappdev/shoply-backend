@@ -266,7 +266,7 @@ module.exports = function(app, apiRoutes){
                                     subject: 'Recuperacion de Contraseña'
                               }
 
-                              console.log("token", rs.resetPasswordToken)
+                              console.log("token", rs.resetPasswordToken.toString())
 
                               _html = _compiler.render({ _data : {
                                 url : rs.resetPasswordToken
