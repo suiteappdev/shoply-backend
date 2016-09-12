@@ -266,7 +266,7 @@ module.exports = function(app, apiRoutes){
                                     subject: 'Recuperacion de Contraseña'
                               }
 
-                              console.log("token", rs.resetPasswordToken.toString())
+                              onsole.log("token", rs.resetPasswordToken.toString())
 
                               _html = _compiler.render({ _data : {
                                 url : rs.resetPasswordToken
@@ -297,9 +297,30 @@ module.exports = function(app, apiRoutes){
                   }); 
     }
 
+  function reset(req, res){
+      var REQ = req.body || req.params;
+      
+      User.findOne({ resetPasswordToken: REQ.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+            res.status(404).json({message: 'no user found or reset link has been expired'});
+        }else{
+          user.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.newpwd);
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+
+          user.save(function(err, rs){
+              if(rs){
+                  res.status(200).json({message : "ok"});
+              }
+          })
+        }
+      });      
+  }
+
     apiRoutes.get('/user', users);
     apiRoutes.get('/user/:id', user);
     app.get('/api/user/exists/:email', exists);
+    app.get('/api/reset/:token', reset);
     app.post('/api/password-reset/', passwordReset);
     app.post('/api/recover/', recover);
     app.post("/api/user", create);
