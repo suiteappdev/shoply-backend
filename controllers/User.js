@@ -266,6 +266,8 @@ module.exports = function(app, apiRoutes){
                                     subject: 'Recuperacion de Contraseña'
                               }
 
+                              console.log("token", rs.resetPasswordToken)
+
                               _html = _compiler.render({ _data : {
                                 url : rs.resetPasswordToken
                                 } }, 'recover/index.ejs');
