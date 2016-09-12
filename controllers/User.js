@@ -300,7 +300,7 @@ module.exports = function(app, apiRoutes){
   function reset(req, res){
       var REQ = req.body || req.params;
       
-      User.findOne({ resetPasswordToken: REQ.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      User.findOne({ resetPasswordToken: REQ.link, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
             res.status(404).json({message: 'no user found or reset link has been expired'});
         }else{
