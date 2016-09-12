@@ -320,7 +320,7 @@ module.exports = function(app, apiRoutes){
     apiRoutes.get('/user', users);
     apiRoutes.get('/user/:id', user);
     app.get('/api/user/exists/:email', exists);
-    app.get('/api/reset/:token', reset);
+    app.post('/api/reset/:token', reset);
     app.post('/api/password-reset/', passwordReset);
     app.post('/api/recover/', recover);
     app.post("/api/user", create);
