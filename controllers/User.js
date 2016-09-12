@@ -264,12 +264,12 @@ module.exports = function(app, apiRoutes){
                                     from: "listerine1989@gmail.com",
                                     to: rs.email,
                                     subject: 'Recuperacion de Contraseña'
-                              }     
+                              }
+
+                              var _url = 'http://www.shoply.com/dist/#/forgot/' + rs.resetPasswordToken     
 
                               _html = _compiler.render({ _data : {
-                                name : rs.name,
-                                last_name : rs.last_name,
-                                email : rs.email,
+                                url : _url
                                 } }, 'recover/index.ejs');
 
                                mailOptions.html = _html;
