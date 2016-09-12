@@ -249,7 +249,6 @@ module.exports = function(app, apiRoutes){
 
     function recover(req, res){
         var REQ = req.body || req.params;
-        
         User.findOne({ email : REQ.email}, function(err, rs){
             if(rs){
                   crypto.pseudoRandomBytes(30, function (err, raw) {
@@ -259,14 +258,43 @@ module.exports = function(app, apiRoutes){
                       rs.save(function(err, rs){
                           if(rs){
                               res.status(200).json({message : "ok"});
-                          }
-                      })                   
-                  }); 
 
-            }else{
-                res.status(404).json({message : "user not found"})
-            }
-        });            
+                              var _html;
+                              var mailOptions = {
+                                    from: "listerine1989@gmail.com",
+                                    to: rs.email,
+                                    subject: 'Recuperacion de Contraseña'
+                              }     
+
+                              _html = _compiler.render({ _data : {
+                                name : rs.name,
+                                last_name : rs.last_name,
+                                email : rs.email,
+                                } }, 'recover/index.ejs');
+
+                               mailOptions.html = _html;
+
+                              var _shell  = _batmanMailer.bulk([mailOptions]);
+
+                              _shell.stdout.on('data', function(output) {
+                                  console.log('stdout: ' + output);
+                              });
+
+                              _shell.stderr.on('data', function(output) {
+                                  console.log('stdout: ' + output);
+                              });
+
+                              _shell.on('close', function(code) {
+                                  console.log('closing code: ' + code);
+                              }); 
+                          }
+                          })
+                      }) 
+                  }else{
+                      res.status(404).json({message : "user not found"})
+                  }                    
+                  
+                  }); 
     }
 
     apiRoutes.get('/user', users);
