@@ -266,10 +266,8 @@ module.exports = function(app, apiRoutes){
                                     subject: 'Recuperacion de Contraseña'
                               }
 
-                              var _url = 'http://www.shoply.com/dist/#/forgot/' + rs.resetPasswordToken     
-
                               _html = _compiler.render({ _data : {
-                                url : _url
+                                url : rs.resetPasswordToken
                                 } }, 'recover/index.ejs');
 
                                mailOptions.html = _html;
