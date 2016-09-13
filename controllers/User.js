@@ -42,7 +42,7 @@ module.exports = function(app, apiRoutes){
                     subject: 'Bienvenido a Shoply'
               }     
 
-              if(usuario.type == "USER"){
+              if(usuario.type == "ADMINISTRATOR"){
                     _html = _compiler.render({_data : {
                       name : usuario.name,
                       last_name : usuario.last_name,
