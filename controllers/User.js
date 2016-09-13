@@ -130,8 +130,7 @@ module.exports = function(app, apiRoutes){
     }
 
     function verificationCode(req, res){
-      
-      User.findOne({_id : mongoose.Types.ObjectId(req.params('user'))}).exec(function(err, user){
+      User.findOne({_id : mongoose.Types.ObjectId(req.params.user)}).exec(function(err, user){
           if(!err){
               crypto.pseudoRandomBytes(4, function (err, raw){
                   user.verificationCode =  raw.toString('hex');
