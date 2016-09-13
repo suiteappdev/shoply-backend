@@ -205,6 +205,10 @@ module.exports = function(app, apiRoutes){
                        data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
                    }
 
+                   if(REQ.password){
+                      data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
+                   }
+
                    data = { $set : data }; 
 
                    userHelper.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
@@ -229,6 +233,10 @@ module.exports = function(app, apiRoutes){
              if(REQ._permission){
                  data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
              }
+
+             if(REQ.password){
+                data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
+             } 
 
              data = { $set : data }; 
 
