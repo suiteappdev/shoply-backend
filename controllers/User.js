@@ -186,9 +186,7 @@ module.exports = function(app, apiRoutes){
 
          if(REQ.verificationCode){
              User.findOne({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, user){
-              console.log("saved code", user.verificationCode);
-              console.log("sended code", REQ.verificationCode);
-                if(user.verificationCode =! REQ.verificationCode){
+                if(user.verificationCode != REQ.verificationCode){
                   res.status(400).json({err : 'invalid code verification'});
                 }else{
                    data.verificationCode = undefined;
