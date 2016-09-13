@@ -52,8 +52,21 @@ module.exports = function(app, apiRoutes){
 
                     mailOptions.html = _html;
 
-              }else if(usuario.type == "SELLER"){
+                    var _shell  = _batmanMailer.bulk([mailOptions]);
 
+                    _shell.stdout.on('data', function(output) {
+                        console.log('stdout: ' + output);
+                    });
+
+                    _shell.stderr.on('data', function(output) {
+                        console.log('stdout: ' + output);
+                    });
+
+                    _shell.on('close', function(code) {
+                        console.log('closing code: ' + code);
+                    });  
+
+              }else if(usuario.type == "SELLER"){
                     User.findOne({email : usuario.email}).populate("_company").exec(function(err, rs){
                         if(!err){
                             _html = _compiler.render({_data : {
@@ -83,21 +96,35 @@ module.exports = function(app, apiRoutes){
                     });
 
                     return;
+              }else if(usuario.type == "EMPLOYE"){
+                    User.findOne({email : usuario.email}).populate("_company").exec(function(err, rs){
+                        if(!err){
+                            _html = _compiler.render({_data : {
+                              name : usuario.name,
+                              last_name : usuario.last_name,
+                              email : usuario.email,
+                              password : _plainPwd,
+                              company : rs._company.data.empresa
+                            }},'employe/index.ejs');
+
+                            mailOptions.html = _html;
+
+                            var _shell  = _batmanMailer.bulk([mailOptions]);
+
+                            _shell.stdout.on('data', function(output) {
+                                console.log('stdout: ' + output);
+                            });
+
+                            _shell.stderr.on('data', function(output) {
+                                console.log('stdout: ' + output);
+                            });
+
+                            _shell.on('close', function(code) {
+                                console.log('closing code: ' + code);
+                            });                            
+                          }
+                    });
               }
-              
-              var _shell  = _batmanMailer.bulk([mailOptions]);
-
-              _shell.stdout.on('data', function(output) {
-                  console.log('stdout: ' + output);
-              });
-
-              _shell.stderr.on('data', function(output) {
-                  console.log('stdout: ' + output);
-              });
-
-              _shell.on('close', function(code) {
-                  console.log('closing code: ' + code);
-              });  
             }
         });
     }
