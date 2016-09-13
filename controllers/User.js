@@ -160,7 +160,9 @@ module.exports = function(app, apiRoutes){
 
                   _shell.on('close', function(code) {
                       console.log('closing code: ' + code);
-                  });                  
+                  });
+
+                  res.status(200).json({message:"ok"});                  
               });
             }
       });    
