@@ -135,34 +135,40 @@ module.exports = function(app, apiRoutes){
       User.findOne({_id : mongoose.Types.ObjectId(REQ.user)}).exec(function(err, user){
           if(!err){
               crypto.pseudoRandomBytes(4, function (err, raw){
-                  var _html;
-                  var mailOptions = {
-                        from: "listerine1989@gmail.com",
-                        to: user.email,
-                        subject: 'Codigo de verificación'
-                  }  
+                  user.verificationCode =  raw.toString('hex');
+                  user.save(function(err, rs){
+                    if(!err){
+                        var _html;
+                        var mailOptions = {
+                              from: "listerine1989@gmail.com",
+                              to: user.email,
+                              subject: 'Codigo de verificación'
+                        }  
 
-                  _html = _compiler.render({_data : {
-                    verificationCode : raw.toString('hex')
-                  }},'verificationCode/index.ejs');
+                        _html = _compiler.render({_data : {
+                          verificationCode : raw.toString('hex')
+                        }},'verificationCode/index.ejs');
 
-                  mailOptions.html = _html;
+                        mailOptions.html = _html;
 
-                  var _shell  = _batmanMailer.bulk([mailOptions]);
+                        var _shell  = _batmanMailer.bulk([mailOptions]);
 
-                  _shell.stdout.on('data', function(output) {
-                      console.log('stdout: ' + output);
+                        _shell.stdout.on('data', function(output) {
+                            console.log('stdout: ' + output);
+                        });
+
+                        _shell.stderr.on('data', function(output) {
+                            console.log('stdout: ' + output);
+                        });
+
+                        _shell.on('close', function(code) {
+                            console.log('closing code: ' + code);
+                        });
+                        
+                        res.status(200).json({message:"ok"});                        
+                    }
                   });
-
-                  _shell.stderr.on('data', function(output) {
-                      console.log('stdout: ' + output);
-                  });
-
-                  _shell.on('close', function(code) {
-                      console.log('closing code: ' + code);
-                  });
-
-                  res.status(200).json({message:"ok"});                  
+                                 
               });
             }
       });    

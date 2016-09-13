@@ -17,7 +17,7 @@ var _Schema = new Schema({
 	  name : { type : String, trim : true},
 	  last_name : { type : String, trim : true},
 	  full_name : { type : String, trim : true},
-	  email : { type : String, trim : true , unique : true},
+	  email : { type : String, trim : true , unique : true, lowercase:true},
 	  data:{ type : Object},
 	  active : { type : Boolean, default : true},
 	  type : { type : String, trim : true, default : 'ADMINISTRATOR'},
@@ -26,12 +26,12 @@ var _Schema = new Schema({
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
 	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}],
 	  resetPasswordToken: String,
-  	  resetPasswordExpires: Date
+  	  resetPasswordExpires: Date,
+  	  verificationCode : String
 });
 
 _Schema.pre('save', function (next) {
     this.full_name = (this.name || '') + ' ' + (this.last_name  || '');
-
     next();
 });
 
