@@ -182,31 +182,62 @@ module.exports = function(app, apiRoutes){
          !REQ.email || (data.email = REQ.email);
          !REQ.name || (data.name = REQ.name);
          !REQ.last_name || (data.last_name = REQ.last_name);
+         !REQ.verificationCode || (data.verificationCode = REQ.verificationCode);
 
-         if(req.headers["x-soply-company"]){
-           data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-         }
+         if(REQ.verificationCode){
+             User.findOne({_id : mongoose.Types.ObjectId(req.params.id)}, function(err, user){
+                if(user.verificationCode =! REQ.verificationCode){
+                  res.status(400).json({err : 'invalid code verification'});
+                }else{
+                   data.verificationCode = undefined;
+                   if(req.headers["x-soply-company"]){
+                     data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+                   }
 
-         if(REQ._route){
-             data._route = [];
-            for(r in REQ._route){
-               data._route.push(mongoose.Types.ObjectId(REQ._route[r]));
-            }
-         }
+                   if(REQ._route){
+                       data._route = [];
+                      for(r in REQ._route){
+                         data._route.push(mongoose.Types.ObjectId(REQ._route[r]));
+                      }
+                   }
 
-       if(REQ._permission){
-           data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
-       }
+                   if(REQ._permission){
+                       data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
+                   }
 
-         data = { $set : data }; 
+                   data = { $set : data }; 
 
-         userHelper.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
-                    if(rs){
+                   userHelper.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
+                      if(rs){
                         res.json(rs);
-                                     
-                    }
-         });
+                      }
+                   });                  
+                }
+             });          
+         }else{
+             if(req.headers["x-soply-company"]){
+               data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+             }
 
+             if(REQ._route){
+                 data._route = [];
+                for(r in REQ._route){
+                   data._route.push(mongoose.Types.ObjectId(REQ._route[r]));
+                }
+             }
+
+             if(REQ._permission){
+                 data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
+             }
+
+             data = { $set : data }; 
+
+             userHelper.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
+                if(rs){
+                  res.json(rs);
+                }
+             });   
+         }
     }
 
     function remove(req, res){
