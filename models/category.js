@@ -25,7 +25,7 @@ _Schema.pre('save', function (next) {
 	 	this.parent = "#";
 	 }
 
-	_self.parentObj = mongoose.Types.ObjectId(this.parent);
+	_self._parentObj = mongoose.Types.ObjectId(this.parent);
 
 	next();
 });
