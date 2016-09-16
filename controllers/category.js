@@ -98,6 +98,8 @@ module.exports = function(app, apiRoutes, io){
 
   		!REQ.data || (data.data = REQ.data);             
       data.text = REQ.text;
+      data.parent = REQ.parent;
+      data._parentObj = mongoose.Types.ObjectId(REQ.parent);
       
   		data = { $set : data };          
 
