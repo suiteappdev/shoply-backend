@@ -23,11 +23,12 @@ _Schema.pre('save', function (next) {
 
 	 if(!_self.parent){
 	 	this.parent = "#";
+		next();
 	 }
 
 	_self._parentObj = mongoose.Types.ObjectId(this.parent);
-
 	next();
+
 });
 
 //add plugins
