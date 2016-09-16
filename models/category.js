@@ -20,11 +20,12 @@ _Schema.pre('save', function (next) {
 	 var _self = this;
 	
 	_self.id = this._id;
-	_self.parentObj = mongoose.Types.ObjectId(this._id);
 
 	 if(!_self.parent){
 	 	this.parent = "#";
 	 }
+
+	_self.parentObj = mongoose.Types.ObjectId(this.parent);
 
 	next();
 });
