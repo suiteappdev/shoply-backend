@@ -94,8 +94,6 @@ module.exports = function(app, apiRoutes){
                             });                            
                           }
                     });
-
-                    return;
               }else if(usuario.type == "EMPLOYE"){
                     User.findOne({email : usuario.email}).populate("_company").exec(function(err, rs){
                         if(!err){

@@ -12,6 +12,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .populate("_parentObj")
        .exec(function(err, rs){
            if(!err)
            {
@@ -30,6 +31,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .findOne({_id : REQ.id})
+       .populate("_parentObj")
        .exec(function(err, rs){
            if(!err)
            {
@@ -56,7 +58,7 @@ module.exports = function(app, apiRoutes, io){
 
     function getChilds(req, res){
         var REQ = req.params;
-        Model.find({parent : REQ.parent, _company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).exec(function(err, rs){
+        Model.find({parent : REQ.parent, _company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_parentObj").exec(function(err, rs){
             if(!err){
               res.json(rs)
              }else{
