@@ -28,39 +28,16 @@ module.exports = function(app, apiRoutes, io){
     function getRange(req, res){
 
       var REQ = req.params; 
-      var data = {};
-
-      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-
-      if(REQ.seller){
-        data._seller = mongoose.Types.ObjectId(REQ.seller);
-      }
-
-      if(REQ.client){
-        data._client = mongoose.Types.ObjectId(REQ.client);
-      }
-
-      if(REQ.ini && REQ.end){
-        var startDate = new Date(REQ.ini); // this is the starting date that looks like ISODate("2014-10-03T04:00:00.188Z")
-
-        startDate.setSeconds(0);
-        startDate.setHours(0);
-        startDate.setMinutes(0);
-
-        var dateMidnight = new Date(REQ.end);
-
-        dateMidnight.setHours(23);
-        dateMidnight.setMinutes(59);
-        dateMidnight.setSeconds(59);
-
-        data.createdAt = {
-            $gte: startDate,
-            $lt: dateMidnight
-          }
-      }
 
        Model
-       .find(data)
+       .find({
+          _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
+          _seller : REQ.seller,
+          createdAt : {
+            $gte: new Date(REQ.ini).toISOString(),
+            $lt: new Date(REQ.end).toISOString()
+          }
+        })
        .populate("_company")
        .populate("_client")
        .populate("_seller")
