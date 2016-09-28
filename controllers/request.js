@@ -33,11 +33,11 @@ module.exports = function(app, apiRoutes, io){
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ.seller){
-        data._seller = REQ.seller;
+        data._seller = mongoose.Types.ObjectId(REQ.seller);
       }
 
       if(REQ.client){
-        data._client = REQ.client;
+        data._client = mongoose.Types.ObjectId(REQ.client);
       }
 
       if(REQ.ini && REQ.end){
