@@ -108,6 +108,10 @@ module.exports = function(app, apiRoutes, io){
         _data._client = mongoose.Types.ObjectId(REQ._client);
       }
 
+      if(REQ._seller){
+        _data._seller = mongoose.Types.ObjectId(REQ._seller);
+      }
+
       if(REQ.factura){
         _data.id = REQ.factura;
       }
