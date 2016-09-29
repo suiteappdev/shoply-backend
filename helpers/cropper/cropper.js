@@ -1,8 +1,10 @@
 var aws = require('aws-sdk');
 var crypto = require("crypto");
+var uploadDir = require(path.join("../", "uploads", "images", ));
 var EXTENTION  = '.jpeg';
 var BUCKET = 'shoplyassets';
 var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
+var BASE_LOCAL = "http://s3.amazonaws.com/"+BUCKET+"/";
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -30,6 +32,24 @@ module.exports = {
 	  		};
 
 			s3.putObject(data, function(err, data){
+				if(err){
+					callback(err, null);
+				}else{
+					var URL = BASE_AMAZON  + _key;
+					callback(null, {url : URL});
+				}
+			});
+        });
+	}
+
+	uploadToLocal : function(data, callback){
+		_buffer = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+
+		crypto.pseudoRandomBytes(16, function (err, raw) {
+            if (err) return cb(err);
+            var _key = raw.toString('hex') + EXTENTION;
+
+			require("fs").writeFile(path.join(uploadDir, _key), _buffer, 'base64', function(err) {
 				if(err){
 					callback(err, null);
 				}else{

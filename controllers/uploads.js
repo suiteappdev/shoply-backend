@@ -56,8 +56,17 @@ module.exports = function(app, apiRoutes, io){
         });
     }
 
+    function upload_local(req, res, next){
+        cropper.uploadToLocal(req.body.data, function(err, data){
+            if (err) throw err;
+            else       
+                res.status(200).json(data);
+        });
+    }
+
     app.post("/api/" + entity_name , upload, post);
     app.post("/api/upload-amazon/", upload_amazon);
+    app.post("/api/upload-local/", upload_local);
 
     return this;
 }
