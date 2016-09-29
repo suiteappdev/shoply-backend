@@ -6,7 +6,6 @@ var mongoose = require("mongoose");
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: "50mb"}));
 var cors = require('cors');
-app.use(express.static('uploads'));
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var cluster = require('cluster');
@@ -50,7 +49,7 @@ apiRoutes.use(function(req, res, next) {
         }
     });
 
-app.use('/uploads', express.static('uploads'));
+app.use('/static', express.static('public'));
 
 app.get('/home', function(req, res){
     res.send("Home");
