@@ -5,7 +5,7 @@ var uploadDir = path.join(process.env.PWD, "uploads", "images");
 var EXTENTION  = '.jpeg';
 var BUCKET = 'shoplyassets';
 var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
-var BASE_LOCAL = "http://www.shoply.com/uploads/";
+var BASE_LOCAL = "http://www.shoply.com.co:8080/static/images/";
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
