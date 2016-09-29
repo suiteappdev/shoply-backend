@@ -28,6 +28,7 @@ module.exports = function(app, apiRoutes){
 
         userHelper.create(data, function(err, usuario){
           if(err){
+            console.log("erro", err);
               res.status(409).json({code : 11000});
               return;
           }
