@@ -1,6 +1,6 @@
 var aws = require('aws-sdk');
 var crypto = require("crypto");
-var uploadDir = require(path.join("../", "uploads", "images", ));
+var uploadDir = require(path.join("../", "uploads", "images"));
 var EXTENTION  = '.jpeg';
 var BUCKET = 'shoplyassets';
 var BASE_AMAZON = "http://s3.amazonaws.com/"+BUCKET+"/";
