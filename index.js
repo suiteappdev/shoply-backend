@@ -49,7 +49,7 @@ apiRoutes.use(function(req, res, next) {
         }
     });
 
-app.use('/static', express.static('public'));
+app.use('/static/images', express.static('uploads/images'));
 
 app.get('/home', function(req, res){
     res.send("Home");
