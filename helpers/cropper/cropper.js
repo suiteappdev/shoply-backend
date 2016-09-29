@@ -40,7 +40,7 @@ module.exports = {
 				}
 			});
         });
-	}
+	},
 
 	uploadToLocal : function(data, callback){
 		_buffer = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""), 'base64');
