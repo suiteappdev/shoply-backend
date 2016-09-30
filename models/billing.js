@@ -20,7 +20,6 @@ var _Schema = new Schema({
 	_product :  Array,
 	_payments : Array,
 	data : 		{ type : Object},
-	created : { type: Date, default: Date.now }
  });
 
 _Schema.pre('save', function (next) {
