@@ -97,14 +97,10 @@ module.exports = function(app, apiRoutes, io){
 
         var dateMidnight = new Date(REQ.end);
 
-        dateMidnight.setHours(23);
-        dateMidnight.setMinutes(59);
-        dateMidnight.setSeconds(59);
-
         console.log("startDate", startDate.toISOString());
         console.log("dateMidnight", dateMidnight.toISOString());
 
-        _data.createdAt = {$gt: startDate , $lt: dateMidnight};
+        _data.createdAt = {$gt: startDate.toISOString() , $lt: dateMidnight.toISOString()};
         console.log("data", _data.createdAt);
       }    
 
