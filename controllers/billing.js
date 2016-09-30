@@ -104,7 +104,7 @@ module.exports = function(app, apiRoutes, io){
         console.log("startDate", startDate);
         console.log("dateMidnight", dateMidnight);
 
-        _data.createdAt = {$gte: new Date(startDate.toString()).toISOString(), $lte: new Date(dateMidnight.toString()).toISOString()};
+        _data.createdAt = {$gte: startDate , $lte: dateMidnight};
         console.log("data", _data.createdAt);
       }    
 
