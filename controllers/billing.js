@@ -101,7 +101,7 @@ module.exports = function(app, apiRoutes, io){
         dateMidnight.setMinutes(59);
         dateMidnight.setSeconds(59);
 
-        _data.createdAt = {$gte: startDate, $lte:dateMidnight};
+        _data.createdAt = {$gte: startDate.toISOString(), $lte:dateMidnightto.ISOString()};
       }    
 
       if(REQ._client){
