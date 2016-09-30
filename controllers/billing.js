@@ -90,7 +90,12 @@ module.exports = function(app, apiRoutes, io){
 
       if(REQ.ini && REQ.end){
         var startDate = new Date(REQ.ini);
-        var dateMidnight = new Date(REQ.end);
+        var dateMidnight = new Date(
+            new Date(REQ.end).getFullYear(),
+            new Date(REQ.end).getMonth(),
+            new Date(REQ.end).getDate(),
+            23, 59, 59
+          );
 
         console.log("startDate", startDate.toISOString());
         console.log("dateMidnight", dateMidnight.toISOString());
