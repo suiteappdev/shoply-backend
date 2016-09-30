@@ -89,13 +89,13 @@ module.exports = function(app, apiRoutes, io){
           _data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ.ini && REQ.end){
-        var startDate = new Date(REQ.ini);
+        var startDate = new Date(REQ.ini).toISOString();
 
         startDate.setSeconds(0);
         startDate.setHours(0);
         startDate.setMinutes(0);
 
-        var dateMidnight = new Date(REQ.end);
+        var dateMidnight = new Date(REQ.end).toISOString();
 
         dateMidnight.setHours(23);
         dateMidnight.setMinutes(59);
@@ -104,7 +104,7 @@ module.exports = function(app, apiRoutes, io){
         console.log("startDate", startDate);
         console.log("dateMidnight", dateMidnight);
 
-        _data.createdAt = {$gte: startDate.toISOString(), $lte:dateMidnight.toISOString()};
+        _data.createdAt = {$gte: startDate, $lte:dateMidnight};
       }    
 
       if(REQ._client){
