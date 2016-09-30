@@ -99,15 +99,19 @@ module.exports = function(app, apiRoutes, io){
   		!REQ.data || (data.data = REQ.data);             
       data.text = REQ.text;
       data.parent = REQ.parent;
-      data._parentObj = mongoose.Types.ObjectId(REQ.parent);
       
-  		data = { $set : data };          
-
-  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
-  			if(rs){
-  				res.json(err || rs);
-  			}
-  		});
+      try{
+        data._parentObj = mongoose.Types.ObjectId(REQ.parent);
+      }catch(e){
+        data._parentObj = "#";
+      }finally{
+        data = { $set : data };          
+        Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+          if(rs){
+            res.json(err || rs);
+          }
+        });        
+      }
     }
 
 
