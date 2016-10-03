@@ -138,7 +138,10 @@ module.exports = function(app, apiRoutes, io){
 
 		  data = { $set : data }; 
 
-      mongoose.model("reference").update({_id : mongoose.Types.ObjectId(REQ._reference._id) }, REQ._reference, function(error, refs){
+      var _ref_id = REQ._reference._id;
+      delete REQ._reference._id;
+
+      mongoose.model("reference").update({_id : mongoose.Types.ObjectId(_ref_id) }, REQ._reference, function(error, refs){
         console.log("error " , error);
          if(!err){
             Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
