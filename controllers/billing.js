@@ -91,11 +91,11 @@ module.exports = function(app, apiRoutes, io){
       if(REQ.ini && REQ.end){
         var startDate = new Date(REQ.ini);
         var dateMidnight = new Date(REQ.end);
-        dateMidnight.setHours(24);
+
         console.log("startDate", startDate.toISOString());
         console.log("dateMidnight", dateMidnight.toISOString());
 
-        _data.createdAt = {$gte: startDate , $lt: dateMidnight};
+        _data.createdAt = {$gte: startDate.toISOString() , $lt: dateMidnight.toISOString()};
         console.log("data", _data.createdAt);
       }    
 
