@@ -142,8 +142,7 @@ module.exports = function(app, apiRoutes, io){
       delete REQ._reference._id;
 
       mongoose.model("reference").update({_id : mongoose.Types.ObjectId(_ref_id) }, REQ._reference, function(error, refs){
-        console.log("error " , error);
-         if(!err){
+         if(!error){
             Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
               if(rs){
                 res.json(err || rs);
