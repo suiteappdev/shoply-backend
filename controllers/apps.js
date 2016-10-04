@@ -74,6 +74,8 @@ module.exports = function(app, apiRoutes, io){
                                   
                                   Builder.Build(function(output){
                                       Builder.UploadLocal(function(_err, _data){
+                                        console.log("error", _err);
+                                        
                                             var data = {};
                                             !REQ.data || (data.data = JSON.parse(REQ.data));
 
