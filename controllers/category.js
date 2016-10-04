@@ -43,7 +43,8 @@ module.exports = function(app, apiRoutes, io){
     }
 
     function getRoot(req, res){
-      var REQ = req.params; 
+      var REQ = req.params;
+      console.log("incoming request", REQ);
        Model
        .find({parent : "#", _company :mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
@@ -58,6 +59,7 @@ module.exports = function(app, apiRoutes, io){
 
     function getChilds(req, res){
         var REQ = req.params;
+        console.log("incoming request", REQ);
         Model.find({parent : REQ.parent, _company: mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_parentObj").exec(function(err, rs){
             if(!err){
               res.json(rs)
