@@ -3,8 +3,10 @@ var crypto = require("crypto");
 var EXTENTION  = '.apk';
 var BUCKET = 'shoply-apps';
 var BASE_AMAZON = "http://s3-us-west-2.amazonaws.com/"+BUCKET+"/";
+var BASE_LOCAL = "http://www.shoply.com.co:8080/static/apps/";
 var fs = require('fs');
 var path = require("path");
+var uploadDir = path.join(process.env.PWD, "uploads", "apps");
 
 aws.config.update({
     accessKeyId: "AKIAIBQ56J72L3L23YKQ",
@@ -31,6 +33,24 @@ module.exports = {
 							callback(err, null);
 						}else{
 							var URL = BASE_AMAZON  + _key;
+							callback(null, {url : URL});
+						}
+					});
+		        });	 
+		});
+	},
+
+	UploadLocal : function(){
+		fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "platforms", "android", "build", "outputs", "apk", "android-debug.apk"), function (err, _buffer) {
+				crypto.pseudoRandomBytes(16, function (err, raw) {
+		            if (err) return cb(err);
+		            var _key = raw.toString('hex') + EXTENTION;
+
+					require("fs").writeFile(path.join(uploadDir, _key), _buffer, function(err) {
+						if(err){
+							callback(err, null);
+						}else{
+							var URL = BASE_LOCAL  + _key;
 							callback(null, {url : URL});
 						}
 					});
