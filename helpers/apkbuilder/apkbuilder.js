@@ -40,7 +40,7 @@ module.exports = {
 		});
 	},
 
-	UploadLocal : function(){
+	UploadLocal : function(callback){
 		fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "platforms", "android", "build", "outputs", "apk", "android-debug.apk"), function (err, _buffer) {
 				crypto.pseudoRandomBytes(16, function (err, raw) {
 		            if (err) return cb(err);
