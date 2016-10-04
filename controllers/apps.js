@@ -93,10 +93,6 @@ module.exports = function(app, apiRoutes, io){
                                   });
                                 }); 
                         });  
-
-
-
-                     
                   });
               });
           }

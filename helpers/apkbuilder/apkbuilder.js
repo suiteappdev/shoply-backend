@@ -60,7 +60,7 @@ module.exports = {
 
 	Build : function(callback){
         var exec = require('child_process').exec;
-        var child = exec('sudo ionic platform add android && sudo ionic resources && sudo ionic build', {cwd: '/home/bitnami/backend/shoply-backend/apps/shoply-app/'});
+        var child = exec('sudo ionic platform add android && sudo ionic resources && sudo ionic build', {cwd: '/home/majoca10/backend/shoply-backend/apps/shoply-app/'});
         
         child.stdout.on('data', function(data){
         	console.log(data);
