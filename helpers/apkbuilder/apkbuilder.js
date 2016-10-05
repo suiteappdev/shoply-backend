@@ -63,7 +63,7 @@ module.exports = {
         var child = exec('sudo ionic platform add android && sudo ionic resources && sudo ionic build', {cwd: '/home/majoca10/backend/shoply-backend/apps/shoply-app/'});
         
         child.stdout.on('data', function(data){
-        	console.log(data);
+        	console.log("shell->", data);
         });
         
         child.on('close', callback);
