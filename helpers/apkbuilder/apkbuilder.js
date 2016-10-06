@@ -60,7 +60,7 @@ module.exports = {
 
 	Build : function(callback){
         var exec = require('child_process').exec;
-        var child = exec('ionic build android', {cwd: '/home/majoca10/shoply/backend/shoply-backend/apps/shoply-app/'});
+        var child = exec('ionic platforms add android && ionic resources && ionic build android', {cwd: '/home/majoca10/shoply/backend/shoply-backend/apps/shoply-app/'});
         
         child.stdout.on('data', function(data){
         	console.log("shell->", data);
