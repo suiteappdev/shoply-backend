@@ -71,26 +71,35 @@ module.exports = function(app, apiRoutes, io){
                                   if(err){
                                       return console.log(err);
                                   }
-                                  
-                                  Builder.Build(function(output){
-                                      Builder.UploadLocal(function(_err, _data){
-                                        console.log("error", _err);
-                                        
-                                            var data = {};
-                                            !REQ.data || (data.data = JSON.parse(REQ.data));
 
-                                            data.data.url = _data.url; 
-                                            data.data.isPublic = true; 
-                                            data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-                                            data.metadata = REQ.metadata;
+                                  //write app.json data
+                                  fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js",  "app.json"), JSON.stringify(_bodyData), function(err){
+                                      if (err) {
+                                          return console.log(err);
+                                      };
+                                      
+                                      Builder.Build(function(output){
+                                          Builder.UploadLocal(function(_err, _data){
+                                            console.log("error", _err);
+                                            
+                                                var data = {};
+                                                !REQ.data || (data.data = JSON.parse(REQ.data));
 
-                                            var model = new Model(data);
+                                                data.data.url = _data.url; 
+                                                data.data.isPublic = true; 
+                                                data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+                                                data.metadata = REQ.metadata;
 
-                                            model.save(function(err, rs){
-                                                res.status(200).json(rs);
-                                            });
-                                      });                      
+                                                var model = new Model(data);
+
+                                                model.save(function(err, rs){
+                                                    res.status(200).json(rs);
+                                                });
+                                          });                      
+                                      });                                    
                                   });
+                                  
+
                                 }); 
                         });  
                   });
