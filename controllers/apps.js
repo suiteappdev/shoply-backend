@@ -93,7 +93,7 @@ module.exports = function(app, apiRoutes, io){
                                       "background-color":_bodyData.footerColor
                                     }];
 
-                                    json.children['.tab-item .icon '].attributes = [{
+                                    json.children['.tab-item .icon'].attributes = [{
                                       color:_bodyData.footerText
                                     }];
 
