@@ -66,41 +66,49 @@ module.exports = function(app, apiRoutes, io){
                                 var xml2js = require('xml2js');
                                 var builder = new xml2js.Builder();
                                 var xml = builder.buildObject(result);
-
-                                fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
-                                  if(err){
+                                
+                                //read theme.css
+                                fs.readFile(process.env.PWD, "apps","shoply-app", "www", "css",  "theme.css", 'utf8', function (err, styles) {
+                                    if (err) {
                                       return console.log(err);
-                                  }
+                                    }
 
-                                  //write app.json data
-                                  fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js",  "app.json"), JSON.stringify(_bodyData), function(err){
-                                      if (err) {
-                                          return console.log(err);
-                                      };
-                                      
-                                      Builder.Build(function(output){
-                                          Builder.UploadLocal(function(_err, _data){
-                                            console.log("error", _err);
+                                    //apply styles here
+                                    console.log("estilos", styles)
+
+                                      fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
+                                        if(err){
+                                            return console.log(err);
+                                        }
+
+                                        //write app.json data
+                                        fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "www", "js",  "app.json"), JSON.stringify(_bodyData), function(err){
+                                            if (err) {
+                                                return console.log(err);
+                                            };
                                             
-                                                var data = {};
-                                                !REQ.data || (data.data = JSON.parse(REQ.data));
+                                            Builder.Build(function(output){
+                                                Builder.UploadLocal(function(_err, _data){
+                                                  console.log("error", _err);
+                                                  
+                                                      var data = {};
+                                                      !REQ.data || (data.data = JSON.parse(REQ.data));
 
-                                                data.data.url = _data.url; 
-                                                data.data.isPublic = true; 
-                                                data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-                                                data.metadata = REQ.metadata;
+                                                      data.data.url = _data.url; 
+                                                      data.data.isPublic = true; 
+                                                      data._company  = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+                                                      data.metadata = REQ.metadata;
 
-                                                var model = new Model(data);
+                                                      var model = new Model(data);
 
-                                                model.save(function(err, rs){
-                                                    res.status(200).json(rs);
-                                                });
-                                          });                      
-                                      });                                    
-                                  });
-                                  
-
-                                }); 
+                                                      model.save(function(err, rs){
+                                                          res.status(200).json(rs);
+                                                      });
+                                                });                      
+                                            });                                    
+                                        });
+                                      }); 
+                                });
                         });  
                   });
               });
