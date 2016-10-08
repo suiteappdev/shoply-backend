@@ -75,7 +75,7 @@ module.exports = function(app, apiRoutes, io){
                                     }
 
                                     // To JSON
-                                    var json = CSSJSON.toJSON(cssString);
+                                    var json = styleParser.toJSON(cssString);
 
                                     // To CSS
                                     //var css = CSSJSON.toCSS(jsonObject);
