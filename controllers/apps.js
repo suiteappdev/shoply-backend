@@ -68,7 +68,7 @@ module.exports = function(app, apiRoutes, io){
                                 var xml = builder.buildObject(result);
                                 
                                 //read theme.css
-                                fs.readFile(process.env.PWD, "apps","shoply-app", "www", "css",  "theme.css", 'utf8', function (err, styles) {
+                                fs.readFile(process.env.PWD, "apps","shoply-app", "www", "css",  "theme.css", function (err, styles) {
                                     if (err) {
                                       return console.log(err);
                                     }
