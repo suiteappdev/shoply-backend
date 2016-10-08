@@ -77,10 +77,42 @@ module.exports = function(app, apiRoutes, io){
                                     // To JSON
                                     var json = styleParser.toJSON(styles);
 
+                                    json.children['.bar.bar-stable .title'].attributes = [{
+                                      color:_bodyData.headerText;
+                                    }];
+
+                                    json.children['.bar.bar-stable'].attributes = [{
+                                      "background-color":_bodyData.headerColor;
+                                    }];
+
+                                    json.children['.tab-title'].attributes = [{
+                                      color:_bodyData.footerText;
+                                    }];
+
+                                    json.children['.tabs'].attributes = [{
+                                      "background-color":_bodyData.footerColor;
+                                    }];
+
+                                    json.children['.tab-item .icon '].attributes = [{
+                                      color:_bodyData.footerText;
+                                    }];
+
+                                    json.children['.custom-list-tab'].attributes = [{
+                                      "background-color":_bodyData.productButtonBackground;
+                                    }];
+
+                                    json.children['.action-product i'].attributes = [{
+                                      color:_bodyData.productBotonColor;
+                                    }];
+
+                                    json.children['.action-product'].attributes = [{
+                                      color:_bodyData.productButtonBackground;
+                                    }];
+
                                     // To CSS
                                     //var css = CSSJSON.toCSS(jsonObject);
                                     //apply styles here
-                                    console.log("estilos json", json)
+                                    console.log("json set", json)
 
                                       fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
                                         if(err){
