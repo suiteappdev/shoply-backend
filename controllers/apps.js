@@ -109,7 +109,7 @@ module.exports = function(app, apiRoutes, io){
                                       color:_bodyData.productButtonBackground
                                     };
 
-                                    fs.writeFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css", styleParser.toCSS(json)), function(err){
+                                    fs.writeFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css"), styleParser.toCSS(json), function(err){
                                       if(err){
                                         return console.log(err);
                                       }
