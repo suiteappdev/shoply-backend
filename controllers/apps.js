@@ -77,37 +77,37 @@ module.exports = function(app, apiRoutes, io){
                                     // To JSON
                                     var json = styleParser.toJSON(styles);
 
-                                    json.children['.bar.bar-stable .title'].attributes = [{
+                                    json.children['.bar.bar-stable .title'].attributes = {
                                       color:_bodyData.headerText
-                                    }];
+                                    };
 
-                                    json.children['.bar.bar-stable'].attributes = [{
+                                    json.children['.bar.bar-stable'].attributes = {
                                       "background-color":_bodyData.headerColor
-                                    }];
+                                    };
 
-                                    json.children['.tab-title'].attributes = [{
+                                    json.children['.tab-title'].attributes = {
                                       color:_bodyData.footerText
-                                    }];
+                                    };
 
-                                    json.children['.tabs'].attributes = [{
+                                    json.children['.tabs'].attributes = {
                                       "background-color":_bodyData.footerColor
-                                    }];
+                                    };
 
-                                    json.children['.tab-item .icon'].attributes = [{
+                                    json.children['.tab-item .icon'].attributes = {
                                       color:_bodyData.footerText
-                                    }];
+                                    };
 
-                                    json.children['.custom-list-tab'].attributes = [{
+                                    json.children['.custom-list-tab'].attributes = {
                                       "background-color":_bodyData.productButtonBackground
-                                    }];
+                                    };
 
-                                    json.children['.action-product i'].attributes = [{
+                                    json.children['.action-product i'].attributes = {
                                       color:_bodyData.productBotonColor
-                                    }];
+                                    };
 
-                                    json.children['.action-product'].attributes = [{
+                                    json.children['.action-product'].attributes = {
                                       color:_bodyData.productButtonBackground
-                                    }];
+                                    };
 
                                     // To CSS
                                     //var css = CSSJSON.toCSS(jsonObject);
