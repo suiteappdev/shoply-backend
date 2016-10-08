@@ -77,36 +77,36 @@ module.exports = function(app, apiRoutes, io){
                                     // To JSON
                                     var json = styleParser.toJSON(styles);
 
-                                    json.children['.bar.bar-stable .title'].attributes = {
-                                      color:_bodyData.headerText
+                                    json.children['.bar .title'].attributes = {
+                                      color:_bodyData.headerText+"!important;"
                                     };
 
-                                    json.children['.bar.bar-stable'].attributes = {
-                                      "background-color":_bodyData.headerColor
+                                    json.children['.bar-header'].attributes = {
+                                      "background-color":_bodyData.headerColor+"!important;"
                                     };
 
                                     json.children['.tab-title'].attributes = {
-                                      color:_bodyData.footerText
+                                      color:_bodyData.footerText+"!important;"
                                     };
 
                                     json.children['.tabs'].attributes = {
-                                      "background-color":_bodyData.footerColor
+                                      "background-color":_bodyData.footerColor+"!important;"
                                     };
 
                                     json.children['.tab-item .icon'].attributes = {
-                                      color:_bodyData.footerText
+                                      color:_bodyData.footerText+"!important;"
                                     };
 
                                     json.children['.custom-list-tab'].attributes = {
-                                      "background-color":_bodyData.productButtonBackground
+                                      "background-color":_bodyData.productButtonBackground+"!important;"
                                     };
 
                                     json.children['.action-product i'].attributes = {
-                                      color:_bodyData.productBotonColor
+                                      color:_bodyData.productBotonColor+"!important;"
                                     };
 
                                     json.children['.action-product'].attributes = {
-                                      color:_bodyData.productButtonBackground
+                                      color:_bodyData.productButtonBackground+"!important;"
                                     };
 
                                     fs.writeFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css"), styleParser.toCSS(json), function(err){
