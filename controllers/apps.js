@@ -112,7 +112,7 @@ module.exports = function(app, apiRoutes, io){
                                     // To CSS
                                     //var css = CSSJSON.toCSS(jsonObject);
                                     //apply styles here
-                                    console.log("json set", json)
+                                    console.log("json set", styleParser.toCSS())
 
                                       fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
                                         if(err){
