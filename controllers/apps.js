@@ -9,6 +9,7 @@ module.exports = function(app, apiRoutes, io){
     var Builder = require(path.join("../", "helpers", "apkbuilder", "apkbuilder.js"));
     var crypto = require("crypto");
     var multer = require("multer");
+    var styleParser = require("cssjson");
     
     var storage = multer.diskStorage({
       destination: function (req, file, cb) {
@@ -68,13 +69,18 @@ module.exports = function(app, apiRoutes, io){
                                 var xml = builder.buildObject(result);
                                 
                                 //read theme.css
-                                fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css"), function (err, styles) {
+                                fs.readFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css"), "utf8", function (err, styles) {
                                     if (err) {
                                       return console.log(err);
                                     }
 
+                                    // To JSON
+                                    var json = CSSJSON.toJSON(cssString);
+
+                                    // To CSS
+                                    //var css = CSSJSON.toCSS(jsonObject);
                                     //apply styles here
-                                    console.log("estilos", styles)
+                                    console.log("estilos json", json)
 
                                       fs.writeFile(path.join(process.env.PWD, "apps","shoply-app", "config.xml"), xml, function(err){
                                         if(err){
