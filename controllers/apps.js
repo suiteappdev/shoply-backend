@@ -110,12 +110,12 @@ module.exports = function(app, apiRoutes, io){
                                     };
 
                                     json.children['.button.button-custom'].attributes = {
-                                      "background-color":_bodyData.primaryButtonBackground+"!important;"
+                                      "background-color":_bodyData.primaryButtonBackground+"!important;",
                                        color:_bodyData.primaryButtonColor+"!important;"
                                     };
 
                                     json.children['.badge.badge-positive'].attributes = {
-                                      "background-color":_bodyData.notificatorBackgroundColor+"!important;"
+                                      "background-color":_bodyData.notificatorBackgroundColor+"!important;",
                                        color:_bodyData.notificatorIconColor+"!important;"
                                     };
 
