@@ -109,6 +109,17 @@ module.exports = function(app, apiRoutes, io){
                                       color:_bodyData.productButtonBackground+"!important;"
                                     };
 
+                                    json.children['.button.button-custom'].attributes = {
+                                      "background-color":_bodyData.primaryButtonBackground+"!important;"
+                                       color:_bodyData.primaryButtonColor+"!important;"
+                                    };
+
+                                    json.children['.badge.badge-positive'].attributes = {
+                                      "background-color":_bodyData.notificatorBackgroundColor+"!important;"
+                                       color:_bodyData.notificatorIconColor+"!important;"
+                                    };
+
+
                                     fs.writeFile(path.join(process.env.PWD, "apps", "shoply-app", "www", "css",  "theme.css"), styleParser.toCSS(json), function(err){
                                       if(err){
                                         return console.log(err);
