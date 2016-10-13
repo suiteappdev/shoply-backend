@@ -114,6 +114,10 @@ module.exports = function(app, apiRoutes, io){
                                        color:_bodyData.primaryButtonColor+"!important;"
                                     };
 
+                                    json.children['.register-text'].attributes = {
+                                      color:_bodyData.primaryButtonBackground+"!important;"
+                                    };
+
                                     json.children['.badge.badge-positive'].attributes = {
                                       "background-color":_bodyData.notificatorBackgroundColor+"!important;",
                                        color:_bodyData.notificatorIconColor+"!important;"
