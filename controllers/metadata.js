@@ -120,7 +120,7 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
-    function getApps(req, res){
+    function getBills(req, res){
        _billing
        .count({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
