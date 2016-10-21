@@ -135,6 +135,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
   		!REQ.data || (data.data = REQ.data);             
       !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
+      !REQ._category || (data._category = mongoose.Types.ObjectId(REQ._category));
 
 		  data = { $set : data }; 
 
