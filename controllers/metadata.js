@@ -120,11 +120,25 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
+    function getApps(req, res){
+       _billing
+       .count({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       });
+    } 
+
     apiRoutes.get("/" + _url_alias + "/apps", getApps);
     apiRoutes.get("/" + _url_alias + "/pedidos", getRequest);
     apiRoutes.get("/" + _url_alias + "/productos", getProducts);
     apiRoutes.get("/" + _url_alias + "/empleados", getEmployes);
     apiRoutes.get("/" + _url_alias + "/clientes", getClients);
+    apiRoutes.get("/" + _url_alias + "/ventas", getBills);
     apiRoutes.get("/" + _url_alias + "/vendedores", getSellers);
 
     return this;
