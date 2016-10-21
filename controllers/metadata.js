@@ -89,12 +89,13 @@ module.exports = function(app, apiRoutes, io){
            else
             res.json(err);
        });
-    } 
+    }
+
 
     function getSellers(req, res){
       var REQ = req.params; 
 
-       _seller
+       _users
        .count({type:"SELLER", _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
            if(!err)
