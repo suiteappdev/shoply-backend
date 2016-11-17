@@ -16,9 +16,7 @@ module.exports = function(app, apiRoutes, io){
        .populate("_seller")
        .populate("_request")
        .exec(function(err, rs){
-            res.status(200).json(rs);
-          
-          /*var options =[
+          var options =[
             {
               path: '_request._seller',
               model: 'User'
@@ -33,7 +31,7 @@ module.exports = function(app, apiRoutes, io){
 
           Model.populate(rs, options, function (err, data) {
             res.status(200).json(data);
-          });     */   
+          });     
        });
     }
 
