@@ -16,16 +16,11 @@ module.exports = function(app, apiRoutes, io){
        .populate("_seller")
        .populate("_request")
        .exec(function(err, rs){
-          var options =[
+          var options =
             {
-              path: '_request._seller',
-              model: 'User'
-            },
-            {
-              path: '_request._client',
-              model: 'User'
-            }
-          ];
+              path: '_request',
+              model: 'request'
+            };
 
           if (err) return res.status(500).json(err);
 
