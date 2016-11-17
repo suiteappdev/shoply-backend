@@ -16,7 +16,7 @@ var _Schema = new Schema({
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
 	  _client : {type : Schema.Types.ObjectId , ref : 'User'},
 	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
-	  _request : [{type : Schema.Types.ObjectId , ref : 'request'}],
+	  _request : [{type : Schema.Types.ObjectId , ref : 'billing'}],
 	  data : { type : Object}
  });
 
