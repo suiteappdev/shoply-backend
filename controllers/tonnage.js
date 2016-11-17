@@ -14,8 +14,11 @@ module.exports = function(app, apiRoutes, io){
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_seller")
+       .populate("_request")
        .exec(function(err, rs){
-          var options =[
+            res.status(200).json(rs);
+          
+          /*var options =[
             {
               path: '_request._seller',
               model: 'User'
@@ -30,7 +33,7 @@ module.exports = function(app, apiRoutes, io){
 
           Model.populate(rs, options, function (err, data) {
             res.status(200).json(data);
-          });        
+          });     */   
        });
     }
 
