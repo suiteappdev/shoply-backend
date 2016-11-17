@@ -14,13 +14,23 @@ module.exports = function(app, apiRoutes, io){
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_seller")
+       .populate("_client")
        .populate("_request")
        .exec(function(err, rs){
-          var options =
+          var options =[
             {
-              path: '_request',
-              model: 'request'
-            };
+              path: '_request._seller',
+              model: 'User'
+            },
+            {
+              path: '_request._seller',
+              model: 'User'
+            },
+            {
+              path: '_request._client',
+              model: 'User'
+            }
+          ];
 
           if (err) return res.status(500).json(err);
 
