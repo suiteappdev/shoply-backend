@@ -19,7 +19,7 @@ module.exports = function(app, apiRoutes, io){
        .exec(function(err, rs){
           if (err) return res.status(500).json(err);
 
-          res.status(200).json(data);
+          res.status(200).json(rs);
        });
     }
 
