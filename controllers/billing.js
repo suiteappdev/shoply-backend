@@ -114,7 +114,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find(_data)
-       .populate("_client _seller")
+       .populate("_client _seller _company")
        .exec(function(err, rs){
            if(!err)
            {
