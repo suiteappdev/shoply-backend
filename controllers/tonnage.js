@@ -14,7 +14,6 @@ module.exports = function(app, apiRoutes, io){
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_seller")
-       .populate("_request")
        .exec(function(err, rs){
           var options =[
             {
@@ -74,7 +73,6 @@ module.exports = function(app, apiRoutes, io){
        
        if(REQ._request){
           data._request = [];
-          console.log(REQ._request);
           for(x in REQ._request){
               data._request.push(mongoose.Types.ObjectId(REQ._request[x]));
           }
