@@ -74,7 +74,7 @@ module.exports = function(app, apiRoutes, io){
        
        if(REQ._request){
           data._request = [];
-
+          console.log(REQ._request);
           for(x in REQ._request){
               data._request.push(mongoose.Types.ObjectId(REQ._request[x]));
           }
