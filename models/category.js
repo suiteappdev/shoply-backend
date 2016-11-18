@@ -8,7 +8,7 @@ var metadata = require('./plugins/metadata');
 var entity = "category";
 
 var _Schema = new Schema({
-	  id : {type : String, trim : true, unique : true, lowercase : true},
+	  id : String,
       parent : { type : String, trim : true, lowercase : true},
       _parentObj : { type : Schema.Types.ObjectId , ref : 'category'},
 	  text : { type : String, trim : true, lowercase : true},
