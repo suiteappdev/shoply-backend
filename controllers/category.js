@@ -78,7 +78,7 @@ module.exports = function(app, apiRoutes, io){
       
       data.id       =  mongoose.Types.ObjectId(),
       data.parent   = req.body.parent ? req.body.parent : '#',
-      data.text     = req.body.id
+      data.text     = req.body.text
 
       data._company = req.headers["x-shoply-company"];
             
@@ -102,8 +102,8 @@ module.exports = function(app, apiRoutes, io){
   		!REQ.data || (data.data = REQ.data);             
      
       data.parent   = req.body.parent ? req.body.parent : '#'
-      data.text     = req.body.id
-      
+      data.text     = req.body.text
+
       data = { $set : data }; 
 
       Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
