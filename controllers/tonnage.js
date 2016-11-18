@@ -31,23 +31,32 @@ module.exports = function(app, apiRoutes, io){
        .findOne({_id : REQ.id, _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
        .populate("_request")
+       .populate("_seller")
        .exec(function(err, rs){
-          var options =[
-            {
-              path: '_request._seller',
-              model: 'User'
-            },
-            {
-              path: '_request._client',
-              model: 'User'
-            }
-          ];
-
-          if (err) return res.status(500).json(err);
-
-          Model.populate(rs, options, function (err, data) {
-            res.status(200).json(data);
-          });   
+          var options =[   
+             {   
+               path: '_request',   
+               model: 'request'   
+             }, 
+             {   
+               path: '_seller',   
+               model: 'User'   
+             },    
+             {   
+               path: '_seller',   
+               model: 'User'   
+             },    
+             {   
+               path: '_client',   
+               model: 'User'   
+             }   
+           ];    
+    
+            if (err) return res.status(500).json(err);                
+        
+           Model.populate(rs, options, function (err, data) {
+             res.status(200).json(data);   
+           });   
        });
     }
 
