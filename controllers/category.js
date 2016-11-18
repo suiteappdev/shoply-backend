@@ -76,9 +76,10 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data); 
       
-      data.id = new mongoose.Types.ObjectId();      
-      data.text = REQ.text;
-      data.parent = REQ.parent;
+      data.id       =  mongoose.Types.ObjectId(),
+      data.parent   = req.body.parent ? req.body.parent : '#',
+      data.text     = req.body.id
+
       data._company = req.headers["x-shoply-company"];
             
   	 var model = new Model(data);
@@ -99,20 +100,17 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
   		!REQ.data || (data.data = REQ.data);             
-      data.text = REQ.text;
-      data.parent = REQ.parent;
-      try{
-        data._parentObj = mongoose.Types.ObjectId(REQ.parent);
-      }catch(e){
-        data._parentObj = "#";
-      }finally{
-        data = { $set : data };          
-        Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
-          if(rs){
-            res.json(err || rs);
-          }
-        });        
-      }
+     
+      data.parent   = req.body.parent ? req.body.parent : '#'
+      data.text     = req.body.id
+      
+      data = { $set : data }; 
+
+      Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+        if(rs){
+          res.json(err || rs);
+        }
+      });        
     }
 
 
