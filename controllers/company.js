@@ -12,6 +12,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .populate("_parent")
        .exec(function(err, rs){
            if(!err)
            {
@@ -30,6 +31,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .findOne({_id : REQ.id})
+       .populate("_parent")
        .exec(function(err, rs){
            if(!err)
            {
@@ -46,6 +48,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_user : mongoose.Types.ObjectId(REQ.user)})
+       .populate("_parent")
        .exec(function(err, rs){
            if(!err)
            {
