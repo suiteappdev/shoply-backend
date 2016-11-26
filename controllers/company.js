@@ -65,7 +65,11 @@ module.exports = function(app, apiRoutes, io){
       !REQ.data || (data.data = REQ.data);
       data._user = REQ._user; 
       
-  	   var model = new Model(data);
+      if(REQ._parent){
+        data._parent = mongoose.Types.ObjectId(REQ._parent);
+      }
+  	  
+      var model = new Model(data);
 
   		model.save(function(err, rs){
     			if(rs){
@@ -82,7 +86,11 @@ module.exports = function(app, apiRoutes, io){
   		var data = {};
   		var REQ = req.body || req.params;
 
-  		!REQ.data || (data.data = REQ.data);             
+  		!REQ.data || (data.data = REQ.data); 
+
+      if(REQ._parent){
+        data._parent = mongoose.Types.ObjectId(REQ._parent);
+      }            
 
   		data = { $set : data };          
 

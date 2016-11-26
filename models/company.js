@@ -10,6 +10,7 @@ var entity = "company";
 
 var _Schema = new Schema({
 	  _user : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _parent : {type : Schema.Types.ObjectId , ref : 'company'},
 	  data : { type : Object}
  });
 
