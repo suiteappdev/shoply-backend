@@ -11,6 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .populate("_company _responsible")
        .exec(function(err, rs){
            if(!err)
            {
@@ -29,7 +30,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .findOne({_id : REQ.id})
-       .populate("_responsible")
+       .populate("_company _responsible")
        .exec(function(err, rs){
            if(!err)
            {
@@ -45,7 +46,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
-      REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
          data._responsible = mongoose.Types.ObjectId(REQ._responsible);
@@ -69,7 +70,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
   		!REQ.data || (data.data = REQ.data); 
-      REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
          data._responsible = mongoose.Types.ObjectId(REQ._responsible);
