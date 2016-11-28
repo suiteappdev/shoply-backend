@@ -10,7 +10,8 @@ var entity = "grocery";
 
 var _Schema = new Schema({
 	  data : { type : Object},
-	  _responsible :{ type : Schema.Types.ObjectId , ref : 'User'}
+	  _responsible :{ type : Schema.Types.ObjectId , ref : 'User'},
+	  _company :{ type : Schema.Types.ObjectId , ref : 'company'}
  });
 
 _Schema.pre('save', function (next) {
