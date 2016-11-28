@@ -9,7 +9,6 @@ module.exports = function(app, apiRoutes, io){
     function get(req, res){
 
       var REQ = req.params; 
-
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
@@ -41,31 +40,13 @@ module.exports = function(app, apiRoutes, io){
        });
     }
 
-    function getByUser(req, res){
-
-      var REQ = req.params; 
-
-       Model
-       .find({_user : mongoose.Types.ObjectId(REQ.user)})
-       .populate("_responsible")
-       .exec(function(err, rs){
-           if(!err)
-           {
-            res.json(rs);
-           }
-           else
-            res.json(err);
-       });
-    }
-
-
-
     function post(req, res){
   		var data = {};
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
-  	  
+      REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+      
       if(REQ._responsible){
          REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
       }
@@ -88,6 +69,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
   		!REQ.data || (data.data = REQ.data); 
+      REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
          REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
