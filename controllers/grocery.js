@@ -46,9 +46,9 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
       REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-      
+
       if(REQ._responsible){
-         REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
+         data._responsible = mongoose.Types.ObjectId(REQ._responsible);
       }
 
       var model = new Model(data);
@@ -72,7 +72,7 @@ module.exports = function(app, apiRoutes, io){
       REQ._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
-         REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
+         data._responsible = mongoose.Types.ObjectId(REQ._responsible);
       }
 
   		data = { $set : data };          
