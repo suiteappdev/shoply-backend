@@ -9,7 +9,8 @@ var metadata = require('./plugins/metadata');
 var entity = "grocery";
 
 var _Schema = new Schema({
-	  data : { type : Object}
+	  data : { type : Object},
+	  _responsible :{ type : Schema.Types.ObjectId , ref : 'User'}
  });
 
 _Schema.pre('save', function (next) {

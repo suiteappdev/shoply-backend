@@ -30,6 +30,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .findOne({_id : REQ.id})
+       .populate("_responsible")
        .exec(function(err, rs){
            if(!err)
            {
@@ -46,6 +47,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_user : mongoose.Types.ObjectId(REQ.user)})
+       .populate("_responsible")
        .exec(function(err, rs){
            if(!err)
            {
@@ -64,6 +66,10 @@ module.exports = function(app, apiRoutes, io){
 
       !REQ.data || (data.data = REQ.data);
   	  
+      if(REQ._responsible){
+         REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
+      }
+
       var model = new Model(data);
 
   		model.save(function(err, rs){
@@ -82,6 +88,10 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
   		!REQ.data || (data.data = REQ.data); 
+
+      if(REQ._responsible){
+         REQ._responsible = mongoose.Types.ObjectId(REQ._responsible);
+      }
 
   		data = { $set : data };          
 
