@@ -11,6 +11,7 @@ var entity = "inputs";
 var _Schema = new Schema({
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
 	  _responsible : {type : Schema.Types.ObjectId , ref : 'User'},
+	  _grocery :{type : Schema.Types.ObjectId , ref : 'grocery'},
 	  _author : {type : Schema.Types.ObjectId , ref : 'User'},
 	  data : Object
  });

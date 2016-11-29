@@ -56,6 +56,10 @@ module.exports = function(app, apiRoutes, io){
          data._author = mongoose.Types.ObjectId(REQ._author);
       }
 
+      if(REQ._grocery){
+         data._grocery = mongoose.Types.ObjectId(REQ._grocery);
+      }
+
       var model = new Model(data);
 
   		model.save(function(err, rs){
