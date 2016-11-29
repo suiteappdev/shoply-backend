@@ -46,6 +46,8 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
+      !REQ.metadata || (data.metadata = REQ.metadata);
+
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
@@ -77,7 +79,9 @@ module.exports = function(app, apiRoutes, io){
   		var data = {};
   		var REQ = req.body || req.params;
 
-  		!REQ.data || (data.data = REQ.data); 
+  		!REQ.data || (data.data = REQ.data);
+      !REQ.metadata || (data.metadata = REQ.metadata);
+       
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){

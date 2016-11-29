@@ -43,8 +43,9 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
+      !REQ.metadata || (data.metadata = REQ.metadata);
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
-      
+
   	   var model = new Model(data);
 
   		model.save(function(err, rs){
@@ -62,7 +63,9 @@ module.exports = function(app, apiRoutes, io){
   		var data = {};
   		var REQ = req.body || req.params;
 
-  		!REQ.data || (data.data = REQ.data);             
+  		!REQ.data || (data.data = REQ.data); 
+      !REQ.metadata || (data.metadata = REQ.metadata);
+                  
 
   		data = { $set : data };          
 
