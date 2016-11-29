@@ -11,7 +11,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
-       .populate("_company _responsible _author")
+       .populate("_company _responsible _grocery")
        .exec(function(err, rs){
            if(!err)
            {
@@ -30,7 +30,7 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .findOne({_id : REQ.id})
-       .populate("_company _responsible _author")
+       .populate("_company _responsible _grocery")
        .exec(function(err, rs){
            if(!err)
            {
@@ -81,7 +81,7 @@ module.exports = function(app, apiRoutes, io){
 
   		!REQ.data || (data.data = REQ.data);
       !REQ.metadata || (data.metadata = REQ.metadata);
-       
+
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ._responsible){
