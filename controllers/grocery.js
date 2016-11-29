@@ -10,7 +10,7 @@ module.exports = function(app, apiRoutes, io){
     		var data = {};
     		var REQ = req.body || req.params;
 
-    		Model.update({ _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), mongoose.Types.ObjectId(req.params.id) }, {$inc :{amount : req.params.amount}}, function(err, rs){
+    		Model.update({ _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), _product : mongoose.Types.ObjectId(req.params.id)}, {$inc :{amount : req.params.amount}}, function(err, rs){
     			if(rs){
     				  res.status(200).json(err || rs);
     			}
