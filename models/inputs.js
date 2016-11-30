@@ -30,7 +30,9 @@ _Schema.post('save', function () {
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
-	             rs.update(where, {$inc :{ amount : parseInt(_self.data._product[x].cantidad)}}, function(err, doc){
+	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
+
+	             rs.update(where, { amount : amount)}, function(err, doc){
 	             	if(!err){
 	             		console.log("actualizando cantidades", doc);
 	             	}
