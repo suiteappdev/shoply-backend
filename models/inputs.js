@@ -51,7 +51,7 @@ _Schema.post('save', function () {
 	            });*/
 	        }
 	    });
-	}*/
+	}
 });
 
 //add plugins
