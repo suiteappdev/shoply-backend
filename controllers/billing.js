@@ -92,7 +92,7 @@ module.exports = function(app, apiRoutes, io){
         var start = new Date(REQ.ini).toISOString();
         
         var end = new Date(REQ.end);
-        end.setHours(24);
+        new Date(end).setHours(24);
         end.toISOString();
 
           _data.createdAt = {$gte: start, $lte : end };
