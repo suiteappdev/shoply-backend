@@ -90,9 +90,12 @@ module.exports = function(app, apiRoutes, io){
 
       if(REQ.ini && REQ.end){
         var start = new Date(REQ.ini).toISOString();
-        var end = new Date(REQ.end).toISOString();
+        
+        var end = new Date(REQ.end);
+        end.setHours(24);
+        end.toISOString();
 
-          _data.createdAt = {$gte: start, $lte:end };
+          _data.createdAt = {$gte: start, $lte : end };
       }
 
       console.log("fechas", _data)
