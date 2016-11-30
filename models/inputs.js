@@ -30,7 +30,7 @@ _Schema.post('save', function () {
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
-	             rs.update(where, {$inc :{ amount : _self.data._product[x].cantidad}}, function(err, doc){
+	             rs.update(where, {$inc :{ amount : parseInt(_self.data._product[x].cantidad)}}, function(err, doc){
 	             	if(!err){
 	             		console.log("actualizando cantidades", doc);
 	             	}
@@ -39,7 +39,7 @@ _Schema.post('save', function () {
 	            var inputs = new _amounts({
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
 	            	_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
-	            	amount : _self.data._product[x].cantidad
+	            	amount : parseInt(_self.data._product[x].cantidad)
 	            });
 	            
 	            inputs.save(function(err, rs){
