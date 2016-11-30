@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+function sq(collection, company, callback) {
+   mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+}
+
 
 // Load required packages
 var timestamps = require('mongoose-timestamp');
@@ -15,7 +19,20 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	next();
+	_self = this;
+	sq("_grocery", _self._company, function(err, s){
+		if(s){
+		
+			if(s.prefix){
+				_self.idcomposed = (s.prefix + s.seq);						
+			}
+			
+			_self.id = s.seq;
+			next();			
+		}else{
+			next();
+		}
+	});
 });
 
 //add plugins
