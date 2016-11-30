@@ -12,6 +12,8 @@ var metadata = require('./plugins/metadata');
 var entity = "inputs";
 
 var _Schema = new Schema({
+	  id : {type : Number},
+	  idcomposed : { type : String},
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
 	  _responsible : {type : Schema.Types.ObjectId , ref : 'User'},
 	  _grocery :{type : Schema.Types.ObjectId , ref : 'grocery'},
@@ -27,7 +29,7 @@ _Schema.pre('save', function (next) {
 			if(s.prefix){
 				_self.idcomposed = (s.prefix + s.seq);						
 			}
-			
+
 			_self.id = s.seq;
 			next();			
 		}else{

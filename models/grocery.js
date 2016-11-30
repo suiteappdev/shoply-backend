@@ -13,6 +13,8 @@ var metadata = require('./plugins/metadata');
 var entity = "grocery";
 
 var _Schema = new Schema({
+	  id : {type : Number},
+	  idcomposed : { type : String},
 	  data : { type : Object},
 	  _responsible :{ type : Schema.Types.ObjectId , ref : 'User'},
 	  _company :{ type : Schema.Types.ObjectId , ref : 'company'}
