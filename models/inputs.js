@@ -32,7 +32,7 @@ _Schema.post('save', function () {
 	        if(rs){
 	             rs.update(where, {$inc :{ amount : _self.data._product[x].cantidad}}, function(err, doc){
 	             	if(!err){
-	             		console.log("insertado en alterno", doc);
+	             		console.log("actualizando cantidades", doc);
 	             	}
 	             });
 	        }else{
@@ -44,7 +44,7 @@ _Schema.post('save', function () {
 	            
 	            inputs.save(function(err, rs){
 	            	if(!err){
-	            		console.log("cantidades alternas guardadas", rs);
+	            		console.log("Cantidades alternas creadas", rs);
 	            	}
 	            });
 	        }
