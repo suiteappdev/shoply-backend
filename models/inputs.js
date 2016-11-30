@@ -32,7 +32,7 @@ _Schema.post('save', function () {
 	        if(rs){
 	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
 
-	             rs.update(where, { amount : amount)}, function(err, doc){
+	             rs.update(where, { amount : amount}, function(err, doc){
 	             	if(!err){
 	             		console.log("actualizando cantidades", doc);
 	             	}
