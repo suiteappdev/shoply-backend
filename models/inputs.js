@@ -21,9 +21,8 @@ _Schema.pre('save', function (next) {
 	next();
 });
 
-_Schema.pre('post', function () {
+_Schema.post('save', function () {
 	var _self = this;
-	
 	var _amounts = mongoose.model('amounts');
 
 	for(x in _self.data._product){
@@ -52,7 +51,7 @@ _Schema.pre('post', function () {
 	            });*/
 	        }
 	    });
-	}
+	}*/
 });
 
 //add plugins
