@@ -31,12 +31,13 @@ _Schema.post('save', function () {
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
 	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
-	        	console.log("nueva cantidad", amount)
-	             rs.update(where, { amount : amount}, function(err, doc){
+	        	rs.amount = amount;
+
+	        	rs.save(function(err, rs){
 	             	if(!err){
 	             		console.log("actualizando cantidades", doc);
-	             	}
-	             });
+	             	}	        		
+	        	});
 	        }else{
 	            var inputs = new _amounts({
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
