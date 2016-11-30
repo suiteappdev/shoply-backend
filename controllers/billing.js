@@ -89,9 +89,7 @@ module.exports = function(app, apiRoutes, io){
           _data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       if(REQ.ini && REQ.end){
-          var end = new Date(REQ.end).setHours(24);
-
-          _data.createdAt = {$gte: new Date(REQ.ini).toISOString(), $lt: new Date(end).toISOString()};
+          _data.createdAt = {$gte: new Date(REQ.ini).toISOString(), $lte: new Date(REQ.end).toISOString()};
       }
 
       console.log("fechas", _data)
