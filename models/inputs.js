@@ -35,7 +35,7 @@ _Schema.post('save', function () {
 
 	        	rs.save(function(err, rs){
 	             	if(!err){
-	             		console.log("actualizando cantidades", doc);
+	             		console.log("actualizando cantidades", rs);
 	             	}	        		
 	        	});
 	        }else{
