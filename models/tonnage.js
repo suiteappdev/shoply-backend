@@ -18,6 +18,8 @@ var _Schema = new Schema({
 	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
 	  _request : [{type : Schema.Types.ObjectId , ref : 'billing'}],
 	  data : { type : Object}
+	  ini : {type : Date},
+	  end : {type : Date},
  });
 
 
