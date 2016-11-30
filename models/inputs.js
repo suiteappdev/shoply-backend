@@ -31,14 +31,15 @@ _Schema.pre('post', function () {
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
-	             rs.update(where, {$inc :{ amount : _self.data._product[x].cantidad}}, function(err, doc){
+	            console.log("si existe", rs);
+	             /*rs.update(where, {$inc :{ amount : _self.data._product[x].cantidad}}, function(err, doc){
 	             	if(!err){
 	             		console.log("insertado en alterno", doc);
 	             	}
-	             });
+	             });*/
 	        }else{
-
-	            var inputs = new _amounts({
+	            console.log("no existe", rs);
+	            /*var inputs = new _amounts({
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
 	            	_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 	            	amount : _self.data._product[x].cantidad
@@ -48,7 +49,7 @@ _Schema.pre('post', function () {
 	            	if(!err){
 	            		console.log("cantidades alternas guardadas", rs);
 	            	}
-	            });
+	            });*/
 	        }
 	    });
 	}
