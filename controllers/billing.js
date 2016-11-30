@@ -99,7 +99,7 @@ module.exports = function(app, apiRoutes, io){
       }
       
       if(!REQ.ini && REQ.end){
-          _data.createdAt =  {$lt : new Date(REQ.end).setHours(24)}
+          _data.createdAt =  {$lt : new Date(REQ.end).toISOString()}
       }
 
       if(REQ._client){

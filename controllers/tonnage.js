@@ -124,9 +124,40 @@ module.exports = function(app, apiRoutes, io){
         });
 	   }
 
+    function find(req, res){
+      var REQ = req.body || req.params;
+      var _data = {};
+          _data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
+
+      if(REQ.ini){
+          _data.ini = new Date(REQ.ini).toISOString();
+      }
+
+      if(REQ.end){
+          _data.end = new Date(REQ.end).toISOString();
+      }
+
+      if(REQ._seller){
+        _data._seller = mongoose.Types.ObjectId(REQ._seller);
+      }
+
+       Model
+       .find(_data)
+       .populate("_client _seller _company")
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.status(200).json(rs);
+           }
+           else
+            res.status(200).json(err);
+       });
+    }
+
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.post("/" + _url_alias, post);
+    apiRoutes.post("/" + _url_alias + "/find", find);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
 
