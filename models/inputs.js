@@ -57,6 +57,7 @@ _Schema.post('save', function () {
 	        	});
 	        }else{
 	            var inputs = new _amounts({
+	            	_company : mongoose.Types.ObjectId(_self._company),
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
 	            	_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 	            	amount : parseInt(_self.data._product[x].cantidad)

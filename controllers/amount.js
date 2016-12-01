@@ -20,6 +20,7 @@ module.exports = function(app, apiRoutes, io){
     function stock(req, res){
         var data = {};
         var REQ = req.body || req.params;
+        
         Model.find(
             { 
               _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
@@ -42,7 +43,7 @@ module.exports = function(app, apiRoutes, io){
 
     apiRoutes.get("/" + _url_alias + "/:id/add/:amount", add);
     apiRoutes.get("/" + _url_alias + "/:id/remove/:amount", remove);
-    apiRoutes.get("/" + _url_alias + "/stock/:_grocery/:_product/", stock);
+    apiRoutes.get("/" + _url_alias + "/stock/:_grocery/:_product", stock);
 
     return this;
 }
