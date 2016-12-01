@@ -43,7 +43,11 @@ _Schema.post('save', function () {
 	var _amounts = mongoose.model('amounts');
 
 	for(x in _self.data._product){
-		var where = {_grocery: mongoose.Types.ObjectId(_self._grocery), _product : mongoose.Types.ObjectId(_self.data._product[x]._id)};
+		var where = {
+			_grocery: mongoose.Types.ObjectId(_self._grocery),
+			_product : mongoose.Types.ObjectId(_self.data._product[x]._id,
+			_company: mongoose.Types.ObjectId(_self._company))
+		};
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
