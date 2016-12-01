@@ -45,7 +45,7 @@ _Schema.post('save', function () {
 	for(x in _self.data._product){
 		var where = {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
-			_product : mongoose.Types.ObjectId(_self.data._product[x]._id,
+			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 			_company: mongoose.Types.ObjectId(_self._company))
 		};
 
