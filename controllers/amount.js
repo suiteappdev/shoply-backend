@@ -20,7 +20,7 @@ module.exports = function(app, apiRoutes, io){
     function stock(req, res){
         var data = {};
         var REQ = req.body || req.params;
-
+        console.log(REQ)
         Model.find(
             { 
               _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
