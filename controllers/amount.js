@@ -20,16 +20,15 @@ module.exports = function(app, apiRoutes, io){
     function stock(req, res){
         var data = {};
         var REQ = req.body || req.params;
-        console.log(REQ)
         Model.find(
             { 
               _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
               _product : mongoose.Types.ObjectId(req.params._product), 
-              _grocery : mongoose.Types.ObjectId(req.params._grocery)}, function(err, rs){
-          if(rs){
-              res.status(200).json(err || rs);
-          }
-        });
+              _grocery : mongoose.Types.ObjectId(req.params._grocery)}).exec(function(err, rs){
+                if(rs){
+                    res.status(200).json(err || rs);
+                }
+            });
     }
 
 
