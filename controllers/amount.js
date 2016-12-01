@@ -17,6 +17,21 @@ module.exports = function(app, apiRoutes, io){
     		});
     }
 
+    function stock(req, res){
+        var data = {};
+        var REQ = req.body || req.params;
+
+        Model.find(
+            { 
+              _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
+              _product : mongoose.Types.ObjectId(REQ.params._product), 
+              _grocery : mongoose.Types.ObjectId(REQ.params._grocery)}, function(err, rs){
+          if(rs){
+              res.status(200).json(err || rs);
+          }
+        });
+    }
+
 
     function remove(req, res){
         Model.update({ _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), _product : mongoose.Types.ObjectId(req.params.id) }, {$dec :{amount : req.params.amount}}, function(err, rs){
@@ -28,6 +43,7 @@ module.exports = function(app, apiRoutes, io){
 
     apiRoutes.get("/" + _url_alias + "/:id/add/:amount", add);
     apiRoutes.get("/" + _url_alias + "/:id/remove/:amount", remove);
+    apiRoutes.get("/" + _url_alias + "/stock/:idgrocery/:idproducto/", stock);
 
     return this;
 }
