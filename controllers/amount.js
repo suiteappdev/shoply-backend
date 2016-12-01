@@ -24,8 +24,8 @@ module.exports = function(app, apiRoutes, io){
         Model.find(
             { 
               _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
-              _product : mongoose.Types.ObjectId(REQ.params._product), 
-              _grocery : mongoose.Types.ObjectId(REQ.params._grocery)}, function(err, rs){
+              _product : mongoose.Types.ObjectId(REQ._product), 
+              _grocery : mongoose.Types.ObjectId(REQ._grocery)}, function(err, rs){
           if(rs){
               res.status(200).json(err || rs);
           }
