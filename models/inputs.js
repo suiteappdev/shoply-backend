@@ -43,11 +43,14 @@ _Schema.post('save', function () {
 	var _amounts = mongoose.model('amounts');
 
 	for(x in _self.data._product){
+		
 		var where = {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
 			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 			_company: mongoose.Types.ObjectId(_self._company)
 		};
+
+		console.log("iter", x)
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
@@ -60,7 +63,6 @@ _Schema.post('save', function () {
 	             	}	        		
 	        	});
 	        }else{
-	        	console.log("cantidad" + _self.data._product[x]._id, _self.data._product[x].cantidad);
 	            var inputs = new _amounts({
 	            	_company : mongoose.Types.ObjectId(_self._company),
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
@@ -71,7 +73,6 @@ _Schema.post('save', function () {
 	            inputs.save(function(err, rs){
 	            	if(!err){
 	            		console.log("Cantidades alternas creadas", rs);
-	            		x++;
 	            	}
 	            });
 	        }
