@@ -42,7 +42,7 @@ module.exports = function(app, apiRoutes, io){
 
     apiRoutes.get("/" + _url_alias + "/:id/add/:amount", add);
     apiRoutes.get("/" + _url_alias + "/:id/remove/:amount", remove);
-    apiRoutes.get("/" + _url_alias + "/stock/:idgrocery/:idproducto/", stock);
+    apiRoutes.get("/" + _url_alias + "/stock/:_grocery/:_product/", stock);
 
     return this;
 }
