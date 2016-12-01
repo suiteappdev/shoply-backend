@@ -25,7 +25,7 @@ module.exports = function(app, apiRoutes, io){
             { 
               _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), 
               _product : mongoose.Types.ObjectId(req.params._product), 
-              _grocery : mongoose.Types.ObjectId(req.params._grocery)}).exec(function(err, rs){
+              _grocery : mongoose.Types.ObjectId(req.params._grocery)}).populate("_grocery _product").exec(function(err, rs){
                 if(rs){
                     res.status(200).json(err || rs);
                 }
