@@ -46,7 +46,7 @@ _Schema.post('save', function () {
 		var where = {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
 			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
-			_company: mongoose.Types.ObjectId(_self._company))
+			_company: mongoose.Types.ObjectId(_self._company)
 		};
 
 	    _amounts.findOne(where, function(err, rs){
