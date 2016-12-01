@@ -49,7 +49,7 @@ _Schema.post('save', function () {
 			_company: mongoose.Types.ObjectId(_self._company)
 		};
 
-		console.log("iteracion del _product" , _self.data._product[x].id);
+		console.log("iteracion del _product" , _self.data._product[x]);
 
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
@@ -69,7 +69,7 @@ _Schema.post('save', function () {
 	            	amount : parseInt(_self.data._product[x].cantidad)
 	            });
 
-				console.log("iteracion del _product save" , _self.data._product[x].id);
+				console.log("iteracion del _product save" , _self.data._product[x]);
 
 	            
 	            inputs.save(function(err, rs){
