@@ -71,6 +71,7 @@ _Schema.post('save', function () {
 	            inputs.save(function(err, rs){
 	            	if(!err){
 	            		console.log("Cantidades alternas creadas", rs);
+	            		delete inputs;
 	            	}
 	            });
 	        }
