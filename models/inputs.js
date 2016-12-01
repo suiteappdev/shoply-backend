@@ -60,7 +60,7 @@ _Schema.post('save', function () {
 	             	}	        		
 	        	});
 	        }else{
-	        	console.log("cantidad" _self.data._product[x].cantidad);
+	        	console.log("cantidad", _self.data._product[x].cantidad);
 	            var inputs = new _amounts({
 	            	_company : mongoose.Types.ObjectId(_self._company),
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
