@@ -11,7 +11,7 @@ var _Schema = new Schema({
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
 	  _grocery : {type : Schema.Types.ObjectId , ref : 'grocery'},
 	  _product : {type : Schema.Types.ObjectId , ref : 'product'},
-	  amount : { type : Number,  default : 0}
+	  amount : { type : Number}
  });
 
 _Schema.pre('save', function (next) {

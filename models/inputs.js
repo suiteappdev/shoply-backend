@@ -49,8 +49,6 @@ _Schema.post('save', function () {
 			_company: mongoose.Types.ObjectId(_self._company)
 		};
 
-		console.log("iteracion del _product" , _self.data._product[x]);
-
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
 	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
@@ -62,6 +60,7 @@ _Schema.post('save', function () {
 	             	}	        		
 	        	});
 	        }else{
+	        	console.log("cantidad" _self.data._product[x].cantidad);
 	            var inputs = new _amounts({
 	            	_company : mongoose.Types.ObjectId(_self._company),
 	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
@@ -69,9 +68,6 @@ _Schema.post('save', function () {
 	            	amount : parseInt(_self.data._product[x].cantidad)
 	            });
 
-				console.log("iteracion del _product save" , _self.data._product[x]);
-
-	            
 	            inputs.save(function(err, rs){
 	            	if(!err){
 	            		console.log("Cantidades alternas creadas", rs);
