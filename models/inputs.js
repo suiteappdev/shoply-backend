@@ -53,8 +53,9 @@ _Schema.post('save', function () {
 		};
 
 	    _amounts.findOne(where, function(err, rs){
+	        console.log("rs", _self.data._product[x]._id);
+
 	        if(rs){
-	        	console.log("rs", _self.data._product[x]._id);
 	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
 	        	rs.amount = amount;
 
