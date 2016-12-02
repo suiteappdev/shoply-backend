@@ -56,7 +56,7 @@ _Schema.post('save', function () {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
 			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 			_company: mongoose.Types.ObjectId(_self._company),
-			amount : _self.data._product[x].cantidad
+			$inc : {amount : _self.data._product[x].cantidad}
 		};
 
 		_task.push(_amounts.update(
