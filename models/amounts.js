@@ -23,7 +23,7 @@ _Schema.pre('save', function (next) {
 _Schema.pre('update', function() {
 	var _self = this;
 
- 	console.log("pre update", _self);
+ 	console.log("pre update");
 });
 
 //add plugins
