@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Q = require("q");
 
 function sq(collection, company, callback) {
    mongoose.model('counters').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
@@ -41,45 +42,35 @@ _Schema.pre('save', function (next) {
 _Schema.post('save', function () {
 	var _self = this;
 	var _amounts = mongoose.model('amounts');
-
-
+	var _task = [];
 
 	for(x in _self.data._product){
-		
+
 		var where = {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
 			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 			_company: mongoose.Types.ObjectId(_self._company)
 		};
 
-	    _amounts.findOne(where, function(err, rs){
-	        console.log("rs", _self.data._product[x]._id);
+		var data = {
+			_grocery: mongoose.Types.ObjectId(_self._grocery),
+			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
+			_company: mongoose.Types.ObjectId(_self._company),
+			amount : _self.data._product[x].cantidad
+		};
 
-	        if(rs){
-	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
-	        	rs.amount = amount;
-
-	        	rs.save(function(err, rs){
-	             	if(!err){
-	             		console.log("actualizando cantidades", rs);
-	             	}	        		
-	        	});
-	        }else{
-	            var inputs = new _amounts({
-	            	_company : mongoose.Types.ObjectId(_self._company),
-	            	_grocery : mongoose.Types.ObjectId(_self._grocery),
-	            	_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
-	            	amount : parseInt(_self.data._product[x].cantidad)
-	            });
-
-	            inputs.save(function(err, rs){
-	            	if(!err){
-	            		console.log("Cantidades alternas creadas", rs);
-	            	}
-	            });
-	        }
-	    });
+		_task.push(_amounts.update(
+		   where,
+		   data,
+		   {
+		     upsert: true,
+		   }
+		).exec());
 	}
+
+	Q.all(_task).then(function(values){
+		console.log("result", var Q = require("q");
+	});
 });
 
 //add plugins
