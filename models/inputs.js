@@ -42,6 +42,8 @@ _Schema.post('save', function () {
 	var _self = this;
 	var _amounts = mongoose.model('amounts');
 
+
+
 	for(x in _self.data._product){
 		
 		var where = {
@@ -50,10 +52,9 @@ _Schema.post('save', function () {
 			_company: mongoose.Types.ObjectId(_self._company)
 		};
 
-		console.log("iter", x)
-
 	    _amounts.findOne(where, function(err, rs){
 	        if(rs){
+	        	console.log("rs", _self.data._product[x]._id);
 	        	var amount = (rs.amount + parseInt(_self.data._product[x].cantidad));
 	        	rs.amount = amount;
 
