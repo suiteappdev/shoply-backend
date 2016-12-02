@@ -69,7 +69,7 @@ _Schema.post('save', function () {
 	}
 
 	Q.all(_task).then(function(values){
-		console.log("result", var Q = require("q");
+		console.log("result", values);
 	});
 });
 
