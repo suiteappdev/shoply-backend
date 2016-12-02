@@ -32,6 +32,19 @@ module.exports = function(app, apiRoutes, io){
             });
     }
 
+    function byProduct(req, res){
+        var data = {};
+        var REQ = req.body || req.params;
+        
+        Model.find(
+            { 
+              _product : mongoose.Types.ObjectId(req.params._product), 
+              _grocery : mongoose.Types.ObjectId(req.params._grocery)}).populate("_grocery _product").exec(function(err, rs){
+                if(rs){
+                    res.status(200).json(err || rs);
+                }
+            });
+    }
 
     function remove(req, res){
         Model.update({ _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), _product : mongoose.Types.ObjectId(req.params.id) }, {$dec :{amount : req.params.amount}}, function(err, rs){
@@ -44,6 +57,7 @@ module.exports = function(app, apiRoutes, io){
     apiRoutes.get("/" + _url_alias + "/:id/add/:amount", add);
     apiRoutes.get("/" + _url_alias + "/:id/remove/:amount", remove);
     apiRoutes.get("/" + _url_alias + "/stock/:_grocery/:_product", stock);
+    apiRoutes.get("/" + _url_alias + "/stock/:_product", byProduct);
 
     return this;
 }
