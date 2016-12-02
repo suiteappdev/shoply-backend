@@ -15,12 +15,15 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-
+	_self = this;
+	console.log("pre save", _self)
 	next();
 });
 
 _Schema.pre('update', function() {
- 	console.log("pre object" + this);
+	var _self = this;
+
+ 	console.log("pre update", _self);
 });
 
 //add plugins
