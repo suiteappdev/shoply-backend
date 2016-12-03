@@ -63,7 +63,7 @@ _Schema.post('save', function () {
 		   where,
 		   data,
 		   {
-		     upsert: true,
+		     upsert: false,
 		   }
 		).exec());
 	}
