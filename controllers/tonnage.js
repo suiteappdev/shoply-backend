@@ -17,9 +17,30 @@ module.exports = function(app, apiRoutes, io){
        .populate("_client")
        .populate("_request")
        .exec(function(err, rs){
-          if (err) return res.status(500).json(err);
-
-          res.status(200).json(rs);
+          var options =[   
+             {   
+               path: '_request',   
+               model: 'request'   
+             }, 
+             {   
+               path: '_seller',   
+               model: 'User'   
+             },    
+             {   
+               path: '_seller',   
+               model: 'User'   
+             },    
+             {   
+               path: '_client',   
+               model: 'User'   
+             }   
+           ];    
+    
+            if (err) return res.status(500).json(err);                
+        
+           Model.populate(rs, options, function (err, data) {
+             res.status(200).json(data);   
+           });  
        });
     }
 
