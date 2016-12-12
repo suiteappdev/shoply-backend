@@ -13,31 +13,13 @@ module.exports = function(app, apiRoutes, io){
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_company")
+       .populate("_seller")
+       .populate("_client")
+       .populate("_request")
        .exec(function(err, rs){
-          var options =[   
-             {   
-               path: '_request',   
-               model: 'request'   
-             }, 
-             {   
-               path: '_seller',   
-               model: 'User'   
-             },    
-             {   
-               path: '_seller',   
-               model: 'User'   
-             },    
-             {   
-               path: '_client',   
-               model: 'User'   
-             }   
-           ];    
-    
-            if (err) return res.status(500).json(err);                
-        
-           Model.populate(rs, options, function (err, data) {
-             res.status(200).json(data);   
-           });  
+          if (err) return res.status(500).json(err);
+
+          res.status(200).json(rs);
        });
     }
 
