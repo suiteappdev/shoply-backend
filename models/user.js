@@ -24,6 +24,7 @@ var _Schema = new Schema({
 	  _role : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
 	  _permission :{ type : Schema.Types.ObjectId , ref : 'permission'},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
+	  _grocery : { type : Schema.Types.ObjectId , ref : 'grocery'},
 	  _route :  [{ type : Schema.Types.ObjectId , ref : 'route'}],
 	  resetPasswordToken: String,
   	  resetPasswordExpires: Date,

@@ -26,6 +26,10 @@ module.exports = function(app, apiRoutes){
            data._permission = mongoose.Types.ObjectId(req._permission);
        }
 
+       if(req._grocery){
+           data._grocery = mongoose.Types.ObjectId(req._grocery);
+       }
+
         userHelper.create(data, function(err, usuario){
           if(err){
             console.log("erro", err);
@@ -203,6 +207,10 @@ module.exports = function(app, apiRoutes){
                    if(REQ._permission){
                        data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
                    }
+       
+                   if(REQ._grocery){
+                       data._grocery = mongoose.Types.ObjectId(REQ._grocery);
+                   }
 
                    if(REQ.password){
                       data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
@@ -232,6 +240,11 @@ module.exports = function(app, apiRoutes){
              if(REQ._permission){
                  data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
              }
+
+             if(REQ._grocery){
+                 data._grocery = mongoose.Types.ObjectId(REQ._grocery);
+             }
+
 
              if(REQ.password){
                 data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
@@ -263,6 +276,7 @@ module.exports = function(app, apiRoutes){
         User.find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
         .populate("_company")
         .populate("_route")
+        .populate("_grocery")
         .populate("_permission")
         .exec(function(err, users){
             if(!err){
@@ -278,6 +292,7 @@ module.exports = function(app, apiRoutes){
         .findOne( mongoose.Types.ObjectId(req.params.id))
         .populate("_company")
         .populate("_route")
+        .populate("_grocery")
         .populate("_permission")
         .exec(function(err, rs){
             if(rs)
