@@ -1,6 +1,6 @@
 module.exports = function(app, apiRoutes, io){
   	var _entity ="commercial_home";
-  	var _url_alias = "casa-commercial";
+  	var _url_alias = "casa-comercial";
 
   	var path = require("path");
     var mongoose = require('mongoose');
