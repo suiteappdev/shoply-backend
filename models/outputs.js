@@ -40,6 +40,7 @@ _Schema.pre('save', function (next) {
 });
 
 _Schema.post('save', function () {
+	console.log("on save hook ", this);
 	var _self = this;
 	var _amounts = mongoose.model('amounts');
 	var _task = [];
@@ -61,10 +62,7 @@ _Schema.post('save', function () {
 
 		_task.push(_amounts.update(
 		   where,
-		   data,
-		   {
-		     upsert: false,
-		   }
+		   data
 		).exec());
 	}
 
