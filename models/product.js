@@ -21,6 +21,7 @@ var _Schema = new Schema({
 	  _iva : { type : Schema.Types.ObjectId , ref : 'ivas'},
 	  comments : { type : Array},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'},
+	  _commercial_home : { type : Schema.Types.ObjectId , ref : 'commercial_home'},
 	  _reference : { type : Schema.Types.ObjectId , ref : 'reference'},
 	  trashed : { type : Boolean, default : false}
  });

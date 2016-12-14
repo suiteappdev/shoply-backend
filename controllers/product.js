@@ -15,6 +15,7 @@ module.exports = function(app, apiRoutes, io){
        .populate("_category")
        .populate("_company")
        .populate("_reference")
+       .populate("_commercial_home")
        .populate("_iva")
        .exec(function(err, rs){
            if(!err)
@@ -34,6 +35,7 @@ module.exports = function(app, apiRoutes, io){
        .findOne({_id : REQ.id, trashed : false})
         .populate("_category")
         .populate("_company")
+        .populate("_commercial_home")
         .populate("_reference")
         .populate("_iva")
        .exec(function(err, rs){
@@ -54,6 +56,7 @@ module.exports = function(app, apiRoutes, io){
        .find({_category : mongoose.Types.ObjectId(REQ.id),  _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false})
        .populate("_category")
        .populate("_company")
+       .populate("_commercial_home")
        .populate("_reference")
        .populate("_iva")
        .exec(function(err, rs){
@@ -82,6 +85,10 @@ module.exports = function(app, apiRoutes, io){
         for(r in REQ._reference){
           data.data._reference.push(REQ._reference[r]);
         }
+      }
+
+      if(REQ._commercial_home){
+        data._commercial_home = mongoose.Types.ObjectId(REQ._commercial_home)
       }
 
      
@@ -136,6 +143,10 @@ module.exports = function(app, apiRoutes, io){
   		!REQ.data || (data.data = REQ.data);             
       !REQ._iva || (data._iva = mongoose.Types.ObjectId(REQ._iva));
       !REQ._category || (data._category = mongoose.Types.ObjectId(REQ._category));
+      
+      if(REQ._commercial_home){
+        data._commercial_home = mongoose.Types.ObjectId(REQ._commercial_home)
+      }
 
 		  data = { $set : data }; 
 
