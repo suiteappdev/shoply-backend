@@ -57,7 +57,7 @@ _Schema.post('save', function () {
 			_grocery: mongoose.Types.ObjectId(_self._grocery),
 			_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 			_company: mongoose.Types.ObjectId(_self._company),
-			$dec : {amount : _self.data._product[x].cantidad}
+			$inc : {amount : - Math.abs(_self.data._product[x].cantidad)}
 		};
 
 		_task.push(_amounts.update(
@@ -67,7 +67,7 @@ _Schema.post('save', function () {
 	}
 
 	Q.all(_task).then(function(values){
-		console.log("result", values);
+		console.log("resultado", values);
 	});
 });
 
