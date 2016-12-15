@@ -65,12 +65,9 @@ module.exports = function(app, apiRoutes, io){
         if(req.body.negativo){
           _where.negativo = req.body.negativo;
         }
-        
 
-        Model.find(_where).populate("_grocery _product").populate({path: '_product._commercial_home', match: {
-            _id: req.body._commercial_home || { $ne: null }
-          }
-        }).exec(function(err, rs){
+
+        Model.find(_where).populate("_grocery _product").populate("_product._commercial_home").exec(function(err, rs){
                 if(rs){
                     res.status(200).json(err || rs);
                 }
