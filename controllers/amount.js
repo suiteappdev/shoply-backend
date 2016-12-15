@@ -74,7 +74,7 @@ module.exports = function(app, apiRoutes, io){
 
             _where._id = mongoose.Types.ObjectId(req.body._commercial_home) || { $ne: null };
             _where.data = {};
-            _where.data.estado = mongoose.Types.ObjectId(req.body.estado) || { $ne: null };
+            _where.data.estado = req.body.estado || { $ne: null };
             _where.data.negativo = req.body.negativo || { $ne: null };
 
             var options = {
