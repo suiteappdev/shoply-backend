@@ -67,11 +67,12 @@ module.exports = function(app, apiRoutes, io){
         }
 
         if(req.body._commercial_home){
-          _where._commercial_home =  mongoose.Types.ObjectId(req.body._commercial_home);
+          _where._product = {};
+          _where._product._commercial_home =  mongoose.Types.ObjectId(req.body._commercial_home);
         }
 
 
-        Model.find(_where).populate("_grocery _product").populate( '_product._commercial_home', null, { _id: _where._commercial_home } ).exec(function(err, rs){
+        Model.find(_where).populate("_grocery _product").exec(function(err, rs){
                 if(rs){
                     res.status(200).json(err || rs);
                 }
