@@ -70,10 +70,17 @@ module.exports = function(app, apiRoutes, io){
         Model.find(_where).populate("_grocery _product").exec(function(err, rs){
           if (err) return res.json(500);
 
+            var _where = {};
+
+            _where._id = mongoose.Types.ObjectId(req.body._commercial_home) || { $ne: null };
+            _where.data = {};
+            _where.data.estado = mongoose.Types.ObjectId(req.body.estado) || { $ne: null };
+            _where.data.negativo = mongoose.Types.ObjectId(req.body.negativo) || { $ne: null };
+
             var options = {
               path: '_product._commercial_home',
               model: 'commercial_home',
-              match : { _id : mongoose.Types.ObjectId(req.body._commercial_home) || { $ne: null }}
+              match : _where}
             };
 
             Model.populate(rs, options, function (err, data) {
