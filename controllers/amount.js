@@ -55,7 +55,7 @@ module.exports = function(app, apiRoutes, io){
         _where._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
         if(req.body._product){
-              _where._product : mongoose.Types.ObjectId(req.body._product), 
+              _where._product = mongoose.Types.ObjectId(req.body._product), 
         }
 
         if(req.body._grocery){
