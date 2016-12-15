@@ -80,7 +80,7 @@ module.exports = function(app, apiRoutes, io){
             var options = {
               path: '_product._commercial_home',
               model: 'commercial_home',
-              match : _where}
+              match : _where
             };
 
             Model.populate(rs, options, function (err, data) {
