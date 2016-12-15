@@ -73,6 +73,7 @@ module.exports = function(app, apiRoutes, io){
             var options = {
               path: '_product._commercial_home',
               model: 'commercial_home'
+              match : { _id : mongoose.Types.ObjectId(req.body._commercial_home) || { $ne: null }}
             };
 
             Model.populate(rs, options, function (err, data) {
