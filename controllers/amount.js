@@ -67,11 +67,18 @@ module.exports = function(app, apiRoutes, io){
         }
 
 
-        Model.find(_where).populate("_grocery _product").populate("_product._commercial_home").exec(function(err, rs){
-                if(rs){
-                    res.status(200).json(err || rs);
-                }
-            });
+        Model.find(_where).populate("_grocery _product").exec(function(err, rs){
+          if (err) return res.json(500);
+
+            var options = {
+              path: '_product._commercial_home',
+              model: 'commercial_home'
+            };
+
+            model.populate(rs, options, function (err, data) {
+              res.status(200).json(data);
+            }); 
+        });
     }
 
     function byProduct(req, res){
