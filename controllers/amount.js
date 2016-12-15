@@ -77,11 +77,16 @@ module.exports = function(app, apiRoutes, io){
             _where.data.estado = req.body.estado || { $ne: null };
             _where.data.negativo = req.body.negativo || { $ne: null };
 
-            var options = {
+            var options = [{
               path: '_product._commercial_home',
               model: 'commercial_home',
               match : _where
-            };
+            },{
+              path: '_product._iva',
+              model: 'ivas'
+            }]
+
+
 
             Model.populate(rs, options, function (err, data) {
               res.status(200).json(data);
