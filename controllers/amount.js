@@ -71,7 +71,10 @@ module.exports = function(app, apiRoutes, io){
         }
 
 
-        Model.find(_where).populate("_grocery _product").exec(function(err, rs){
+        Model.find(_where).populate("_grocery _product").populate({
+          path: '_product._commercial_home',
+          match: { _id:  mongoose.Types.ObjectId(req.body._commercial_home)},
+        }).exec(function(err, rs){
                 if(rs){
                     res.status(200).json(err || rs);
                 }
