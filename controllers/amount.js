@@ -75,7 +75,7 @@ module.exports = function(app, apiRoutes, io){
               model: 'commercial_home'
             };
 
-            model.populate(rs, options, function (err, data) {
+            Model.populate(rs, options, function (err, data) {
               res.status(200).json(data);
             }); 
         });
