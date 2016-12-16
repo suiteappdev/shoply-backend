@@ -27,6 +27,7 @@ module.exports = function(app, apiRoutes){
        }
 
        if(REQ._grocery){
+          data._grocery = [];
           for(x in REQ._grocery){
               data._grocery.push(mongoose.Types.ObjectId(REQ._grocery[x]))
           }
@@ -211,6 +212,7 @@ module.exports = function(app, apiRoutes){
                    }
        
                     if(REQ._grocery){
+                          data._grocery = [];
                           for(x in REQ._grocery){
                               data._grocery.push(mongoose.Types.ObjectId(REQ._grocery[x]))
                           }
@@ -246,6 +248,7 @@ module.exports = function(app, apiRoutes){
              }
 
             if(REQ._grocery){
+                data._grocery = [];
                 for(x in REQ._grocery){
                       data._grocery.push(mongoose.Types.ObjectId(REQ._grocery[x]))
                 }
