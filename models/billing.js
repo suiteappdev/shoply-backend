@@ -33,7 +33,27 @@ _Schema.pre('save', function (next) {
 			_self.idcomposed = (s.prefix + s.seq);						
 		}
 
-		next();
+		var _amounts = mongoose.model('amounts');
+		var _task = [];
+
+		for(x in _self._product){
+
+			var where = {
+				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
+				_product : mongoose.Types.ObjectId(_self._product[x]._id),
+				_company: mongoose.Types.ObjectId(_self._company)
+			};
+
+			_task.push(_amounts.find(
+			   where
+			).exec());
+		}
+
+		Q.all(_task).then(function(values){
+			console.log(values);
+			next();
+		});
+
 	});	
 });
 
