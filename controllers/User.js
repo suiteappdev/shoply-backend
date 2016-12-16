@@ -238,16 +238,16 @@ module.exports = function(app, apiRoutes){
              }
 
              if(REQ._permission){
-                 data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
+                data._permission = mongoose.Types.ObjectId(REQ._permission._id || REQ._permission);
              }
 
             if(REQ._grocery){
                data._grocery = REQ._grocery.map(function(_grocery){ return mongoose.Types.ObjectId(_grocery)}) ;
             }
 
-             if(REQ.password){
-                data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
-             } 
+            if(REQ.password){
+              data.password = require(process.env.PWD + "/helpers/crypto-util")(REQ.password);
+            } 
 
              data = { $set : data }; 
 
