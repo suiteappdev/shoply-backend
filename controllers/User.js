@@ -26,9 +26,9 @@ module.exports = function(app, apiRoutes){
            data._permission = mongoose.Types.ObjectId(req._permission);
        }
 
-       if(req._grocery){
-           data._grocery = mongoose.Types.ObjectId(req._grocery);
-       }
+      if(REQ._grocery){
+          data._grocery = REQ._grocery.map(function(_grocery){ return mongoose.Types.ObjectId(_grocery)}) ;
+      }
 
         userHelper.create(data, function(err, usuario){
           if(err){
@@ -209,7 +209,7 @@ module.exports = function(app, apiRoutes){
                    }
        
                    if(REQ._grocery){
-                       data._grocery = mongoose.Types.ObjectId(REQ._grocery);
+                       data._grocery = REQ._grocery.map(function(_grocery){ return mongoose.Types.ObjectId(_grocery)}) ;
                    }
 
                    if(REQ.password){
