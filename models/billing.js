@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Q = require('q');
 
 // Load required packages
 var timestamps = require('mongoose-timestamp');
@@ -25,7 +24,9 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	_self = this;
+	var _self = this;
+	var _amounts = mongoose.model('amounts');
+	var _task = [];
 	
 	sq("_invoice", _self._company, function(err, s){
 		_self.id = s.seq;
@@ -34,26 +35,34 @@ _Schema.pre('save', function (next) {
 			_self.idcomposed = (s.prefix + s.seq);						
 		}
 
-		var _amounts = mongoose.model('amounts');
-		var _task = [];
-
-		for(x in _self._product){
+		for(x in _self.data._product){
 
 			var where = {
-				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
-				_product : mongoose.Types.ObjectId(_self._product[x]._id),
+				_grocery: mongoose.Types.ObjectId(_self._grocery),
+				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company)
 			};
 
-			_task.push(_amounts.find(
-			   where
+			var data = {
+				_grocery: mongoose.Types.ObjectId(_self._grocery),
+				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
+				_company: mongoose.Types.ObjectId(_self._company),
+				$inc : {amount : - _self.data._product[x].cantidad}
+			};
+
+			_task.push(_amounts.update(
+			   where,
+			   data,
+			   {
+			     upsert: true,
+			   }
 			).exec());
 		}
 
 		Q.all(_task).then(function(values){
-			console.log(values);
 			next();
 		});
+
 	});	
 });
 
