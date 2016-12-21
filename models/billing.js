@@ -27,6 +27,7 @@ _Schema.pre('save', function (next) {
 	var _self = this;
 	var _amounts = mongoose.model('amounts');
 	var _task = [];
+	console.log(this);
 	
 	sq("_invoice", _self._company, function(err, s){
 		_self.id = s.seq;
@@ -35,19 +36,19 @@ _Schema.pre('save', function (next) {
 			_self.idcomposed = (s.prefix + s.seq);						
 		}
 
-		for(x in _self.data._product){
+		for(x in _self._product){
 
 			var where = {
 				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
-				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
+				_product : mongoose.Types.ObjectId(_self._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company)
 			};
 
 			var data = {
 				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
-				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
+				_product : mongoose.Types.ObjectId(_self._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company),
-				$inc : {amount : - _self.data._product[x].cantidad}
+				$inc : {amount : - _self._product[x].cantidad}
 			};
 
 			_task.push(_amounts.update(
