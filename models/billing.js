@@ -38,13 +38,13 @@ _Schema.pre('save', function (next) {
 		for(x in _self.data._product){
 
 			var where = {
-				_grocery: mongoose.Types.ObjectId(_self._grocery),
+				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
 				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company)
 			};
 
 			var data = {
-				_grocery: mongoose.Types.ObjectId(_self._grocery),
+				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
 				_product : mongoose.Types.ObjectId(_self.data._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company),
 				$inc : {amount : - _self.data._product[x].cantidad}
