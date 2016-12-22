@@ -44,9 +44,8 @@ module.exports = function(app, apiRoutes, io){
 
     function getRoot(req, res){
       var REQ = req.params;
-      console.log("categoria raiz ->incoming request", req.headers["x-shoply-company"]);
        Model
-       .find({parent : "#", _company :mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .find({parent : "#", _company :mongoose.Types.ObjectId(req.headers["x-shoply-company"])}).populate("_company")
        .exec(function(err, rs){
            if(!err)
            {
