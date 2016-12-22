@@ -77,9 +77,11 @@ module.exports = function(app, apiRoutes, io){
   		data = { $set : data };          
 
   		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data, function(err, rs){
-  			if(rs){
-  				 res.json(err || rs);
-  			}
+        console.log("error", err);
+        console.log("rs", rs);
+        if(!err){
+          res.status(200).json(rs);
+        }
   		});
     }
 
