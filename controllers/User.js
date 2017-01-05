@@ -26,10 +26,10 @@ module.exports = function(app, apiRoutes){
            data._permission = mongoose.Types.ObjectId(req._permission);
        }
 
-       if(REQ._grocery){
+       if(req._grocery){
           data._grocery = [];
-          for(x in REQ._grocery){
-              data._grocery.push(mongoose.Types.ObjectId(REQ._grocery[x]))
+          for(x in req._grocery){
+              data._grocery.push(mongoose.Types.ObjectId(req._grocery[x]))
           }
        }
 
