@@ -134,7 +134,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .findOne({_seller : mongoose.Types.ObjectId(REQ.user) , _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .find({_seller : mongoose.Types.ObjectId(REQ.user) , _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .populate("_user")
        .populate("_seller")
        .populate("_company")
