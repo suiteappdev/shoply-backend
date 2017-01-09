@@ -27,7 +27,6 @@ _Schema.pre('save', function (next) {
 	var _self = this;
 	var _amounts = mongoose.model('amounts');
 	var _task = [];
-	console.log(this);
 	
 	sq("_invoice", _self._company, function(err, s){
 		_self.id = s.seq;
@@ -37,6 +36,10 @@ _Schema.pre('save', function (next) {
 		}
 
 		for(x in _self._product){
+
+			if(_self._product[x].data.negativo){
+				return;
+			}
 
 			var where = {
 				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
