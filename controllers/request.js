@@ -152,7 +152,7 @@ module.exports = function(app, apiRoutes, io){
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:seller/:ini/:end", getRange);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
-    apiRoutes.get("/" + _url_alias + "/user/:id", getByUser);
+    apiRoutes.get("/" + _url_alias + "/user/:user", getByUser);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
