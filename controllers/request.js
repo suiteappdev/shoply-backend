@@ -105,14 +105,13 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
   		!REQ.data || (data.data = REQ.data);
       !REQ.metadata || (data.metadata = REQ.metadata);           
-    
-      data.shoppingCart = REQ.shoppingCart;      
+
       data._seller =  mongoose.Types.ObjectId(REQ._seller);
       data._client =  mongoose.Types.ObjectId(REQ._client);
   		
       data = { $set : data };          
 
-  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) }, data,function(err, rs){
+  		Model.update({ _id : mongoose.Types.ObjectId(req.params.id) },  data,function(err, rs){
   			if(rs){
   				res.json(err || rs);
   			}
@@ -149,12 +148,26 @@ module.exports = function(app, apiRoutes, io){
        });
   }
 
+  function facturado(req, res){
+      Model.findOne({ _id : mongoose.Types.ObjectId(req.params.id) }, function(err, rs){
+        if(rs){
+            res.data.estado = 'Facturado';
+            res.save(function(err, doc){
+              if(!err){
+                 res.json(doc);
+              }
+            });
+        }
+      });
+  }
+
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:seller/:ini/:end", getRange);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.get("/" + _url_alias + "/user/:user", getByUser);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);
+    apiRoutes.put("/" + _url_alias + "/facturado", facturado);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
 
     return this;
