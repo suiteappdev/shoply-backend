@@ -38,7 +38,7 @@ _Schema.pre('save', function (next) {
 		for(x in _self._product){
 
 			if(_self._product[x].negativo){
-				return;
+				x++;
 			}
 
 			var where = {
