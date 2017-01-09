@@ -149,15 +149,9 @@ module.exports = function(app, apiRoutes, io){
   }
 
   function facturado(req, res){
-      Model.findOne({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, function(err, rs){
-        if(rs){
-          console.log("fat", rs)
-            rs.data.estado = 'Facturado';
-            rs.save(function(err, doc){
-              if(!err){
-                 res.json(doc);
-              }
-            });
+      Model.update({ _id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, {"data.estado" : 'Facturado'}, function(err, rs){
+        if(!err){
+          res.status(200).json(rs);
         }
       });
   }
