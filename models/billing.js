@@ -37,28 +37,32 @@ _Schema.pre('save', function (next) {
 
 		for(x in _self._product){
 
-			if(_self._product[x].negativo){
-				x++;
-			}
-
 			var where = {
 				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
 				_product : mongoose.Types.ObjectId(_self._product[x]._id),
 				_company: mongoose.Types.ObjectId(_self._company)
 			};
 
-			var data = {
-				_grocery: mongoose.Types.ObjectId(_self.data._grocery),
-				_product : mongoose.Types.ObjectId(_self._product[x]._id),
-				_company: mongoose.Types.ObjectId(_self._company),
-				$inc : {amount : - _self._product[x].cantidad}
-			};
+			if(_self._product[x].negativo){
+				var data = {
+					_grocery: mongoose.Types.ObjectId(_self.data._grocery),
+					_product : mongoose.Types.ObjectId(_self._product[x]._id),
+					_company: mongoose.Types.ObjectId(_self._company),
+				};	
+			}else{
+				var data = {
+					_grocery: mongoose.Types.ObjectId(_self.data._grocery),
+					_product : mongoose.Types.ObjectId(_self._product[x]._id),
+					_company: mongoose.Types.ObjectId(_self._company),
+					$inc : {amount : - _self._product[x].cantidad}
+				};				
+			}
 
 			_task.push(_amounts.update(
 			   where,
 			   data,
 			   {
-			     upsert: true,
+			     upsert: false,
 			   }
 			).exec());
 		}
