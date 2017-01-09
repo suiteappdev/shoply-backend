@@ -151,8 +151,8 @@ module.exports = function(app, apiRoutes, io){
   function facturado(req, res){
       Model.findOne({ _id : mongoose.Types.ObjectId(req.params.id) }, function(err, rs){
         if(rs){
-            res.data.estado = 'Facturado';
-            res.save(function(err, doc){
+            rs.data.estado = 'Facturado';
+            rs.save(function(err, doc){
               if(!err){
                  res.json(doc);
               }
