@@ -120,7 +120,7 @@ module.exports = function(app, apiRoutes, io){
     }
 
 
-    function remove(req, res){
+  function remove(req, res){
         Model.remove({_id : mongoose.Types.ObjectId(req.params.id), _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])}, function(err, rs){
               if(!err)
                   res.json(rs);
@@ -128,9 +128,31 @@ module.exports = function(app, apiRoutes, io){
                  res.status(500).json(err);
         });
 	}
+
+   
+  function getByUser(req, res){
+      var REQ = req.params; 
+
+       Model
+       .findOne({_seller : mongoose.Types.ObjectId(REQ.user) , _company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
+       .populate("_user")
+       .populate("_seller")
+       .populate("_company")
+       .populate("_client")
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       });
+  }
+
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:seller/:ini/:end", getRange);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
+    apiRoutes.get("/" + _url_alias + "/user/:id", getByUser);
     apiRoutes.post("/" + _url_alias, post);
     apiRoutes.put("/" + _url_alias + "/:id", update);
     apiRoutes.delete("/" + _url_alias + "/:id", remove);
