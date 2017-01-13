@@ -176,7 +176,7 @@ module.exports = function(app, apiRoutes, io){
       var REQ = req.params; 
 
        Model
-       .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false})
+       .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false, "data.servicio": true})
        .populate("_category")
        .populate("_company")
        .populate("_reference")
