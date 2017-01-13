@@ -193,9 +193,9 @@ module.exports = function(app, apiRoutes, io){
   }
 
     apiRoutes.get("/" + _url_alias, get);
+    apiRoutes.get("/" + _url_alias + "/servicios", getServices);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.get("/" + _url_alias + "/category/:id", getProductByCategory);
-    apiRoutes.get("/" + _url_alias + "/servicios", getServices);
     apiRoutes.post("/" + _url_alias + "/:id/like", like);
 
     //comments-route
