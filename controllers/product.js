@@ -172,9 +172,30 @@ module.exports = function(app, apiRoutes, io){
       }); 
 	}
 
+  function getServices(req, res){
+      var REQ = req.params; 
+
+       Model
+       .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false, "data.servicio" : true})
+       .populate("_category")
+       .populate("_company")
+       .populate("_reference")
+       .populate("_commercial_home")
+       .populate("_iva")
+       .exec(function(err, rs){
+           if(!err)
+           {
+            res.json(rs);
+           }
+           else
+            res.json(err);
+       }); 
+  }
+
     apiRoutes.get("/" + _url_alias, get);
     apiRoutes.get("/" + _url_alias + "/:id", getById);
     apiRoutes.get("/" + _url_alias + "/category/:id", getProductByCategory);
+    apiRoutes.get("/" + _url_alias + "/service/", getServices);
     apiRoutes.post("/" + _url_alias + "/:id/like", like);
 
     //comments-route
