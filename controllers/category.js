@@ -78,6 +78,7 @@ module.exports = function(app, apiRoutes, io){
       data.id       =  mongoose.Types.ObjectId(),
       data.parent   = req.body.parent ? req.body.parent : '#',
       data.text     = req.body.text
+      data.materiales = req.body.materiales;
 
       data._company = req.headers["x-shoply-company"];
             
@@ -102,6 +103,8 @@ module.exports = function(app, apiRoutes, io){
      
       data.parent   = req.body.parent ? req.body.parent : '#'
       data.text     = req.body.text
+      data.materiales = req.body.materiales;
+      
 
       data = { $set : data }; 
 

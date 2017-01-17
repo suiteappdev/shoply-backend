@@ -11,6 +11,7 @@ var _Schema = new Schema({
 	  id			: String,
 	  parent		: String,
 	  text			: String,
+	  materiales    : Boolean, 
 	  data : { type : Object},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company'}
  });
