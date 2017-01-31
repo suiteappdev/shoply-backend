@@ -12,12 +12,12 @@ module.exports = function(app, apiRoutes, io){
 
        Model
        .find({_company: mongoose.Types.ObjectId(req.headers["x-shoply-company"]), trashed : false})
-       .populate(path:"_category", model:"category")
-       .populate(path:"_company", model:"company")
-       .populate(path:"_reference", model:"reference")
-       .populate(path:"_commercial_home", model:"commercial_home")
+       .populate({path:"_category", model:"category"})
+       .populate({path:"_company", model:"company"})
+       .populate({path:"_reference", model:"reference"})
+       .populate({path:"_commercial_home", model:"commercial_home"})
        .populate({path :'data.component._id', model : 'product'})
-       .populate("_iva")
+       .populate({path:"_iva", model:"ivas"})
        .exec(function(err, rs){
            if(!err)
            {
