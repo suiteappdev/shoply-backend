@@ -59,6 +59,7 @@ module.exports = function(app, apiRoutes, io){
        .populate("_category")
        .populate("_company")
        .populate("_commercial_home")
+       .populate({path :'data.component._id', model : 'product'})
        .populate("_reference")
        .populate("_iva")
        .exec(function(err, rs){
