@@ -17,14 +17,25 @@ module.exports = function(app, apiRoutes, io){
        .populate({path:"_reference", model:"reference"})
        .populate({path:"_commercial_home", model:"commercial_home"})
        .populate({path :'data.component._id', model : 'product'})
-       .populate({path :'data.component._id._company', model : 'company'})
-       .populate({path :'data.component._id._category', model : 'category'})
        .populate({path :'data.services._id', model : 'product'})
        .populate({path:"_iva", model:"ivas"})
        .exec(function(err, rs){
            if(!err)
            {
-            res.json(rs);
+            var options = [
+            {
+              path: 'data.component._id._company',
+              model: 'product',
+            },
+            {
+              path: 'data.component._id._category',
+              model: 'product',
+            }
+            ]
+
+            Model.populate(rs, options, function (err, data) {
+              res.status(200).json(data);
+            }); 
            }
            else
             res.json(err);
