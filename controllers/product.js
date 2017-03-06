@@ -25,11 +25,11 @@ module.exports = function(app, apiRoutes, io){
             var options = [
             {
               path: 'data.component._id._company',
-              model: 'product',
+              model: 'company',
             },
             {
               path: 'data.component._id._category',
-              model: 'product',
+              model: 'category',
             }
             ]
 
