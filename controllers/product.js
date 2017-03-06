@@ -17,6 +17,8 @@ module.exports = function(app, apiRoutes, io){
        .populate({path:"_reference", model:"reference"})
        .populate({path:"_commercial_home", model:"commercial_home"})
        .populate({path :'data.component._id', model : 'product'})
+       .populate({path :'data.component._id._company', model : 'company'})
+       .populate({path :'data.component._id._category', model : 'category'})
        .populate({path :'data.services._id', model : 'product'})
        .populate({path:"_iva", model:"ivas"})
        .exec(function(err, rs){
