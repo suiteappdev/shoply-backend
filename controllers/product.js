@@ -22,20 +22,7 @@ module.exports = function(app, apiRoutes, io){
        .exec(function(err, rs){
            if(!err)
            {
-            var options = [
-            {
-              path: 'data.component._id._company',
-              model: 'company',
-            },
-            {
-              path: 'data.component._id._category',
-              model: 'category',
-            }
-            ]
-
-            Model.populate(rs, options, function (err, data) {
-              res.status(200).json(data);
-            }); 
+            res.json(rs);
            }
            else
             res.json(err);
