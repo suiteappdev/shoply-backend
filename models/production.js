@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
-var entity = "production";
+var entity = "_productions";
 
 var _Schema = new Schema({
 	  data : { type : Object}

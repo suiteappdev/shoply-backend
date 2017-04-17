@@ -1,5 +1,5 @@
 module.exports = function(app, apiRoutes, io){
-  	var _entity ="production";
+  	var _entity ="productions";
   	var _url_alias = "producciones";
 
   	var path = require("path");
@@ -43,7 +43,7 @@ module.exports = function(app, apiRoutes, io){
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
-      
+
       var model = new Model(data);
 
   		model.save(function(err, rs){
