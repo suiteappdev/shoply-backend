@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var entity = "_lotes";
 
 function sq(collection, company, callback) {
-   mongoose.model(entity).findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+   mongoose.model("lotes").findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
 }
 
 // Load required packages
@@ -12,13 +12,13 @@ var metadata = require('./plugins/metadata');
 
 
 var _Schema = new Schema({
-	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
+	  _company : { type : Schema.Types.ObjectId , ref : 'company' },
 	  data : { type : Object}
  });
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	sq(entity, _self._company, function(err, s){
+	sq("lotes", _self._company, function(err, s){
 		if(s){
 			console.log(s);
 			_self.id = s.seq;
