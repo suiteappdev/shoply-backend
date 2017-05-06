@@ -26,6 +26,8 @@ _Schema.pre('save', function (next, done) {
 			}
 
 			_self.id = s.seq;
+			console.log("doc", _self)
+			console.log("counter", s)
 			next();			
 		}else{
 			next();
