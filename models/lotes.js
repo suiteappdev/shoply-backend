@@ -20,6 +20,9 @@ _Schema.pre('save', function (next) {
 	_self = this;
 
 	sq("_lotes", _self._company, function(err, s){
+		console.log("this", this);
+		console.log("_self", _self);
+		console.log("s", s);
 		if(s){
 			if(s.prefix){
 				_self.idcomposed = (s.prefix + s.seq);						
@@ -27,11 +30,13 @@ _Schema.pre('save', function (next) {
 
 			_self.id = s.seq;
 
-			next(_self);			
+			next();			
 		}else{
 			next();
 		}
 	});
+
+	next();
 });
 
 //add plugins
