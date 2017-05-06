@@ -1,11 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+function sq(collection, company, callback) {
+   mongoose.model('_lotes').findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+}
+
 // Load required packages
 var timestamps = require('mongoose-timestamp');
 var metadata = require('./plugins/metadata');
 
-var entity = "lotes";
+var entity = "_lotes";
 
 var _Schema = new Schema({
 	  _company : {type : Schema.Types.ObjectId , ref : 'company'},
@@ -13,7 +17,15 @@ var _Schema = new Schema({
  });
 
 _Schema.pre('save', function (next) {
-	next();
+	_self = this;
+	sq("_request", _self._company, function(err, s){
+		if(s){
+			_self.id = s.seq;
+			next();			
+		}else{
+			next();
+		}
+	});
 });
 
 //add plugins
