@@ -26,7 +26,7 @@ _Schema.pre('save', function (next, done) {
 			}
 
 			_self.id = s.seq;
-			done();			
+			next();			
 		}else{
 			next();
 		}
