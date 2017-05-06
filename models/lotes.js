@@ -12,7 +12,8 @@ var metadata = require('./plugins/metadata');
 
 
 var _Schema = new Schema({
-	  id : {type : Number, unique : true},
+	   id : {type : Number, unique : true},
+	   idcomposed : { type : String},
 	  _company : { type : Schema.Types.ObjectId , ref : 'company' },
 	  data : { type : Object}
  });
