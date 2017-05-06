@@ -20,6 +20,7 @@ _Schema.pre('save', function (next) {
 	_self = this;
 	sq(entity, _self._company, function(err, s){
 		if(s){
+			console.log(s);
 			_self.id = s.seq;
 			next();			
 		}else{
