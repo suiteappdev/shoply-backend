@@ -18,14 +18,15 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	sq("_lotes", _self._company, function(err, s){
-		if(s){
-			_self.id = s.seq;
-			next();			
-		}else{
-			next();
+	sq("_product", _self._company, function(err, s){
+		_self.id = s.seq;
+
+		if(s.prefix){
+			_self.idcomposed = (s.prefix + s.seq);						
 		}
-	});
+
+		next();
+	});	
 });
 
 //add plugins

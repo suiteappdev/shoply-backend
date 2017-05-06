@@ -23,8 +23,14 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	sq("_request", _self._company, function(err, s){
+	
+	sq("_lotes", _self._company, function(err, s){
 		if(s){
+		
+			if(s.prefix){
+				_self.idcomposed = (s.prefix + s.seq);						
+			}
+			
 			_self.id = s.seq;
 			next();			
 		}else{
