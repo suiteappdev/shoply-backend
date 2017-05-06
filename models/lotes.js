@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var entity = "_lotes";
+var entity = "lotes";
 
 function sq(collection, company, callback) {
-   mongoose.model("lotes").findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
+   mongoose.model("counters").findOneAndUpdate({ entity: collection, _company :  mongoose.Types.ObjectId(company)}, { $inc: { seq: 1 } }, callback);
 }
 
 // Load required packages
@@ -18,7 +18,7 @@ var _Schema = new Schema({
 
 _Schema.pre('save', function (next) {
 	_self = this;
-	sq("lotes", _self._company, function(err, s){
+	sq("_lotes", _self._company, function(err, s){
 		if(s){
 			console.log(s);
 			_self.id = s.seq;
