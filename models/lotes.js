@@ -16,27 +16,21 @@ var _Schema = new Schema({
 	  data : { type : Object}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	_self = this;
 
 	sq("_lotes", _self._company, function(err, s){
-		console.log("this", this);
-		console.log("_self", _self);
-		console.log("s", s);
 		if(s){
 			if(s.prefix){
 				_self.idcomposed = (s.prefix + s.seq);						
 			}
 
 			_self.id = s.seq;
-
-			next();			
+			done();			
 		}else{
 			next();
 		}
 	});
-
-	next();
 });
 
 //add plugins
