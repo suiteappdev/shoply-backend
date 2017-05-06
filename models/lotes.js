@@ -16,17 +16,21 @@ var _Schema = new Schema({
 	  data : { type : Object}
  });
 
-_Schema.pre('save', function (next) {
+_Schema.pre('save', function (next, done) {
 	_self = this;
 
 	sq("_lotes", _self._company, function(err, s){
-		_self.id = s.seq;
+		if(s){
+			if(s.prefix){
+				_self.idcomposed = (s.prefix + s.seq);						
+			}
 
-		if(s.prefix){
-			_self.idcomposed = (s.prefix + s.seq);						
+			_self.id = s.seq;
+			next();			
+		}else{
+			next();
 		}
-		next();
-	});	
+	});
 });
 
 //add plugins
