@@ -16,7 +16,7 @@ var _Schema = new Schema({
 	  data : { type : Object}
  });
 
-_Schema.pre('save', function (next, done) {
+_Schema.pre('save', function (next) {
 	_self = this;
 
 	sq("_lotes", _self._company, function(err, s){
@@ -26,9 +26,8 @@ _Schema.pre('save', function (next, done) {
 			}
 
 			_self.id = s.seq;
-			console.log("doc", _self)
-			console.log("counter", s)
-			next();			
+
+			next(_self);			
 		}else{
 			next();
 		}
