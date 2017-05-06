@@ -14,6 +14,7 @@ var entity = "request";
 
 var _Schema = new Schema({
 	   id : {type : Number, unique : true},
+	   idcomposed : { type : String},
  	   data : { type : Object},
  	   shoppingCart : Array,
 	  _seller : {type : Schema.Types.ObjectId , ref : 'User'},
