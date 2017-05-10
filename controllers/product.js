@@ -97,13 +97,14 @@ module.exports = function(app, apiRoutes, io){
      
       data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);  
       
-  		var model = new Model(data, { strict : false });
+  		var model = new Model(data);
 
   		model.save(function(err, rs){
-          if (err)
-            return res.status(409).send(err);
-
-        res.json(rs);
+        if(!err){
+          return json.(rs)
+        }
+        
+        res.status(409).json(err);
   		});
 
     }
