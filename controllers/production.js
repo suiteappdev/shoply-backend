@@ -13,6 +13,8 @@ module.exports = function(app, apiRoutes, io){
        Model
        .find({_company : mongoose.Types.ObjectId(req.headers["x-shoply-company"])})
        .exec(function(err, rs){
+        console.log("err", err)
+        console.log("rs", rs)
            if(!err)
            {
             res.json(rs);
