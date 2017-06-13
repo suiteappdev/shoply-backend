@@ -42,10 +42,10 @@ module.exports = function(app, apiRoutes, io){
 
     function post(req, res){
   		var data = {};
+      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
   		var REQ = req.body || req.params;
 
       !REQ.data || (data.data = REQ.data);
-      data._company = mongoose.Types.ObjectId(req.headers["x-shoply-company"]);
 
       var model = new Model(data);
 
